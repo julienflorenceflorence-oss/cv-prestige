@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Julien FLORENCE - Directeur Commercial - Édition Prestige</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0F1115;      /* Bleu Nuit Profond */
+            --primary-gold: #D4AF37;   /* Or */
+            --text-light: #f4f4f4;     /* Blanc cassé */
+            --text-dim: #b0b0b0;       /* Gris clair */
+            --sidebar-bg: #161a23;     /* Bleu Nuit légèrement plus clair */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #333;
+            color: var(--text-light);
+            line-height: 1.25;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .cv-page {
+            width: 210mm;
+            height: 297mm;
+            background: var(--bg-color);
+            margin: 20px auto;
+            display: flex;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        aside {
+            width: 32%;
+            background-color: var(--sidebar-bg);
+            padding: 25px 15px;
+            border-right: 1px solid rgba(212, 175, 55, 0.2);
+            z-index: 2;
+        }
+
+        .profile-img-container {
+            width: 100%;
+            margin-bottom: 15px;
+            border: 2px solid var(--primary-gold);
+            padding: 4px;
+            background: var(--bg-color);
+        }
+
+        .profile-img-container img {
+            width: 100%;
+            display: block;
+            filter: brightness(1.1);
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            color: var(--primary-gold);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--primary-gold);
+            padding-bottom: 4px;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            font-size: 0.7rem;
+            margin-bottom: 6px;
+            color: var(--text-dim);
+        }
+
+        .info-item strong {
+            color: var(--text-light);
+            display: block;
+            margin-bottom: 1px;
+        }
+
+        .psych-trait {
+            margin-bottom: 8px;
+        }
+        .trait-bar-bg {
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            width: 100%;
+            border-radius: 2px;
+            margin-top: 3px;
+        }
+        .trait-bar-fill {
+            height: 100%;
+            background: var(--primary-gold);
+            border-radius: 2px;
+        }
+
+        main {
+            width: 68%;
+            padding: 25px 25px;
+            z-index: 2;
+        }
+
+        header {
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--primary-gold);
+            margin-bottom: 2px;
+            letter-spacing: 2px;
+        }
+
+        .job-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .summary {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-align: justify;
+            margin-bottom: 15px;
+            padding-left: 12px;
+            border-left: 2px solid var(--primary-gold);
+        }
+
+        .section-header {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--primary-gold);
+            margin: 15px 0 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        .section-header::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--primary-gold), transparent);
+            margin-left: 12px;
+        }
+
+        .exp-item {
+            margin-bottom: 10px;
+        }
+
+        .exp-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .exp-role {
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--primary-gold);
+        }
+
+        .exp-date {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-dim);
+        }
+
+        .exp-comp {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 2px;
+        }
+
+        .exp-desc {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            list-style: none;
+            padding-left: 10px;
+        }
+
+        .exp-desc li::before {
+            content: "•";
+            color: var(--primary-gold);
+            margin-right: 6px;
+        }
+
+        .kpi {
+            color: var(--primary-gold);
+            font-weight: 700;
+        }
+
+        .edu-item {
+            margin-bottom: 4px;
+        }
+        .edu-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+        .edu-org {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+        }
+
+        .btn-container {
+            margin-top: 10px;
+            text-align: center;
+        }
+        .drive-btn {
+            display: inline-block;
+            padding: 6px 15px;
+            border: 2px solid var(--primary-gold);
+            color: var(--primary-gold);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .drive-btn:hover {
+            background-color: var(--primary-gold);
+            color: var(--bg-color);
+        }
+
+        .gold-line {
+            position: absolute;
+            top: 0;
+            right: 40px;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-gold), transparent);
+            opacity: 0.2;
+        }
+
+        @media print {
+            body { background: none; }
+            .cv-page { margin: 0; box-shadow: none; width: 210mm; height: 297mm; }
+            aside { background-color: var(--sidebar-bg) !important; -webkit-print-color-adjust: exact; }
+            .drive-btn { border: 2px solid #D4AF37 !important; color: #D4AF37 !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cv-page">
+        <div class="gold-line"></div>
+        
+        <aside>
+            <div class="profile-img-container">
+                <img src="CV lettre de motivation/photo moi pro.jpeg" alt="Julien FLORENCE">
+            </div>
+
+            <section class="sidebar-section">
+                <h2>Contact</h2>
+                <div class="info-item"><strong>Téléphone</strong> 06 61 74 75 73</div>
+                <div class="info-item"><strong>Email</strong> julienflorence.florence@gmail.com</div>
+                <div class="info-item"><strong>Adresse</strong> 31130 Quint-Fonsegrives</div>
+                <div class="info-item"><strong>Mobilité</strong> Permis B véhiculé</div>
+            </section>
+
+            <section class="sidebar-section">
+                <h2>Profil Psychologique</h2>
+                <div class="info-item" style="color: var(--primary-gold); font-family: 'Cinzel'; font-size: 0.9rem;">ENTJ-A (Commandant)</div>
+                
+                <div class="psych-trait">
+                    <div class="info-item">Rationnel <span style="float:right">94%</span></div>
+                    <div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 94%"></div></div>
+                </div>
+                <div class="psych-trait">
+                    <div class="info-item">Organisé <span style="float:right">94%</span></div>
+                    <div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 94%"></div></div>
+                </div>
+                <div class="psych-trait">
+                    <div class="info-item">Extraverti <span style="float:right">88%</span></div>
+                    <div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 88%"></div></div>
+                </div>
+                <div class="psych-trait">
+                    <div class="info-item">Sûr de soi <span style="float:right">86%</span></div>
+                    <div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 86%"></div></div>
+                </div>
+                
+                <div class="info-item" style="margin-top:10px; font-style: italic;">
+                    <strong>Stratégie :</strong> Maîtrise des relations, posture girafe, communication adulte.
+                </div>
+            </section>
+
+            <section class="sidebar-section">
+                <h2>Expertises Clés</h2>
+                <div class="info-item">✓ Business Plan & Pilotage P&L</div>
+                <div class="info-item">✓ Management (3-15 pers)</div>
+                <div class="info-item">✓ Stratégie d'Acquisition Tech</div>
+                <div class="info-item">✓ Négociation de contrats/Mandats</div>
+                <div class="info-item">✓ Sommelerie & Gastronomie</div>
+            </section>
+
+            <section class="sidebar-section">
+                <h2>Langues</h2>
+                <div class="info-item"><strong>Anglais</strong> Courant (Niveau B2)</div>
+                <div class="info-item"><strong>Néerlandais</strong> Niveau B2 (CBE Centre)</div>
+            </section>
+        </aside>
+
+        <main>
+            <header>
+                <h1>Julien FLORENCE</h1>
+                <div class="job-title">Directeur Commercial</div>
+                <div class="summary">
+                    Plus de 15 ans d'expérience dans la création de valeur et le pilotage de centres de profit. Expert en management d'équipes pluridisciplinaires et en acquisition Tech, je déploie des stratégies commerciales rentables au service de l'excellence et du prestige. Profil ENTJ-A orienté action.
+                </div>
+            </header>
+
+            <h3 class="section-header">Expériences Professionnelles</h3>
+
+            <div class="exp-item">
+                <div class="exp-head">
+                    <span class="exp-role">Responsable du Développement Commercial</span>
+                    <span class="exp-date">2025 – Présent</span>
+                </div>
+                <div class="exp-comp">Happy House</div>
+                <ul class="exp-desc">
+                    <li>Pilotage et coaching d'une équipe de <span class="kpi">3 collaborateurs</span>.</li>
+                    <li>Stratégie Go-To-Market et intégration d'outils d'acquisition Tech.</li>
+                </ul>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-head">
+                    <span class="exp-role">Gestionnaire de Centre de Profit (Agence)</span>
+                    <span class="exp-date">2022 – 2024</span>
+                </div>
+                <div class="exp-comp">RAS Intérim - CA 2.6 M€</div>
+                <ul class="exp-desc">
+                    <li>Management de <span class="kpi">20 ETP/semaine</span> et 25 comptes B2B.</li>
+                </ul>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-head">
+                    <span class="exp-role">Négociateur Immobilier - Conseiller Leader</span>
+                    <span class="exp-date">2015 – 2021</span>
+                </div>
+                <div class="exp-comp">Century 21 & Cabinet Bedin - CA 7 M€</div>
+                <ul class="exp-desc">
+                    <li>Supervision de l'équipe leader (18 mois) et mandats exclusifs.</li>
+                </ul>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-head">
+                    <span class="exp-role">Directeur de Restaurant / Maître d'Hôtel</span>
+                    <span class="exp-date">2010 – 2015</span>
+                </div>
+                <div class="exp-comp">Ma Salle à Manger (Paris 1er, Île de la Cité)</div>
+                <ul class="exp-desc">
+                    <li>Croissance de <span class="kpi">+140% en 5 ans</span> (CA de 250k€ à 600k€).</li>
+                    <li>Management complet d'une équipe de <span class="kpi">15 salariés</span>.</li>
+                </ul>
+            </div>
+
+            <h3 class="section-header">Excellence & Gastronomie de Prestige</h3>
+
+            <div class="exp-item">
+                <div class="exp-head">
+                    <span class="exp-role">Responsable de Salle & Sommelier</span>
+                    <span class="exp-date">2004 – 2009</span>
+                </div>
+                <div class="exp-comp">La Table du Sommelier (CA 750k€)</div>
+                <ul class="exp-desc">
+                    <li>Management de <span class="kpi">7 serveurs</span>, gestion des caves et dégustations.</li>
+                </ul>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-head">
+                    <span class="exp-role">1er Sommelier (Palace 5*)</span>
+                    <span class="exp-date">2003 – 2004</span>
+                </div>
+                <div class="exp-comp">THE WESBURY (Leading Hotel of the World, Dublin)</div>
+                <ul class="exp-desc">
+                    <li>Restaurant <span class="kpi">1 Étoile Michelin</span>. CA global établissement 10M€.</li>
+                    <li>Gestion de cave d'exception et formation du personnel.</li>
+                </ul>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-head">
+                    <span class="exp-role">Chef Barman</span>
+                    <span class="exp-date">2001 – 2002</span>
+                </div>
+                <div class="exp-comp">Le CLOS (1 Étoile Michelin, Bath, Angleterre) - CA 6M€</div>
+                <ul class="exp-desc">
+                    <li>Création de la carte et coordination du service au bar.</li>
+                </ul>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-head">
+                    <span class="exp-role">Assistant Superviseur Room Service (Palace 5*)</span>
+                    <span class="exp-date">2000 – 2001</span>
+                </div>
+                <div class="exp-comp">The GUANAHANI (Leading Hotel, St-Barth) - CA 15M€</div>
+                <ul class="exp-desc">
+                    <li>Restaurant <span class="kpi">2 Étoiles Michelin</span>. Bras droit du superviseur.</li>
+                </ul>
+            </div>
+
+            <h3 class="section-header">Formations & Certifications</h3>
+
+            <div class="edu-item">
+                <div class="edu-title">Bachelor Responsable Marketing et Commercial (2025)</div>
+                <div class="edu-org">Spécialisation en acquisition de tech</div>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+                <div style="width: 48%;">
+                    <div class="edu-item"><div class="edu-title">HTML5 & CSS3</div><div class="edu-org">OpenClassrooms (2025)</div></div>
+                    <div class="edu-item"><div class="edu-title">Digital Marketing</div><div class="edu-org">Google Academy (2025)</div></div>
+                    <div class="edu-item"><div class="edu-title">Inbound Marketing</div><div class="edu-org">HubSpot (2025)</div></div>
+                </div>
+                <div style="width: 48%;">
+                    <div class="edu-item"><div class="edu-title">Lead Mgmt</div><div class="edu-org">Datananas (2025)</div></div>
+                    <div class="edu-item"><div class="edu-title">Conseiller Immo (Bac+2)</div><div class="edu-org">Century 21 (2018)</div></div>
+                    <div class="edu-item"><div class="edu-title">Handball Animation</div><div class="edu-org">FF Handball (2022)</div></div>
+                </div>
+            </div>
+
+            <div class="btn-container">
+                <a href="diplomes.html" class="drive-btn">Consulter mon Portfolio de Diplômes & Certifications</a>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>
+
+
