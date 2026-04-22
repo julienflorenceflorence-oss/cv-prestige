@@ -28,9 +28,14 @@
             margin: 0 auto;
         }
 
-        .back-link {
-            display: inline-block;
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 40px;
+        }
+
+        .back-link {
             color: var(--primary-gold);
             text-decoration: none;
             font-family: 'Cinzel', serif;
@@ -39,12 +44,28 @@
             text-transform: uppercase;
             border-bottom: 1px solid transparent;
             transition: all 0.3s ease;
-            position: relative;
-            z-index: 999;
         }
 
         .back-link:hover {
             border-bottom: 1px solid var(--primary-gold);
+        }
+
+        .rdv-btn-top {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--primary-gold);
+            color: var(--bg-color);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .rdv-btn-top:hover {
+            filter: brightness(1.2);
         }
 
         header {
@@ -153,12 +174,14 @@
 <body>
 
 <div class="container">
-    <a href="./" class="back-link">← Retour au Profil Prestige</a>
+    <div class="nav-header">
+        <a href="./" class="back-link">← Retour au Profil</a>
+        <a href="https://calendar.app.google/iCzfE1GQrjxM3ZQ56" target="_blank" class="rdv-btn-top">Réserver un Entretien</a>
+    </div>
     
     <header>
         <h1>Dossier de Compétences</h1>
-        <div class='subtitle'>Excellence Commerciale & Expertise Tech</div>
-<div style="margin-top:20px;"><a href="https://calendar.app.google/iCzfE1GQrjxM3ZQ56" class="btn-view" style="display:inline-block; padding: 10px 30px; background: var(--primary-gold); color: var(--bg-color); font-weight:700;">R�server un Entretien</a></div>
+        <div class="subtitle">Excellence Commerciale & Expertise Tech</div>
     </header>
 
     <div class="grid">
@@ -178,7 +201,7 @@
         </div>
 
         <div class="card">
-            <div class="card-category">Stratégie Growth</div>
+            <div class="card-category">Stratégie Digital Marketing</div>
             <h3>Inbound Marketing</h3>
             <p>Méthodologie HubSpot axée sur l'optimisation du tunnel de conversion, le lead nurturing et l'alignement des ventes sur le parcours client digital.</p>
             <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat In Band.png" class="btn-view" target="_blank">Consulter l'acte</a>
@@ -229,5 +252,3 @@
 
 </body>
 </html>
-
-
