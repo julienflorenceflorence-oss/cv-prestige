@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certifications & DiplÃ´mes - Julien FLORENCE</title>
+    <title>Portfolio de Certifications - Julien FLORENCE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #0F1115;
             --primary-gold: #D4AF37;
             --text-light: #f4f4f4;
+            --text-dim: #b0b0b0;
             --card-bg: #161a23;
         }
 
@@ -23,75 +24,111 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 40px;
+            color: var(--primary-gold);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 999;
+        }
+
+        .back-link:hover {
+            border-bottom: 1px solid var(--primary-gold);
         }
 
         header {
             text-align: center;
             margin-bottom: 60px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
             padding-bottom: 30px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
 
         h1 {
             font-family: 'Cinzel', serif;
             color: var(--primary-gold);
-            font-size: 2.5rem;
-            letter-spacing: 3px;
+            font-size: 2.2rem;
+            letter-spacing: 4px;
             margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
         .subtitle {
+            font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
             color: var(--primary-gold);
+            font-weight: 300;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
         }
 
         .card {
             background: var(--card-bg);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 25px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 30px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--primary-gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .card-category {
+            font-size: 0.65rem;
+            color: var(--primary-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            font-weight: 700;
         }
 
         .card h3 {
             font-family: 'Cinzel', serif;
             color: var(--primary-gold);
-            margin-top: 0;
+            margin: 0 0 15px 0;
             font-size: 1.1rem;
+            line-height: 1.3;
         }
 
         .card p {
-            font-size: 0.85rem;
-            color: #b0b0b0;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-bottom: 25px;
+            font-weight: 300;
+            text-align: justify;
         }
 
         .btn-view {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 8px 20px;
+            display: block;
+            padding: 12px;
             border: 1px solid var(--primary-gold);
             color: var(--primary-gold);
             text-decoration: none;
-            font-size: 0.75rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             transition: all 0.3s ease;
             text-align: center;
         }
@@ -102,89 +139,92 @@
         }
 
         footer {
-            margin-top: 80px;
+            margin-top: 100px;
             text-align: center;
-            font-size: 0.8rem;
-            color: #666;
-        }
-
-        .back-link { z-index: 999; position: relative;
-            display: block;
-            margin-bottom: 40px;
-            color: var(--primary-gold);
-            text-decoration: none;
-            font-size: 0.9rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            padding-top: 40px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <a href="./" class="back-link">â† Retour au CV</a>
+    <a href="./" class="back-link">← Retour au Profil Prestige</a>
     
     <header>
-        <h1>Portfolio de Certifications</h1>
-        <div class="subtitle">Excellence, Commerce & Tech</div>
+        <h1>Dossier de Compétences</h1>
+        <div class="subtitle">Excellence Commerciale & Expertise Tech</div>
     </header>
 
     <div class="grid">
         <!-- Tech & Digital -->
         <div class="card">
+            <div class="card-category">Développement Web</div>
             <h3>HTML5 & CSS3</h3>
-            <p>OpenClassrooms - MaÃ®trise du dÃ©veloppement web moderne et du design responsive.</p>
-            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat HTML5 CSS.pdf" class="btn-view" target="_blank">Voir le certificat</a>
+            <p>Certification OpenClassrooms validant la maîtrise des standards du web moderne, de la structure sémantique et du design adaptatif (Responsive Design).</p>
+            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat HTML5 CSS.pdf" class="btn-view" target="_blank">Consulter l'acte</a>
         </div>
 
         <div class="card">
-            <h3>Digital Marketing</h3>
-            <p>Google Academy - StratÃ©gies d'acquisition, SEO et analyse de donnÃ©es.</p>
-            <a href="CV lettre de motivation/diplome julien/Fundamentals of digital marketing _ Google.html" class="btn-view" target="_blank">Voir le certificat</a>
+            <div class="card-category">Marketing Digital</div>
+            <h3>Google Fundamentals</h3>
+            <p>Expertise certifiée par Google Academy couvrant l'analyse de données, le SEO, le SEM et les stratégies d'acquisition de trafic haute performance.</p>
+            <a href="CV lettre de motivation/diplome julien/Fundamentals of digital marketing _ Google.html" class="btn-view" target="_blank">Consulter l'acte</a>
         </div>
 
         <div class="card">
+            <div class="card-category">Stratégie Growth</div>
             <h3>Inbound Marketing</h3>
-            <p>HubSpot / In Band - MÃ©thodologies de conversion et fidÃ©lisation client.</p>
-            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat In Band.png" class="btn-view" target="_blank">Voir le certificat</a>
+            <p>Méthodologie HubSpot axée sur l'optimisation du tunnel de conversion, le lead nurturing et l'alignement des ventes sur le parcours client digital.</p>
+            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat In Band.png" class="btn-view" target="_blank">Consulter l'acte</a>
         </div>
 
         <!-- Business -->
         <div class="card">
+            <div class="card-category">Performance B2B</div>
             <h3>B2B Sales Machine</h3>
-            <p>Expertise en prospection et closing B2B haute performance.</p>
-            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat B2B Sales Machine.pdf" class="btn-view" target="_blank">Voir le certificat</a>
+            <p>Techniques avancées de prospection multicanale, psychologie de vente et closing stratégique pour comptes clés et environnements complexes.</p>
+            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat B2B Sales Machine.pdf" class="btn-view" target="_blank">Consulter l'acte</a>
         </div>
 
         <div class="card">
-            <h3>Conseiller Immobilier</h3>
-            <p>Century 21 - Certification de qualification professionnelle et nÃ©gociation de mandats.</p>
-            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat Qualification et Certification de conseiller en immobilier.pdf" class="btn-view" target="_blank">Voir le certificat</a>
+            <div class="card-category">Immobilier de Prestige</div>
+            <h3>Conseiller Expert</h3>
+            <p>Qualification professionnelle Century 21 certifiant l'expertise en estimation, négociation de mandats exclusifs et droit immobilier appliqué.</p>
+            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat Qualification et Certification de conseiller en immobilier.pdf" class="btn-view" target="_blank">Consulter l'acte</a>
         </div>
 
         <!-- International & Management -->
         <div class="card">
-            <h3>Langue NÃ©erlandaise</h3>
-            <p>Niveau B2 - CertifiÃ© par le CBE Centre pour les relations internationales.</p>
-            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat NÃ©erlandais.pdf" class="btn-view" target="_blank">Voir le certificat</a>
+            <div class="card-category">International</div>
+            <h3>Néerlandais B2</h3>
+            <p>Maîtrise linguistique certifiée par le CBE Centre, permettant la gestion de relations d'affaires et la négociation en contexte international.</p>
+            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat Néerlandais.pdf" class="btn-view" target="_blank">Consulter l'acte</a>
         </div>
 
         <div class="card">
-            <h3>CAP Restauration</h3>
-            <p>L'excellence du service et de la gastronomie franÃ§aise.</p>
-            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat CAP Restauration.pdf" class="btn-view" target="_blank">Voir le certificat</a>
+            <div class="card-category">Art de Vivre</div>
+            <h3>Gastronomie Française</h3>
+            <p>Diplôme en restauration validant les codes de l'excellence, du service haut de gamme et de la gestion opérationnelle en milieu étoilé.</p>
+            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat CAP Restauration.pdf" class="btn-view" target="_blank">Consulter l'acte</a>
         </div>
 
         <div class="card">
-            <h3>FÃ©dÃ©ral Sportif</h3>
-            <p>CompÃ©tences en animation et management d'Ã©quipe par le sport.</p>
-            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat FÃ©dÃ©ral Sportif.pdf" class="btn-view" target="_blank">Voir le certificat</a>
+            <div class="card-category">Leadership</div>
+            <h3>Management Sportif</h3>
+            <p>Certification fédérale soulignant les capacités d'animation, de coaching et de cohésion d'équipe appliquées au management professionnel.</p>
+            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat Fédéral Sportif.pdf" class="btn-view" target="_blank">Consulter l'acte</a>
         </div>
     </div>
 
     <footer>
-        &copy; 2026 Julien FLORENCE - Dossier de CompÃ©tences Prestige
+        &copy; 2026 JULIEN FLORENCE &bull; DOSSIER DE COMPÉTENCES &bull; ÉDITION PRESTIGE
     </footer>
 </div>
 
 </body>
 </html>
-
