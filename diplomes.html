@@ -2,281 +2,78 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Portfolio de Certifications - Julien FLORENCE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #0F1115;
-            --primary-gold: #D4AF37;
-            --text-light: #f4f4f4;
-            --text-dim: #b0b0b0;
-            --card-bg: #161a23;
-        }
+        :root { --gold: #D4AF37; --bg: #0F1115; --card: #161a23; --text: #f4f4f4; }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+        
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+        .nav-header { display: flex; justify-content: space-between; margin-bottom: 40px; }
+        .back-link { color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.8rem; text-transform: uppercase; border-bottom: 1px solid transparent; transition: 0.3s; }
+        .back-link:hover { border-bottom-color: var(--gold); }
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-light);
-            margin: 0;
-            padding: 40px 20px;
-            line-height: 1.6;
-        }
+        header { text-align: center; margin-bottom: 60px; padding-bottom: 30px; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
+        h1 { font-family: 'Cinzel'; color: var(--gold); font-size: 2.2rem; letter-spacing: 4px; text-transform: uppercase; }
+        .subtitle { text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; color: var(--gold); font-weight: 300; }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .card { background: var(--card); border: 1px solid rgba(212, 175, 55, 0.15); padding: 30px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.4s; border-radius: 4px; }
+        .card:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .card-cat { font-size: 0.65rem; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; font-weight: 700; }
+        .card h3 { font-family: 'Cinzel'; color: var(--gold); margin-bottom: 15px; font-size: 1.1rem; }
+        .card p { font-size: 0.85rem; color: #b0b0b0; margin-bottom: 25px; text-align: justify; }
 
-        .nav-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
+        .btn-v { display: block; padding: 12px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.7rem; text-transform: uppercase; text-align: center; transition: 0.3s; border-radius: 8px; }
+        .btn-v:hover { background: var(--gold); color: var(--bg); }
 
-        .back-link {
-            color: var(--primary-gold);
-            text-decoration: none;
-            font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border-bottom: 1px solid transparent;
-            transition: all 0.3s ease;
-        }
+        footer { margin-top: 100px; text-align: center; font-family: 'Cinzel'; font-size: 0.7rem; color: #666; padding: 40px 0 380px 0; border-top: 1px solid rgba(212, 175, 55, 0.1); }
 
-        .back-link:hover {
-            border-bottom: 1px solid var(--primary-gold);
-        }
+        /* CTA DOCK ARRONDI */
+        .fixed-dock { position: fixed; bottom: 20px; left: 20px; right: 20px; max-width: 700px; margin: 0 auto; background: rgba(15, 17, 21, 0.98); backdrop-filter: blur(15px); border: 1px solid var(--gold); border-radius: 20px; z-index: 1000; padding: 15px; display: flex; justify-content: center; gap: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+        .btn-d { flex: 1; padding: 15px; border: 2px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; text-align: center; transition: 0.3s; border-radius: 12px; }
+        .btn-g { background: var(--gold); color: var(--bg); }
 
-        .rdv-btn-top {
-            display: inline-block;
-            padding: 8px 20px;
-            background: var(--primary-gold);
-            color: var(--bg-color);
-            text-decoration: none;
-            font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 700;
-            transition: all 0.3s ease;
-        }
-
-        .rdv-btn-top:hover {
-            filter: brightness(1.2);
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 60px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        h1 {
-            font-family: 'Cinzel', serif;
-            color: var(--primary-gold);
-            font-size: 2.2rem;
-            letter-spacing: 4px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .subtitle {
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 0.8rem;
-            color: var(--primary-gold);
-            font-weight: 300;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary-gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .card-category {
-            font-size: 0.65rem;
-            color: var(--primary-gold);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-            font-weight: 700;
-        }
-
-        .card h3 {
-            font-family: 'Cinzel', serif;
-            color: var(--primary-gold);
-            margin: 0 0 15px 0;
-            font-size: 1.1rem;
-            line-height: 1.3;
-        }
-
-        .card p {
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            margin-bottom: 25px;
-            font-weight: 300;
-            text-align: justify;
-        }
-
-        .btn-view {
-            display: block;
-            padding: 12px;
-            border: 1px solid var(--primary-gold);
-            color: var(--primary-gold);
-            text-decoration: none;
-            font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .btn-view:hover {
-            background: var(--primary-gold);
-            color: var(--bg-color);
-        }
-
-        footer {
-            margin-top: 100px;
-            text-align: center;
-            font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
-            color: var(--text-dim);
-            letter-spacing: 1px;
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
-            padding-top: 40px;
-        }
-    
-        .fixed-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(15, 17, 21, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
-            z-index: 1000;
-            border-top: 1px solid rgba(212, 175, 55, 0.3);
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
         @media (max-width: 768px) {
-            .fixed-footer { flex-direction: column; gap: 10px; padding: 15px 25px; }
-            body { padding-bottom: 150px; }
+            .fixed-dock { flex-direction: column; bottom: 15px; left: 15px; right: 15px; margin-bottom: env(safe-area-inset-bottom); }
+            .btn-d { width: 100%; height: 50px; display: flex; align-items: center; justify-content: center; }
+            h1 { font-size: 1.6rem; }
         }
-        body { padding-bottom: 100px; }
     </style>
 </head>
 <body>
-
 <div class="container">
-    <div class="nav-header">
-        <a href="./" class="back-link">← Retour au Profil</a>
-        <a href="https://calendar.app.google/iCzfE1GQrjxM3ZQ56" target="_blank" class="rdv-btn-top">Réserver un Entretien</a>
-    </div>
-    
-    <header>
-        <h1>Dossier de Compétences</h1>
-        <div class="subtitle">Excellence Commerciale & Expertise Tech</div>
-    </header>
-
+    <div class="nav-header"><a href="index.html" class="back-link">← Retour Profil</a></div>
+    <header><h1>Dossier de Compétences</h1><div class="subtitle">Excellence & Expertise Tech</div></header>
     <div class="grid">
-        <!-- Tech & Digital -->
-        <div class="card">
-            <div class="card-category">Développement Web</div>
-            <h3>HTML5 & CSS3</h3>
-            <p>Certification OpenClassrooms validant la maîtrise des standards du web moderne, de la structure sémantique et du design adaptatif (Responsive Design).</p>
-            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat HTML5 CSS.pdf" class="btn-view" target="_blank">Consulter l'acte</a>
-        </div>
-
-        <div class="card">
-            <div class="card-category">Marketing Digital</div>
-            <h3>Google Fundamentals</h3>
-            <p>Expertise certifiée par Google Academy couvrant l'analyse de données, le SEO, le SEM et les stratégies d'acquisition de trafic haute performance.</p>
-            <a href="CV lettre de motivation/diplome julien/Fundamentals of digital marketing _ Google.html" class="btn-view" target="_blank">Consulter l'acte</a>
-        </div>
-
-        <div class="card">
-            <div class="card-category">Stratégie Digital Marketing</div>
-            <h3>Inbound Marketing</h3>
-            <p>Méthodologie HubSpot axée sur l'optimisation du tunnel de conversion, le lead nurturing et l'alignement des ventes sur le parcours client digital.</p>
-            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat In Band.png" class="btn-view" target="_blank">Consulter l'acte</a>
-        </div>
-
-        <!-- Business -->
-        <div class="card">
-            <div class="card-category">Performance B2B</div>
-            <h3>B2B Sales Machine</h3>
-            <p>Techniques avancées de prospection multicanale, psychologie de vente et closing stratégique pour comptes clés et environnements complexes.</p>
-            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat B2B Sales Machine.pdf" class="btn-view" target="_blank">Consulter l'acte</a>
-        </div>
-
-        <div class="card">
-            <div class="card-category">Immobilier de Prestige</div>
-            <h3>Conseiller Expert</h3>
-            <p>Qualification professionnelle Century 21 certifiant l'expertise en estimation, négociation de mandats exclusifs et droit immobilier appliqué.</p>
-            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat Qualification et Certification de conseiller en immobilier.pdf" class="btn-view" target="_blank">Consulter l'acte</a>
-        </div>
-
-        <!-- International & Management -->
-        <div class="card">
-            <div class="card-category">International</div>
-            <h3>Néerlandais B2</h3>
-            <p>Maîtrise linguistique certifiée par le CBE Centre, permettant la gestion de relations d'affaires et la négociation en contexte international.</p>
-            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat Néerlandais.pdf" class="btn-view" target="_blank">Consulter l'acte</a>
-        </div>
-
-        <div class="card">
-            <div class="card-category">Art de Vivre</div>
-            <h3>Gastronomie Française</h3>
-            <p>Diplôme en restauration validant les codes de l'excellence, du service haut de gamme et de la gestion opérationnelle en milieu étoilé.</p>
-            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat CAP Restauration.pdf" class="btn-view" target="_blank">Consulter l'acte</a>
-        </div>
-
-        <div class="card">
-            <div class="card-category">Leadership</div>
-            <h3>Management Sportif</h3>
-            <p>Certification fédérale soulignant les capacités d'animation, de coaching et de cohésion d'équipe appliquées au management professionnel.</p>
-            <a href="CV lettre de motivation/diplome julien/diplome tch/Certificat Fédéral Sportif.pdf" class="btn-view" target="_blank">Consulter l'acte</a>
-        </div>
+        <!-- 1 -->
+        <div class="card"><div class="card-cat">Développement Web</div><h3>HTML5 & CSS3</h3><p>Certification OpenClassrooms validant la maîtrise des standards du web moderne, de la structure sémantique et du design adaptatif.</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat HTML5 CSS.pdf" target="_blank" class="btn-v">Consulter l'acte</a></div>
+        <!-- 2 -->
+        <div class="card"><div class="card-cat">Marketing Digital</div><h3>Google Fundamentals</h3><p>Expertise certifiée par Google Academy couvrant l'analyse de données, le SEO, le SEM et les stratégies d'acquisition haute performance.</p><a href="CV lettre de motivation/diplome julien/Fundamentals of digital marketing _ Google.html" target="_blank" class="btn-v">Consulter l'acte</a></div>
+        <!-- 3 -->
+        <div class="card"><div class="card-cat">Stratégie Digital</div><h3>Inbound Marketing</h3><p>Méthodologie HubSpot axée sur l'optimisation du tunnel de conversion, le lead nurturing et l'alignement des ventes sur le parcours client.</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat In Band.png" target="_blank" class="btn-v">Consulter l'acte</a></div>
+        <!-- 4 -->
+        <div class="card"><div class="card-cat">Performance B2B</div><h3>B2B Sales Machine</h3><p>Techniques avancées de prospection multicanale, psychologie de vente et closing stratégique pour comptes clés.</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat B2B Sales Machine.pdf" target="_blank" class="btn-v">Consulter l'acte</a></div>
+        <!-- 5 -->
+        <div class="card"><div class="card-cat">Immobilier</div><h3>Conseiller Expert</h3><p>Qualification Century 21 certifiant l'expertise en estimation, négociation de mandats exclusifs et droit immobilier (Bac+2).</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat Qualification et Certification de conseiller en immobilier.pdf" target="_blank" class="btn-v">Consulter l'acte</a></div>
+        <!-- 6 -->
+        <div class="card"><div class="card-cat">International</div><h3>Néerlandais B2</h3><p>Maîtrise linguistique certifiée par le CBE Centre, permettant la gestion de relations d'affaires en contexte international.</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat Néerlandais.pdf" target="_blank" class="btn-v">Consulter l'acte</a></div>
+        <!-- 7 -->
+        <div class="card"><div class="card-cat">Art de Vivre</div><h3>Gastronomie Française</h3><p>Diplôme en restauration validant les codes de l'excellence, du service haut de gamme et de la gestion en milieu étoilé.</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat CAP Restauration.pdf" target="_blank" class="btn-v">Consulter l'acte</a></div>
+        <!-- 8 -->
+        <div class="card"><div class="card-cat">Leadership</div><h3>Management Sportif</h3><p>Certification fédérale soulignant les capacités d'animation, de coaching et de cohésion d'équipe (Handball).</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat Fédéral Sportif.pdf" target="_blank" class="btn-v">Consulter l'acte</a></div>
+        <!-- 9 -->
+        <div class="card"><div class="card-cat">Académie</div><h3>Bachelor Marketing</h3><p>Responsable Marketing et Commercial (2025). Spécialisation en acquisition Tech et pilotage de la croissance.</p><a href="#" class="btn-v">Consulter</a></div>
+        <!-- 10 -->
+        <div class="card"><div class="card-cat">Acquisition B2B</div><h3>Lead Management</h3><p>Certification Datananas (2025) : Automatisation de la prospection commerciale et tunnels de vente.</p><a href="#" class="btn-v">Consulter</a></div>
     </div>
-
-    <footer>
-        &copy; 2026 JULIEN FLORENCE &bull; DOSSIER DE COMPÉTENCES &bull; ÉDITION PRESTIGE
-    </footer>
+    <footer>&copy; 2026 JULIEN FLORENCE &bull; DOSSIER DE COMPÉTENCES &bull; ÉDITION PRESTIGE</footer>
 </div>
-
-
-    <div class="fixed-footer">
-        <a href="./" class="btn-view" style="width: auto; padding: 12px 30px; margin: 0;">Retour au Profil</a>
-        <a href="https://calendar.app.google/iCzfE1GQrjxM3ZQ56" target="_blank" class="btn-view" style="width: auto; padding: 12px 30px; margin: 0; background: var(--primary-gold); color: var(--bg-color); font-weight:700;">R&eacute;server un RDV</a>
-    </div>
+<div class="fixed-dock">
+    <a href="index.html" class="btn-d">Retour Profil</a>
+    <a href="https://calendar.app.google/iCzfE1GQrjxM3ZQ56" target="_blank" class="btn-d btn-g">Réserver RDV</a>
+</div>
 </body>
 </html>
-
-
-

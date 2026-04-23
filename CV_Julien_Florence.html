@@ -24,6 +24,28 @@
             overflow-x: hidden;
         }
 
+        /* Bloquer la rotation (Overlay mobile/tablette) */
+        @media screen and (max-width: 1024px) and (orientation: landscape) {
+            body::before {
+                content: "Veuillez pivoter votre appareil en mode portrait pour une lecture optimale.";
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: var(--bg-color);
+                color: var(--primary-gold);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 30px;
+                font-family: 'Cinzel', serif;
+                z-index: 9999;
+                font-size: 1.2rem;
+            }
+        }
+
         /* --- STRUCTURE DE PAGE --- */
         .cv-page {
             width: 100%;
@@ -127,7 +149,7 @@
 
         /* --- RESPONSIVE MOBILE & TABLETTE --- */
         @media (max-width: 1024px) {
-            .cv-page { flex-direction: column; padding-bottom: 140px; }
+            .cv-page { flex-direction: column; padding-bottom: 220px; }
             aside, main { width: 100%; display: contents; }
             
             /* 1. Photo (15%) */
