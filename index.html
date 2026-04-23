@@ -257,6 +257,97 @@
             aside { background-color: var(--sidebar-bg) !important; -webkit-print-color-adjust: exact; }
             .drive-btn { border: 2px solid #D4AF37 !important; color: #D4AF37 !important; }
         }
+    
+        /* --- DESIGN UNIVERSEL & ANTI-SCROLL --- */
+        html, body { 
+            overflow-x: hidden !important; 
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- MODE TABLETTE & MOBILE --- */
+        @media (max-width: 1024px) {
+            body { background-color: var(--bg-color); }
+            
+            .cv-page {
+                display: flex;
+                flex-direction: column;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                height: auto !important;
+                box-shadow: none;
+            }
+
+            /* On permet aux éléments de sortir de leur conteneur pour les ordonner */
+            aside, main, header { display: contents; }
+
+            /* 1. Photo : Strictement 18% */
+            .profile-img-container {
+                order: 1;
+                width: 18% !important;
+                height: auto;
+                aspect-ratio: 1/1;
+                margin: 30px auto 10px auto !important;
+                min-width: 70px;
+                z-index: 10;
+            }
+
+            /* 2. Nom & Prénom */
+            h1 {
+                order: 2;
+                width: 100%;
+                text-align: center !important;
+                font-size: 1.8rem !important;
+                margin: 10px 0 !important;
+            }
+
+            /* 3. Intitulé du Poste */
+            .job-title {
+                order: 3;
+                width: 100%;
+                text-align: center !important;
+                font-size: 1rem !important;
+                letter-spacing: 1px !important;
+                margin-bottom: 25px !important;
+            }
+
+            /* 4. Résumé (Summary) */
+            .summary {
+                order: 4;
+                width: 90%;
+                margin: 0 auto 30px auto !important;
+                border-left: none;
+                border-top: 1px solid var(--primary-gold);
+                padding-top: 15px;
+            }
+
+            /* 5. Sections de la Sidebar (Contact, etc.) */
+            .sidebar-section {
+                order: 5;
+                width: 100%;
+                padding: 0 25px;
+                margin-bottom: 20px;
+            }
+
+            /* 6. Contenu Principal (Expériences) */
+            .section-header { order: 6; width: 100%; padding: 0 25px; margin-top: 30px !important; }
+            .exp-item { order: 7; width: 100%; padding: 0 25px; }
+            
+            /* Dates : Toujours sur une seule ligne */
+            .exp-head {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+            }
+            .exp-date { white-space: nowrap !important; font-size: 0.7rem !important; margin-left: 10px; }
+
+            /* Pied de page */
+            .btn-container { order: 8; width: 100%; padding: 30px 20px; flex-direction: column; gap: 15px; }
+            .drive-btn { width: 100%; text-align: center; }
+        }
     </style>
 </head>
 <body>
@@ -453,3 +544,4 @@
 
 </body>
 </html>
+
