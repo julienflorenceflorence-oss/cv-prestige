@@ -26,8 +26,8 @@
         }
 
         .cv-page {
-            width: 210mm;
-            min-height: 297mm;
+            width: 90%; max-width: 1000px;
+            min-height: 100vh;
             background: var(--bg-color);
             margin: 20px auto;
             display: flex;
@@ -63,7 +63,7 @@
         h2 { font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--primary-gold); text-transform: uppercase; border-bottom: 1px solid var(--primary-gold); padding-bottom: 4px; margin-bottom: 8px; }
         
         .job-title { font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
-        .summary { font-size: 0.75rem; color: var(--text-dim); text-align: justify; margin-bottom: 15px; padding-left: 12px; border-left: 2px solid var(--primary-gold); }
+        .summary { font-size: 0.85rem; color: var(--text-dim); text-align: justify; margin-bottom: 15px; padding-left: 12px; border-left: 2px solid var(--primary-gold); }
         
         .section-header { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--primary-gold); margin: 15px 0 8px 0; display: flex; align-items: center; }
         .section-header::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, var(--primary-gold), transparent); margin-left: 12px; }
@@ -71,9 +71,9 @@
         .exp-item { margin-bottom: 10px; }
         .exp-head { display: flex; justify-content: space-between; align-items: baseline; }
         .exp-role { font-weight: 700; font-size: 0.85rem; color: var(--primary-gold); }
-        .exp-date { font-size: 0.7rem; font-weight: 700; color: var(--text-dim); white-space: nowrap; }
-        .exp-comp { font-size: 0.75rem; font-weight: 700; color: var(--text-light); margin-bottom: 2px; }
-        .exp-desc { font-size: 0.7rem; color: var(--text-dim); list-style: none; padding-left: 10px; }
+        .exp-date { font-size: 0.8rem; font-weight: 700; color: var(--text-dim); white-space: nowrap; }
+        .exp-comp { font-size: 0.85rem; font-weight: 700; color: var(--text-light); margin-bottom: 2px; }
+        .exp-desc { font-size: 0.8rem; color: var(--text-dim); list-style: none; padding-left: 10px; }
         .exp-desc li::before { content: "•"; color: var(--primary-gold); margin-right: 6px; }
         .kpi { color: var(--primary-gold); font-weight: 700; }
 
@@ -81,7 +81,7 @@
         .drive-btn { display: inline-block; padding: 8px 15px; border: 2px solid var(--primary-gold); color: var(--primary-gold); text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.65rem; text-transform: uppercase; transition: all 0.3s ease; }
         .drive-btn:hover { background-color: var(--primary-gold); color: var(--bg-color); }
 
-        .info-item { font-size: 0.7rem; margin-bottom: 6px; color: var(--text-dim); }
+        .info-item { font-size: 0.8rem; margin-bottom: 6px; color: var(--text-dim); }
         .info-item strong { color: var(--text-light); display: block; }
         .psych-trait { margin-bottom: 8px; }
         .trait-bar-bg { height: 3px; background: rgba(255,255,255,0.1); width: 100%; margin-top: 3px; }
@@ -124,7 +124,7 @@
         }
 
         @media print {
-            .cv-page { margin: 0; box-shadow: none; width: 210mm; height: 297mm; }
+            .cv-page { margin: 0; box-shadow: none; width: 90%; max-width: 1000px; height: 297mm; }
         }
     </style>
 </head>
@@ -208,3 +208,4 @@
 
 </body>
 </html>
+
