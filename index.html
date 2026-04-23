@@ -46,7 +46,6 @@
             position: relative;
         }
 
-        /* COLONNE GAUCHE */
         aside {
             width: 35%;
             background-color: var(--sidebar-bg);
@@ -77,7 +76,6 @@
         .info-item { font-size: 0.85rem; margin-bottom: 8px; color: var(--text-dim); }
         .info-item strong { color: var(--text-light); display: block; margin-bottom: 2px; }
 
-        /* COLONNE DROITE */
         main { width: 65%; padding: 40px 50px; }
         
         h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--primary-gold); letter-spacing: 2px; margin-bottom: 5px; }
@@ -88,7 +86,7 @@
         .section-header::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, var(--primary-gold), transparent); margin-left: 15px; }
 
         .exp-item { 
-            margin-bottom: 20px; 
+            margin-bottom: 25px; 
             padding: 20px; 
             border: 1px solid rgba(212, 175, 55, 0.1); 
             border-radius: 15px; 
@@ -103,7 +101,6 @@
         .exp-desc li { margin-bottom: 4px; }
         .exp-desc li::before { content: "•"; color: var(--primary-gold); margin-right: 8px; }
 
-        /* BOUTONS ACTIONS */
         .fixed-footer {
             width: 100%;
             background: var(--bg-color);
@@ -123,18 +120,20 @@
         .drive-btn:hover { background-color: var(--primary-gold); color: var(--bg-color); transform: translateY(-3px); }
         .btn-rdv { background-color: var(--primary-gold); color: var(--bg-color); }
 
-        .btn-mini {
+        .btn-mini-portfolio {
             display: none;
             margin-top: 15px;
-            padding: 10px 20px;
-            border: 1px solid var(--primary-gold);
+            padding: 12px 25px;
+            border: 2px solid var(--primary-gold);
             color: var(--primary-gold);
             text-decoration: none;
             font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            border-radius: 8px;
+            font-weight: bold;
+            border-radius: 12px;
             text-align: center;
+            transition: 0.3s;
         }
 
         .desktop-phrase {
@@ -150,24 +149,23 @@
             aside, main { width: 100%; display: contents; }
             .profile-img-container { order: 1; width: 50% !important; margin: 30px auto 15px auto !important; }
             header { order: 2; width: 100%; padding: 0 25px; text-align: center; }
-            .summary { order: 3; width: 90%; margin: 15px auto 30px auto; text-align: center; }
-            .skills-mobile { order: 4; }
-            .psych-mobile { order: 5; }
-            .exp-section-mobile { order: 6; }
-            .edu-section-mobile { order: 7; }
-            .contact-mobile { order: 8; }
-            .skills-mobile, .psych-mobile, .exp-section-mobile, .edu-section-mobile, .contact-mobile { width: 100%; padding: 0 25px; }
+            .summary { order: 3; width: 90%; margin: 15px auto 30px auto; text-align: center; padding: 15px; }
+            .skills-mobile { order: 4; width: 100%; padding: 0 25px; }
+            .psych-mobile { order: 5; width: 100%; padding: 0 25px; }
+            .exp-section-mobile { order: 6; width: 100%; padding: 0 25px; }
+            .edu-section-mobile { order: 7; width: 100%; padding: 0 25px; }
+            .contact-mobile { order: 8; width: 100%; padding: 0 25px; }
             .fixed-footer { flex-direction: column; padding: 40px 25px; gap: 15px; }
             .drive-btn { width: 100%; height: 55px; }
             h1 { font-size: 1.8rem !important; }
-            .btn-mini { display: block; }
+            .btn-mini-portfolio { display: inline-block; width: 100%; }
             .desktop-phrase { display: none; }
         }
     </style>
 </head>
 <body>
     <div class="cv-page">
-        <!-- ASIDE -->
+        <!-- SIDEBAR (Left on Desktop, Sequential on Mobile) -->
         <aside>
             <div class="profile-img-container"><img src="CV lettre de motivation/photo moi pro.jpeg" alt="Julien FLORENCE"></div>
             <section class="skills-mobile">
@@ -188,17 +186,17 @@
                 <h2>Contact</h2>
                 <div class="info-item"><strong>Téléphone</strong> 06 61 74 75 73</div>
                 <div class="info-item"><strong>Email</strong> julien.florence@gmail.com</div>
-                <div class="info-item"><strong>Mobilité</strong> 31130 Quint-Fonsegrives</div>
+                <div class="info-item"><strong>Mobilité</strong> 31130 Quint-Fonsegrives (Permis B)</div>
             </section>
         </aside>
 
-        <!-- MAIN -->
+        <!-- MAIN (Right on Desktop, Sequential on Mobile) -->
         <main>
             <header>
                 <h1>Julien FLORENCE</h1>
                 <div class="job-title">Directeur Commercial</div>
             </header>
-            <div class="summary">Plus de 15 ans d'expérience dans la création de valeur et le pilotage de centres de profit. Expert en management d'équipes pluridisciplinaires et en acquisition Tech.</div>
+            <div class="summary">Plus de 15 ans d'expérience dans la création de valeur et le pilotage de centres de profit. Expert en management d'équipes pluridisciplinaires et en acquisition Tech, je déploie des stratégies commerciales rentables au service de l'excellence et du prestige. Profil ENTJ-A orienté action.</div>
 
             <section class="exp-section-mobile">
                 <h3 class="section-header">Parcours Professionnel</h3>
@@ -208,35 +206,63 @@
                     <div class="exp-comp">Happy House</div>
                     <ul class="exp-desc">
                         <li>Pilotage et coaching d'une équipe de 3 collaborateurs.</li>
-                        <li>Déploiement de la stratégie Go-To-Market et acquisition Tech.</li>
+                        <li>Déploiement de la stratégie Go-To-Market et intégration d'outils d'acquisition Tech.</li>
                     </ul>
                 </div>
 
                 <div class="exp-item">
                     <div class="exp-head"><span class="exp-role">Gestionnaire de Centre de Profit (Agence)</span><span class="exp-date">01/2022 – 12/2024</span></div>
                     <div class="exp-comp">RAS Intérim - CA 2.6 M€</div>
+                    <ul class="exp-desc">
+                        <li>Management de 20 ETP par semaine et gestion de 25 comptes B2B stratégiques.</li>
+                    </ul>
                 </div>
 
                 <div class="exp-item">
                     <div class="exp-head"><span class="exp-role">Négociateur Immobilier - Conseiller Leader</span><span class="exp-date">01/2015 – 12/2021</span></div>
                     <div class="exp-comp">Century 21 & Cabinet Bedin - CA 7 M€</div>
+                    <ul class="exp-desc">
+                        <li>Supervision de l'équipe leader pendant 18 mois et négociation de mandats exclusifs de prestige.</li>
+                    </ul>
                 </div>
 
                 <div class="exp-item">
                     <div class="exp-head"><span class="exp-role">Directeur de Restaurant / Maître d'Hôtel</span><span class="exp-date">01/2010 – 12/2015</span></div>
                     <div class="exp-comp">Ma Salle à Manger (Paris 1er, Île de la Cité)</div>
+                    <ul class="exp-desc">
+                        <li>Management complet d'une équipe de 15 salariés et croissance de +140% du CA en 5 ans.</li>
+                    </ul>
                 </div>
 
                 <h3 class="section-header">Excellence & Gastronomie</h3>
                 
                 <div class="exp-item">
-                    <div class="exp-head"><span class="exp-role">1er Sommelier (Palace 5*)</span><span class="exp-date">01/2003 – 12/2004</span></div>
-                    <div class="exp-comp">THE WESBURY (Dublin) - 1* Michelin</div>
+                    <div class="exp-head"><span class="exp-role">Responsable de Salle & Sommelier</span><span class="exp-date">01/2004 – 12/2009</span></div>
+                    <div class="exp-comp">La Table du Sommelier (CA 750k€)</div>
+                    <ul class="exp-desc">
+                        <li>Management de 7 serveurs, gestion des caves et organisation de dégustations professionnelles.</li>
+                    </ul>
                 </div>
 
                 <div class="exp-item">
-                    <div class="exp-head"><span class="exp-role">Assistant Superviseur Room Service (Palace 5*)</span><span class="exp-date">09/2000 – 02/2001</span></div>
+                    <div class="exp-head"><span class="exp-role">1er Sommelier (Palace 5*)</span><span class="exp-date">01/2003 – 12/2004</span></div>
+                    <div class="exp-comp">THE WESBURY (Leading Hotel of the World, Dublin)</div>
+                    <ul class="exp-desc">
+                        <li>Restaurant 1 Étoile Michelin. Gestion d'une cave d'exception et service de prestige.</li>
+                    </ul>
+                </div>
+
+                <div class="exp-item">
+                    <div class="exp-head"><span class="exp-role">Chef Barman (Étoilé)</span><span class="exp-date">01/2001 – 12/2002</span></div>
+                    <div class="exp-comp">Le CLOS (Angleterre) - 1* Michelin</div>
+                </div>
+
+                <div class="exp-item">
+                    <div class="exp-head"><span class="exp-role">Assistant Superviseur (Palace 5*)</span><span class="exp-date">09/2000 – 02/2001</span></div>
                     <div class="exp-comp">The GUANAHANI (St-Barth) - 2* Michelin</div>
+                    <ul class="exp-desc">
+                        <li>Leading Hotel of the World | CA 15M€. Bras droit du superviseur Room Service.</li>
+                    </ul>
                 </div>
             </section>
 
@@ -247,11 +273,11 @@
                 </div>
                 <div class="exp-item">
                     <div class="exp-comp">HTML5 & CSS3 (2025) | Google Academy (2025)</div>
-                    <a href="diplomes.html" class="btn-mini">Voir les actes</a>
                     <span class="desktop-phrase">Retrouvez l'intégralité de mes certifications détaillées dans mon portfolio de compétences.</span>
                 </div>
                 <div class="exp-item">
                     <div class="exp-comp">Certification Conseiller Immobilier (2018)</div>
+                    <a href="diplomes.html" class="btn-mini-portfolio">Portefolio</a>
                 </div>
             </section>
         </main>
