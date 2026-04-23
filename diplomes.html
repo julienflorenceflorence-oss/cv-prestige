@@ -10,15 +10,16 @@
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Montserrat', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
         
-        /* INTERDIRE LE MODE HORIZONTAL (Affiche un blocage si Paysage) */
-        @media screen and (orientation: landscape) and (max-device-width: 1024px) {
+        /* BLOQUER UNIQUEMENT LE MODE HORIZONTAL (PAYSAGE) SUR MOBILE/TABLETTE */
+        @media screen and (orientation: landscape) and (max-width: 1024px) {
             body::before { 
                 content: "Lecture horizontale interdite. Veuillez pivoter votre appareil en mode Portrait pour consulter ce dossier de prestige."; 
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
                 background: #0F1115; color: #D4AF37; 
                 display: flex; align-items: center; justify-content: center; 
                 z-index: 99999; font-family: 'Cinzel'; padding: 40px; text-align: center; font-size: 1.2rem; line-height: 1.5;
             }
+            .container, .fixed-dock { display: none !important; }
         }
 
         .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
@@ -31,19 +32,19 @@
         .subtitle { text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; color: var(--gold); font-weight: 300; }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .card { background: var(--card); border: 1px solid rgba(212, 175, 55, 0.15); padding: 30px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.4s; border-radius: 4px; }
+        .card { background: var(--card); border: 1px solid rgba(212, 175, 55, 0.15); padding: 30px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.4s; border-radius: 12px; }
         .card:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .card-cat { font-size: 0.65rem; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; font-weight: 700; }
         .card h3 { font-family: 'Cinzel'; color: var(--gold); margin-bottom: 15px; font-size: 1.1rem; }
         .card p { font-size: 0.85rem; color: #b0b0b0; margin-bottom: 25px; text-align: justify; }
 
-        .btn-v { display: block; padding: 12px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.7rem; text-transform: uppercase; text-align: center; transition: 0.3s; border-radius: 8px; }
+        .btn-v { display: block; padding: 12px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.7rem; text-transform: uppercase; text-align: center; transition: 0.3s; border-radius: 12px; }
         .btn-v:hover { background: var(--gold); color: var(--bg); }
 
         footer { margin-top: 100px; text-align: center; font-family: 'Cinzel'; font-size: 0.7rem; color: #666; padding: 40px 0 380px 0; border-top: 1px solid rgba(212, 175, 55, 0.1); }
 
         .fixed-dock { position: fixed; bottom: 20px; left: 20px; right: 20px; max-width: 700px; margin: 0 auto; background: rgba(15, 17, 21, 0.98); backdrop-filter: blur(15px); border: 1px solid var(--gold); border-radius: 20px; z-index: 1000; padding: 15px; display: flex; justify-content: center; gap: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
-        .btn-d { flex: 1; padding: 15px; border: 2px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; text-align: center; transition: 0.3s; border-radius: 12px; }
+        .btn-d { flex: 1; padding: 15px; border: 2px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; text-align: center; transition: 0.3s; border-radius: 15px; }
         .btn-g { background: var(--gold); color: var(--bg); }
 
         @media (max-width: 768px) {
