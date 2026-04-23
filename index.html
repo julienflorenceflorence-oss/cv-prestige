@@ -25,7 +25,7 @@
         }
 
         /* BLOCAGE PAYSAGE MOBILE */
-        @media screen and (orientation: landscape) and (max-device-width: 1024px) {
+        @media screen and (orientation: landscape) and (max-width: 1024px) {
             body::before {
                 content: "Lecture horizontale interdite. \A Veuillez pivoter votre appareil en mode Portrait pour une lecture optimale.";
                 white-space: pre-wrap; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -91,16 +91,16 @@
             margin-bottom: 20px; 
             padding: 20px; 
             border: 1px solid rgba(212, 175, 55, 0.1); 
-            border-radius: 15px; /* Harmonisation des cadres */
+            border-radius: 15px; 
             transition: 0.3s;
         }
-        .exp-item:hover { border-color: var(--primary-gold); background: rgba(212, 175, 55, 0.05); }
         
         .exp-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
         .exp-role { font-weight: 700; font-size: 1rem; color: var(--primary-gold); }
-        .exp-date { font-size: 0.8rem; font-weight: 700; color: var(--text-dim); font-family: 'Cinzel', serif; }
+        .exp-date { font-size: 0.8rem; font-weight: 700; color: var(--text-dim); font-family: 'Cinzel', serif; white-space: nowrap; }
         .exp-comp { font-size: 0.95rem; font-weight: 700; color: var(--text-light); margin-bottom: 4px; }
         .exp-desc { font-size: 0.85rem; color: var(--text-dim); list-style: none; padding-left: 15px; margin-top: 5px; }
+        .exp-desc li { margin-bottom: 4px; }
         .exp-desc li::before { content: "•"; color: var(--primary-gold); margin-right: 8px; }
 
         /* BOUTONS ACTIONS */
@@ -123,25 +123,18 @@
         .drive-btn:hover { background-color: var(--primary-gold); color: var(--bg-color); transform: translateY(-3px); }
         .btn-rdv { background-color: var(--primary-gold); color: var(--bg-color); }
 
-        /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 1024px) {
             .cv-page { flex-direction: column; }
             aside, main { width: 100%; display: contents; }
-            
-            /* ORDRE STRICT MOBILE */
             .profile-img-container { order: 1; width: 50% !important; margin: 30px auto 15px auto !important; }
-            header { order: 2; width: 100%; padding: 0 25px; text-align: center; } /* Nom & Titre */
-            .summary { order: 3; width: 90%; margin: 15px auto 30px auto; text-align: center; } /* Présentation */
-            
-            /* SECTIONS SIDEBAR */
-            .skills-mobile { order: 4; width: 100%; padding: 0 25px; }
-            .psych-mobile { order: 5; width: 100%; padding: 0 25px; }
-            
-            /* CONTENU PRINCIPAL */
-            .exp-section-mobile { order: 6; width: 100%; padding: 0 25px; }
-            .edu-section-mobile { order: 7; width: 100%; padding: 0 25px; }
-            .contact-mobile { order: 8; width: 100%; padding: 0 25px; }
-
+            header { order: 2; width: 100%; padding: 0 25px; text-align: center; }
+            .summary { order: 3; width: 90%; margin: 15px auto 30px auto; text-align: center; }
+            .skills-mobile { order: 4; }
+            .psych-mobile { order: 5; }
+            .exp-section-mobile { order: 6; }
+            .edu-section-mobile { order: 7; }
+            .contact-mobile { order: 8; }
+            .skills-mobile, .psych-mobile, .exp-section-mobile, .edu-section-mobile, .contact-mobile { width: 100%; padding: 0 25px; }
             .fixed-footer { flex-direction: column; padding: 40px 25px; gap: 15px; }
             .drive-btn { width: 100%; height: 55px; }
             h1 { font-size: 1.8rem !important; }
@@ -150,65 +143,71 @@
 </head>
 <body>
     <div class="cv-page">
-        <!-- SIDEBAR -->
         <aside>
             <div class="profile-img-container"><img src="CV lettre de motivation/photo moi pro.jpeg" alt="Julien FLORENCE"></div>
-            
             <section class="skills-mobile">
                 <h2>Expertises Clés</h2>
                 <ul style="list-style: none;">
                     <li style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 8px;">✓ Business Plan & Pilotage P&L</li>
                     <li style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 8px;">✓ Management d'équipes (3-15 pers)</li>
                     <li style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 8px;">✓ Stratégie d'Acquisition Tech</li>
-                    <li style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 8px;">✓ Négociation de mandats prestige</li>
+                    <li style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 8px;">✓ Négociation de contrats prestige</li>
                 </ul>
             </section>
-
             <section class="psych-mobile">
                 <h2>Profil Psychologique</h2>
                 <div class="info-item" style="color: var(--primary-gold); font-family: 'Cinzel';">ENTJ-A (Commandant)</div>
                 <div class="info-item"><strong>Extraversion</strong> 88% | <strong>Rationnel</strong> 94%</div>
             </section>
-
             <section class="contact-mobile">
                 <h2>Contact</h2>
                 <div class="info-item"><strong>Téléphone</strong> 06 61 74 75 73</div>
                 <div class="info-item"><strong>Email</strong> julien.florence@gmail.com</div>
-                <div class="info-item"><strong>Mobilité</strong> 31130 Quint-Fonsegrives (Permis B)</div>
+                <div class="info-item"><strong>Mobilité</strong> 31130 Quint-Fonsegrives</div>
             </section>
         </aside>
 
-        <!-- MAIN CONTENT -->
         <main>
             <header>
                 <h1>Julien FLORENCE</h1>
                 <div class="job-title">Directeur Commercial</div>
             </header>
-            
             <div class="summary">Plus de 15 ans d'expérience dans la création de valeur et le pilotage de centres de profit. Expert en management d'équipes pluridisciplinaires et en acquisition Tech, je déploie des stratégies commerciales rentables au service de l'excellence et du prestige.</div>
 
             <section class="exp-section-mobile">
                 <h3 class="section-header">Parcours Professionnel</h3>
                 
                 <div class="exp-item">
-                    <div class="exp-head"><span class="exp-role">Responsable Développement</span><span class="exp-date">01/2025 – Présent</span></div>
+                    <div class="exp-head"><span class="exp-role">Responsable Développement Commercial</span><span class="exp-date">01/2025 – Présent</span></div>
                     <div class="exp-comp">Happy House</div>
-                    <ul class="exp-desc"><li>Stratégie Go-To-Market & outils d'acquisition Tech.</li></ul>
+                    <ul class="exp-desc">
+                        <li>Pilotage et coaching d'une équipe de 3 collaborateurs.</li>
+                        <li>Déploiement de la stratégie Go-To-Market et intégration d'outils d'acquisition Tech.</li>
+                    </ul>
                 </div>
 
                 <div class="exp-item">
-                    <div class="exp-head"><span class="exp-role">Gestionnaire Centre de Profit</span><span class="exp-date">01/2022 – 12/2024</span></div>
+                    <div class="exp-head"><span class="exp-role">Gestionnaire de Centre de Profit (Agence)</span><span class="exp-date">01/2022 – 12/2024</span></div>
                     <div class="exp-comp">RAS Intérim - CA 2.6 M€</div>
+                    <ul class="exp-desc">
+                        <li>Management de 20 ETP par semaine et gestion de 25 comptes B2B stratégiques.</li>
+                    </ul>
                 </div>
 
                 <div class="exp-item">
-                    <div class="exp-head"><span class="exp-role">Négociateur Immobilier Leader</span><span class="exp-date">01/2015 – 12/2021</span></div>
+                    <div class="exp-head"><span class="exp-role">Négociateur Immobilier - Conseiller Leader</span><span class="exp-date">01/2015 – 12/2021</span></div>
                     <div class="exp-comp">Century 21 & Cabinet Bedin - CA 7 M€</div>
+                    <ul class="exp-desc">
+                        <li>Supervision de l'équipe leader pendant 18 mois et négociation de mandats exclusifs de prestige.</li>
+                    </ul>
                 </div>
 
                 <div class="exp-item">
-                    <div class="exp-head"><span class="exp-role">Directeur de Restaurant</span><span class="exp-date">01/2010 – 12/2015</span></div>
-                    <div class="exp-comp">Ma Salle à Manger (Paris 1er)</div>
+                    <div class="exp-head"><span class="exp-role">Directeur de Restaurant / Maître d'Hôtel</span><span class="exp-date">01/2010 – 12/2015</span></div>
+                    <div class="exp-comp">Ma Salle à Manger (Paris 1er, Île de la Cité)</div>
+                    <ul class="exp-desc">
+                        <li>Management complet d'une équipe de 15 salariés et croissance de +140% du CA en 5 ans.</li>
+                    </ul>
                 </div>
 
                 <h3 class="section-header">Excellence & Gastronomie</h3>
@@ -216,31 +215,41 @@
                 <div class="exp-item">
                     <div class="exp-head"><span class="exp-role">Responsable de Salle & Sommelier</span><span class="exp-date">01/2004 – 12/2009</span></div>
                     <div class="exp-comp">La Table du Sommelier (CA 750k€)</div>
+                    <ul class="exp-desc">
+                        <li>Management de 7 serveurs, gestion des caves et organisation de dégustations professionnelles.</li>
+                    </ul>
                 </div>
 
                 <div class="exp-item">
                     <div class="exp-head"><span class="exp-role">1er Sommelier (Palace 5*)</span><span class="exp-date">01/2003 – 12/2004</span></div>
-                    <div class="exp-comp">THE WESBURY (Dublin) - 1* Michelin</div>
+                    <div class="exp-comp">THE WESBURY (Leading Hotel of the World, Dublin)</div>
+                    <ul class="exp-desc">
+                        <li>Restaurant 1 Étoile Michelin. Gestion d'une cave d'exception et service de prestige.</li>
+                    </ul>
                 </div>
 
                 <div class="exp-item">
                     <div class="exp-head"><span class="exp-role">Chef Barman</span><span class="exp-date">01/2001 – 12/2002</span></div>
                     <div class="exp-comp">Le CLOS (Angleterre) - 1* Michelin</div>
+                    <ul class="exp-desc">
+                        <li>Management du bar et création de cartes de cocktails pour un établissement étoilé.</li>
+                    </ul>
                 </div>
 
                 <div class="exp-item">
-                    <div class="exp-head"><span class="exp-role">Assistant Superviseur (Palace 5*)</span><span class="exp-date">09/2000 – 02/2001</span></div>
+                    <div class="exp-head"><span class="exp-role">Assistant Superviseur Room Service (Palace 5*)</span><span class="exp-date">09/2000 – 02/2001</span></div>
                     <div class="exp-comp">The GUANAHANI (St-Barth) - 2* Michelin</div>
-                    <ul class="exp-desc"><li>Leading Hotel of the World | CA 15M€. Management de service.</li></ul>
+                    <ul class="exp-desc">
+                        <li>Leading Hotel of the World | CA 15M€. Bras droit du superviseur Room Service.</li>
+                    </ul>
                 </div>
             </section>
 
             <section class="edu-section-mobile">
-                <h3 class="section-header">Formations & 10 Certifications</h3>
+                <h3 class="section-header">Formations & 10 Diplômes</h3>
                 <div class="exp-item"><div class="exp-comp">Bachelor Resp. Marketing et Commercial (2025)</div></div>
                 <div class="exp-item"><div class="exp-comp">Certification Conseiller Immobilier (2018)</div></div>
                 <div class="exp-item"><div class="exp-comp">HTML5 & CSS3 (2025) | Google Academy (2025)</div></div>
-                <div class="exp-item"><div class="exp-comp">HubSpot Inbound (2025) | Lead Management (2025)</div></div>
             </section>
         </main>
     </div>
