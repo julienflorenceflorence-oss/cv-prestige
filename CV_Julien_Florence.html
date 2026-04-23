@@ -14,7 +14,6 @@
             --sidebar-bg: #161a23;     /* Bleu Nuit légèrement plus clair */
         }
 
-        /* --- STYLES GÉNÉRAUX & DESKTOP (ORDINATEUR) --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
@@ -69,57 +68,41 @@
         .section-header { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--primary-gold); margin: 15px 0 8px 0; display: flex; align-items: center; }
         .section-header::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, var(--primary-gold), transparent); margin-left: 12px; }
 
-        .exp-item { margin-bottom: 10px; }
+        .exp-item { margin-bottom: 15px; }
         .exp-head { display: flex; justify-content: space-between; align-items: baseline; }
-        .exp-role { font-weight: 700; font-size: 0.85rem; color: var(--primary-gold); }
-        .exp-date { font-size: 0.75rem; font-weight: 700; color: var(--text-dim); white-space: nowrap; }
-        .exp-comp { font-size: 0.75rem; font-weight: 700; color: var(--text-light); margin-bottom: 2px; }
+        .exp-role { font-weight: 700; font-size: 0.9rem; color: var(--primary-gold); }
+        .exp-date { font-size: 0.75rem; font-weight: 700; color: var(--text-dim); white-space: nowrap; margin-left: 10px; }
+        .exp-comp { font-size: 0.8rem; font-weight: 700; color: var(--text-light); margin-bottom: 4px; }
         .exp-desc { font-size: 0.8rem; color: var(--text-dim); list-style: none; padding-left: 10px; }
         .exp-desc li::before { content: "•"; color: var(--primary-gold); margin-right: 6px; }
         .kpi { color: var(--primary-gold); font-weight: 700; }
 
-        .btn-container { margin-top: 15px; text-align: center; display: flex; justify-content: center; gap: 15px; }
-        .drive-btn { display: inline-block; padding: 8px 15px; border: 2px solid var(--primary-gold); color: var(--primary-gold); text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.65rem; text-transform: uppercase; transition: all 0.3s ease; }
+        .btn-container { margin-top: 25px; text-align: center; display: flex; justify-content: center; gap: 15px; }
+        .drive-btn { display: inline-block; padding: 10px 20px; border: 2px solid var(--primary-gold); color: var(--primary-gold); text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.7rem; text-transform: uppercase; transition: all 0.3s ease; }
         .drive-btn:hover { background-color: var(--primary-gold); color: var(--bg-color); }
 
-        .info-item { font-size: 0.8rem; margin-bottom: 6px; color: var(--text-dim); }
-        .info-item strong { color: var(--text-light); display: block; }
-        .psych-trait { margin-bottom: 8px; }
-        .trait-bar-bg { height: 3px; background: rgba(255,255,255,0.1); width: 100%; margin-top: 3px; }
+        .info-item { font-size: 0.8rem; margin-bottom: 8px; color: var(--text-dim); }
+        .info-item strong { color: var(--text-light); display: block; margin-bottom: 2px; }
+        .psych-trait { margin-bottom: 10px; }
+        .trait-bar-bg { height: 4px; background: rgba(255,255,255,0.1); width: 100%; margin-top: 4px; }
         .trait-bar-fill { height: 100%; background: var(--primary-gold); }
 
         /* --- RESPONSIVE MOBILE & TABLETTE (STRICT) --- */
         @media (max-width: 1024px) {
             body { background-color: var(--bg-color); }
-            .cv-page {
-                display: flex;
-                flex-direction: column;
-                width: 100% !important;
-                max-width: 100% !important;
-                margin: 0 !important;
-                box-shadow: none;
-            }
+            .cv-page { display: flex; flex-direction: column; width: 100% !important; margin: 0 !important; box-shadow: none; }
             aside, main { display: contents; }
-            .profile-img-container {
-                order: 1;
-                width: 18% !important;
-                margin: 30px auto 10px auto !important;
-                min-width: 80px;
-            }
-            header { order: 2; width: 100%; padding: 0 20px; text-align: center; margin-bottom: 10px; }
-            h1 { font-size: 1.6rem !important; text-align: center !important; }
-            .job-title { order: 3; width: 100%; text-align: center !important; font-size: 0.9rem !important; margin-bottom: 20px; }
+            .profile-img-container { order: 1; width: 18% !important; margin: 30px auto 10px auto !important; min-width: 85px; }
+            header { order: 2; width: 100%; padding: 0 20px; text-align: center; }
+            h1 { font-size: 1.8rem !important; }
+            .job-title { order: 3; width: 100%; text-align: center; margin-bottom: 20px; }
             .summary { order: 4; width: 90%; margin: 0 auto 20px auto; border-left: none; border-top: 1px solid var(--primary-gold); padding-top: 15px; }
-            .sidebar-section { order: 5; width: 100%; padding: 0 20px; margin-bottom: 20px; }
-            .section-header { order: 6; width: 100%; padding: 0 20px; }
-            .exp-item { order: 7; width: 100%; padding: 0 20px; }
-            .edu-item { order: 8; width: 100%; padding: 0 20px; }
-            .btn-container { order: 9; width: 100%; padding: 20px; flex-direction: column; }
+            .sidebar-section { order: 5; width: 100%; padding: 0 25px; margin-bottom: 20px; }
+            .section-header { order: 6; width: 100%; padding: 0 25px; }
+            .exp-item { order: 7; width: 100%; padding: 0 25px; }
+            .edu-item { order: 8; width: 100%; padding: 0 25px; }
+            .btn-container { order: 9; width: 100%; padding: 30px 20px; flex-direction: column; }
             .exp-head { display: flex !important; flex-direction: row !important; justify-content: space-between !important; align-items: center !important; }
-        }
-
-        @media print {
-            .cv-page { margin: 0; box-shadow: none; width: 210mm; height: 297mm; }
         }
     </style>
 </head>
@@ -142,27 +125,11 @@
             <section class="sidebar-section">
                 <h2>Profil Psychologique</h2>
                 <div class="info-item" style="color: var(--primary-gold); font-family: 'Cinzel'; font-size: 0.9rem;">ENTJ-A (Commandant)</div>
-                
-                <div class="psych-trait">
-                    <div class="info-item">Rationnel <span style="float:right">94%</span></div>
-                    <div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 94%"></div></div>
-                </div>
-                <div class="psych-trait">
-                    <div class="info-item">Organisé <span style="float:right">94%</span></div>
-                    <div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 94%"></div></div>
-                </div>
-                <div class="psych-trait">
-                    <div class="info-item">Extraverti <span style="float:right">88%</span></div>
-                    <div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 88%"></div></div>
-                </div>
-                <div class="psych-trait">
-                    <div class="info-item">Sûr de soi <span style="float:right">86%</span></div>
-                    <div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 86%"></div></div>
-                </div>
-                
-                <div class="info-item" style="margin-top:10px; font-style: italic;">
-                    <strong>Stratégie :</strong> Maîtrise des relations, posture girafe, communication adulte.
-                </div>
+                <div class="psych-trait"><div class="info-item">Rationnel <span style="float:right">94%</span></div><div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 94%"></div></div></div>
+                <div class="psych-trait"><div class="info-item">Organisé <span style="float:right">94%</span></div><div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 94%"></div></div></div>
+                <div class="psych-trait"><div class="info-item">Extraverti <span style="float:right">88%</span></div><div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 88%"></div></div></div>
+                <div class="psych-trait"><div class="info-item">Sûr de soi <span style="float:right">86%</span></div><div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 86%"></div></div></div>
+                <div class="info-item" style="margin-top:10px; font-style: italic;"><strong>Stratégie :</strong> Maîtrise des relations, posture girafe, communication adulte.</div>
             </section>
 
             <section class="sidebar-section">
@@ -185,18 +152,13 @@
             <header>
                 <h1>Julien FLORENCE</h1>
                 <div class="job-title">Directeur Commercial</div>
-                <div class="summary">
-                    Plus de 15 ans d'expérience dans la création de valeur et le pilotage de centres de profit. Expert en management d'équipes pluridisciplinaires et en acquisition Tech, je déploie des stratégies commerciales rentables au service de l'excellence et du prestige. Profil ENTJ-A orienté action.
-                </div>
+                <div class="summary">Plus de 15 ans d'expérience dans la création de valeur et le pilotage de centres de profit. Expert en management d'équipes pluridisciplinaires et en acquisition Tech, je déploie des stratégies commerciales rentables au service de l'excellence et du prestige. Profil ENTJ-A orienté action.</div>
             </header>
 
             <h3 class="section-header">Expériences Professionnelles</h3>
 
             <div class="exp-item">
-                <div class="exp-head">
-                    <span class="exp-role">Responsable du Développement Commercial</span>
-                    <span class="exp-date">2025 – Présent</span>
-                </div>
+                <div class="exp-head"><span class="exp-role">Responsable Développement Commercial</span><span class="exp-date">2025 – Présent</span></div>
                 <div class="exp-comp">Happy House</div>
                 <ul class="exp-desc">
                     <li>Pilotage et coaching d'une équipe de <span class="kpi">3 collaborateurs</span>.</li>
@@ -205,32 +167,19 @@
             </div>
 
             <div class="exp-item">
-                <div class="exp-head">
-                    <span class="exp-role">Gestionnaire de Centre de Profit (Agence)</span>
-                    <span class="exp-date">2022 – 2024</span>
-                </div>
+                <div class="exp-head"><span class="exp-role">Gestionnaire de Centre de Profit (Agence)</span><span class="exp-date">2022 – 2024</span></div>
                 <div class="exp-comp">RAS Intérim - CA 2.6 M€</div>
-                <ul class="exp-desc">
-                    <li>Management de <span class="kpi">20 ETP/semaine</span> et 25 comptes B2B.</li>
-                </ul>
+                <ul class="exp-desc"><li>Management de <span class="kpi">20 ETP/semaine</span> et 25 comptes B2B.</li></ul>
             </div>
 
             <div class="exp-item">
-                <div class="exp-head">
-                    <span class="exp-role">Négociateur Immobilier - Conseiller Leader</span>
-                    <span class="exp-date">2015 – 2021</span>
-                </div>
+                <div class="exp-head"><span class="exp-role">Négociateur Immobilier - Conseiller Leader</span><span class="exp-date">2015 – 2021</span></div>
                 <div class="exp-comp">Century 21 & Cabinet Bedin - CA 7 M€</div>
-                <ul class="exp-desc">
-                    <li>Supervision de l'équipe leader (18 mois) et mandats exclusifs.</li>
-                </ul>
+                <ul class="exp-desc"><li>Supervision de l'équipe leader (18 mois) et mandats exclusifs.</li></ul>
             </div>
 
             <div class="exp-item">
-                <div class="exp-head">
-                    <span class="exp-role">Directeur de Restaurant / Maître d'Hôtel</span>
-                    <span class="exp-date">2010 – 2015</span>
-                </div>
+                <div class="exp-head"><span class="exp-role">Directeur de Restaurant / Maître d'Hôtel</span><span class="exp-date">2010 – 2015</span></div>
                 <div class="exp-comp">Ma Salle à Manger (Paris 1er, Île de la Cité)</div>
                 <ul class="exp-desc">
                     <li>Croissance de <span class="kpi">+140% en 5 ans</span> (CA de 250k€ à 600k€).</li>
@@ -241,21 +190,13 @@
             <h3 class="section-header">Excellence & Gastronomie de Prestige</h3>
 
             <div class="exp-item">
-                <div class="exp-head">
-                    <span class="exp-role">Responsable de Salle & Sommelier</span>
-                    <span class="exp-date">2004 – 2009</span>
-                </div>
+                <div class="exp-head"><span class="exp-role">Responsable de Salle & Sommelier</span><span class="exp-date">2004 – 2009</span></div>
                 <div class="exp-comp">La Table du Sommelier (CA 750k€)</div>
-                <ul class="exp-desc">
-                    <li>Management de <span class="kpi">7 serveurs</span>, gestion des caves et dégustations.</li>
-                </ul>
+                <ul class="exp-desc"><li>Management de <span class="kpi">7 serveurs</span>, gestion des caves et dégustations.</li></ul>
             </div>
 
             <div class="exp-item">
-                <div class="exp-head">
-                    <span class="exp-role">1er Sommelier (Palace 5*)</span>
-                    <span class="exp-date">2003 – 2004</span>
-                </div>
+                <div class="exp-head"><span class="exp-role">1er Sommelier (Palace 5*)</span><span class="exp-date">2003 – 2004</span></div>
                 <div class="exp-comp">THE WESBURY (Leading Hotel of the World, Dublin)</div>
                 <ul class="exp-desc">
                     <li>Restaurant <span class="kpi">1 Étoile Michelin</span>. CA global établissement 10M€.</li>
@@ -264,34 +205,18 @@
             </div>
 
             <div class="exp-item">
-                <div class="exp-head">
-                    <span class="exp-role">Chef Barman</span>
-                    <span class="exp-date">2001 – 2002</span>
-                </div>
+                <div class="exp-head"><span class="exp-role">Chef Barman</span><span class="exp-date">2001 – 2002</span></div>
                 <div class="exp-comp">Le CLOS (1 Étoile Michelin, Bath, Angleterre) - CA 6M€</div>
-                <ul class="exp-desc">
-                    <li>Création de la carte et coordination du service au bar.</li>
-                </ul>
             </div>
 
             <div class="exp-item">
-                <div class="exp-head">
-                    <span class="exp-role">Assistant Superviseur Room Service (Palace 5*)</span>
-                    <span class="exp-date">2000 – 2001</span>
-                </div>
+                <div class="exp-head"><span class="exp-role">Assistant Superviseur Room Service (Palace 5*)</span><span class="exp-date">2000 – 2001</span></div>
                 <div class="exp-comp">The GUANAHANI (Leading Hotel, St-Barth) - CA 15M€</div>
-                <ul class="exp-desc">
-                    <li>Restaurant <span class="kpi">2 Étoiles Michelin</span>. Bras droit du superviseur.</li>
-                </ul>
+                <ul class="exp-desc"><li>Restaurant <span class="kpi">2 Étoiles Michelin</span>. Bras droit du superviseur.</li></ul>
             </div>
 
             <h3 class="section-header">Formations & Certifications</h3>
-
-            <div class="edu-item">
-                <div class="edu-title">Bachelor Responsable Marketing et Commercial (2025)</div>
-                <div class="edu-org">Spécialisation en acquisition de tech</div>
-            </div>
-
+            <div class="edu-item"><div class="edu-title">Bachelor Responsable Marketing et Commercial (2025)</div><div class="edu-org">Spécialisation en acquisition de tech</div></div>
             <div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
                 <div style="width: 48%;">
                     <div class="edu-item"><div class="edu-title">HTML5 & CSS3</div><div class="edu-org">OpenClassrooms (2025)</div></div>
@@ -309,9 +234,7 @@
                 <a href="diplomes.html" class="drive-btn">Portfolio Diplômes</a>
                 <a href="https://calendar.app.google/iCzfE1GQrjxM3ZQ56" target="_blank" class="drive-btn" style="background: var(--primary-gold); color: var(--bg-color); font-weight:700;">Réserver un RDV</a>
             </div>
-
         </main>
     </div>
-
 </body>
 </html>
