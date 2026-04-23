@@ -27,8 +27,8 @@
         /* BLOQUER LE MODE HORIZONTAL SUR MOBILE */
         @media screen and (orientation: landscape) and (max-width: 1024px) {
             body::before {
-                content: "Lecture horizontale interdite. Veuillez pivoter en mode Portrait pour consulter ce dossier de prestige.";
-                position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+                content: "Lecture horizontale interdite. \A Veuillez pivoter votre appareil en mode Portrait pour une lecture optimale.";
+                white-space: pre-wrap; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
                 background: var(--bg-color); color: var(--primary-gold);
                 display: flex; align-items: center; justify-content: center;
                 text-align: center; padding: 30px; font-family: 'Cinzel', serif;
@@ -37,7 +37,6 @@
             .cv-page, .fixed-footer { display: none !important; }
         }
 
-        /* --- STRUCTURE DE PAGE --- */
         .cv-page {
             width: 100%;
             max-width: 1100px;
@@ -45,10 +44,8 @@
             display: flex;
             background: var(--bg-color);
             position: relative;
-            padding-bottom: 40px;
         }
 
-        /* --- COLONNE GAUCHE --- */
         aside {
             width: 35%;
             background-color: var(--sidebar-bg);
@@ -61,10 +58,10 @@
             margin-bottom: 30px;
             border: 2px solid var(--primary-gold);
             padding: 4px;
-            border-radius: 12px;
+            border-radius: 20px; /* Harmonisé */
         }
 
-        .profile-img-container img { width: 100%; display: block; filter: brightness(1.1); border-radius: 8px; }
+        .profile-img-container img { width: 100%; display: block; filter: brightness(1.1); border-radius: 15px; }
 
         h2 { 
             font-family: 'Cinzel', serif; 
@@ -80,7 +77,6 @@
         .info-item { font-size: 0.85rem; margin-bottom: 8px; color: var(--text-dim); }
         .info-item strong { color: var(--text-light); display: block; margin-bottom: 2px; }
 
-        /* --- COLONNE DROITE --- */
         main { width: 65%; padding: 40px 50px; }
         
         h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--primary-gold); letter-spacing: 2px; }
@@ -98,7 +94,6 @@
         .exp-desc { font-size: 0.9rem; color: var(--text-dim); list-style: none; padding-left: 15px; }
         .exp-desc li::before { content: "•"; color: var(--primary-gold); margin-right: 8px; }
 
-        /* --- COMPÉTENCES & PSYCH --- */
         .skill-list { list-style: none; }
         .skill-list li { font-size: 0.9rem; margin-bottom: 8px; color: var(--text-light); }
         .skill-list li::before { content: "✓"; color: var(--primary-gold); margin-right: 10px; }
@@ -108,10 +103,10 @@
         .trait-bar-bg { height: 4px; background: rgba(255,255,255,0.1); width: 100%; }
         .trait-bar-fill { height: 100%; background: var(--primary-gold); }
 
-        /* --- BOUTONS FIXES --- */
         .fixed-footer {
             position: fixed;
-            bottom: 20px; left: 20px; right: 20px;
+            bottom: 25px; left: 20px; right: 20px;
+            max-width: 600px; margin: 0 auto;
             background: rgba(15, 17, 21, 0.98);
             backdrop-filter: blur(15px);
             padding: 15px;
@@ -124,62 +119,35 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.8);
         }
         .drive-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex: 1;
-            padding: 12px 25px;
-            border: 2px solid var(--primary-gold);
-            color: var(--primary-gold);
-            text-decoration: none;
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            background: transparent;
-            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            flex: 1; padding: 12px 25px; border: 2px solid var(--primary-gold);
+            color: var(--primary-gold); text-decoration: none; font-family: 'Cinzel', serif;
+            font-size: 0.75rem; text-transform: uppercase; font-weight: 700;
+            transition: 0.3s; background: transparent; border-radius: 12px;
         }
         .drive-btn:hover { background-color: var(--primary-gold); color: var(--bg-color); }
         .btn-rdv { background-color: var(--primary-gold); color: var(--bg-color); }
 
-        .mobile-spacer {
-            display: none;
-            height: 350px;
-        }
+        .mobile-spacer { display: none; height: 350px; }
 
-        /* --- RESPONSIVE MOBILE & TABLETTE --- */
         @media (max-width: 1024px) {
-            .cv-page { flex-direction: column; padding-bottom: 0; }
+            .cv-page { flex-direction: column; }
             aside, main { width: 100%; display: contents; }
-            
             .profile-img-container { width: 45% !important; margin: 30px auto 15px auto !important; }
             header { width: 100%; padding: 0 25px; text-align: center; }
             h1 { font-size: 1.8rem !important; }
             .summary { width: 90%; margin: 10px auto 30px auto; border-left: none; border-top: 2px solid var(--primary-gold); padding-top: 15px; }
-            
             .skills-mobile, .psych-mobile, .exp-section-mobile, .edu-section-mobile, .lang-mobile, .contact-mobile { width: 100%; padding: 0 25px; }
-
-            .fixed-footer { 
-                flex-direction: column; 
-                bottom: 15px; left: 15px; right: 15px;
-                padding: 15px;
-                margin-bottom: env(safe-area-inset-bottom);
-            }
+            .fixed-footer { flex-direction: column; bottom: 15px; left: 15px; right: 15px; margin-bottom: env(safe-area-inset-bottom); }
             .drive-btn { width: 100%; height: 50px; }
             .mobile-spacer { display: block; }
         }
     </style>
 </head>
 <body>
-
     <div class="cv-page">
-        <!-- CONTENU GAUCHE -->
         <aside>
-            <div class="profile-img-container">
-                <img src="CV lettre de motivation/photo moi pro.jpeg" alt="Julien FLORENCE">
-            </div>
-
+            <div class="profile-img-container"><img src="CV lettre de motivation/photo moi pro.jpeg" alt="Julien FLORENCE"></div>
             <section class="skills-mobile">
                 <h2>Expertises Clés</h2>
                 <ul class="skill-list">
@@ -190,54 +158,67 @@
                     <li>Sommelerie & Gastronomie</li>
                 </ul>
             </section>
-
             <section class="psych-mobile">
                 <h2>Profil Psychologique</h2>
                 <div class="info-item" style="color: var(--primary-gold); font-family: 'Cinzel'; margin-bottom:15px;">ENTJ-A (Commandant)</div>
                 <div class="psych-trait"><div class="trait-label"><span>Rationnel</span><span>94%</span></div><div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 94%"></div></div></div>
                 <div class="psych-trait"><div class="trait-label"><span>Organisé</span><span>94%</span></div><div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 94%"></div></div></div>
                 <div class="psych-trait"><div class="trait-label"><span>Extraverti</span><span>88%</span></div><div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 88%"></div></div></div>
-                <div class="psych-trait"><div class="trait-label"><span>Sûr de soi</span><span>86%</span></div><div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 86%"></div></div></div>
             </section>
-
             <section class="contact-mobile">
                 <h2>Contact</h2>
                 <div class="info-item"><strong>Téléphone</strong> 06 61 74 75 73</div>
                 <div class="info-item"><strong>Email</strong> julien.florence@gmail.com</div>
-                <div class="info-item"><strong>Adresse</strong> 31130 Quint-Fonsegrives</div>
             </section>
         </aside>
 
-        <!-- CONTENU DROITE -->
         <main>
             <header>
                 <h1>Julien FLORENCE</h1>
                 <div class="job-title">Directeur Commercial</div>
-                <div class="summary">Plus de 15 ans d'expérience dans la création de valeur et le pilotage de centres de profit. Expert en management d'équipes pluridisciplinaires et en acquisition Tech.</div>
+                <div class="summary">Plus de 15 ans d'expérience dans la création de valeur et le pilotage de centres de profit. Expert en management d'équipes Tech et Business.</div>
             </header>
 
             <section class="exp-section-mobile">
-                <h3 class="section-header">Parcours de Prestige</h3>
+                <h3 class="section-header">Expériences Professionnelles</h3>
                 <div class="exp-item">
                     <div class="exp-head"><span class="exp-role">Responsable Développement</span><span class="exp-date">2025 – Présent</span></div>
                     <div class="exp-comp">Happy House</div>
+                    <ul class="exp-desc"><li>Pilotage Go-To-Market & Acquisition Tech.</li></ul>
                 </div>
                 <div class="exp-item">
                     <div class="exp-head"><span class="exp-role">Gestionnaire Centre de Profit</span><span class="exp-date">2022 – 2024</span></div>
                     <div class="exp-comp">RAS Intérim - CA 2.6 M€</div>
+                    <ul class="exp-desc"><li>Management de 20 ETP et 25 comptes B2B.</li></ul>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-head"><span class="exp-role">Négociateur Immobilier Leader</span><span class="exp-date">2015 – 2021</span></div>
+                    <div class="exp-comp">Century 21 & Cabinet Bedin - CA 7 M€</div>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-head"><span class="exp-role">Maître d'Hôtel / Manager</span><span class="exp-date">2010 – 2015</span></div>
+                    <div class="exp-comp">Ma Salle à Manger (Paris 1er)</div>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-head"><span class="exp-role">1er Sommelier (Palace 5*)</span><span class="exp-date">2003 – 2004</span></div>
+                    <div class="exp-comp">THE WESBURY (Dublin) - 1* Michelin</div>
                 </div>
             </section>
 
             <section class="edu-section-mobile">
                 <h3 class="section-header">Formations & 10 Diplômes</h3>
-                <div class="exp-item"><div class="exp-comp">Bachelor Marketing (2025)</div></div>
+                <div class="exp-item"><div class="exp-comp">Bachelor Responsable Marketing et Commercial (2025)</div></div>
+                <div class="exp-item"><div class="exp-comp">Certification Conseiller Immobilier (2018)</div></div>
                 <div class="exp-item"><div class="exp-comp">HTML5 & CSS3 (2025)</div></div>
-                <div class="exp-item"><div class="exp-comp">Google Academy (2025)</div></div>
-                <div class="exp-item"><div class="exp-comp">HubSpot Inbound (2025)</div></div>
+                <div class="exp-item"><div class="exp-comp">Digital Marketing (2025)</div></div>
+                <div class="exp-item"><div class="exp-comp">Inbound Marketing HubSpot (2025)</div></div>
+                <div class="exp-item"><div class="exp-comp">Lead Management Datananas (2025)</div></div>
+                <div class="exp-item"><div class="exp-comp">Néerlandais B2 (2024)</div></div>
+                <div class="exp-item"><div class="exp-comp">CAP Restauration (2000)</div></div>
+                <div class="exp-item"><div class="exp-comp">Handball Animation (2022)</div></div>
             </section>
         </main>
     </div>
-
     <div class="fixed-footer">
         <a href="diplomes.html" class="drive-btn">Portfolio Diplômes</a>
         <a href="https://calendar.app.google/iCzfE1GQrjxM3ZQ56" target="_blank" class="drive-btn btn-rdv">Réserver un RDV</a>
