@@ -55,15 +55,14 @@
         }
         input:focus { border-color: var(--primary); outline: none; }
 
-        .color-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .color-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
 
-        /* Actions Manager */
         .action-item { background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px; margin-bottom: 10px; position: relative; }
         .remove-btn { position: absolute; top: 5px; right: 5px; background: #ff4444; color: white; border: none; border-radius: 3px; font-size: 0.6rem; padding: 2px 5px; cursor: pointer; }
         .add-btn { width: 100%; padding: 10px; background: transparent; border: 1px dashed var(--primary); color: var(--primary); cursor: pointer; border-radius: 5px; font-family: 'Cinzel'; font-size: 0.7rem; }
 
         .preview-panel { position: sticky; top: 20px; display: flex; flex-direction: column; align-items: center; }
-        .signature-wrapper { width: 100%; max-width: 650px; border: 2px solid var(--primary); border-radius: 10px; overflow: hidden; }
+        .signature-wrapper { width: 100%; max-width: 650px; border: 2px solid var(--primary); border-radius: 10px; overflow: hidden; background: #fff; }
 
         .btn-prestige {
             width: 100%; padding: 18px; background: var(--primary); color: #000; border: none; border-radius: 10px; font-family: 'Cinzel'; font-weight: 700; cursor: pointer; text-transform: uppercase; margin-top: 20px;
@@ -82,19 +81,17 @@
     <div class="form-panel">
         <h3>🎨 Thème & Couleurs</h3>
         <div class="color-grid">
-            <div class="input-group"><label>Couleur Boutons</label><input type="color" id="btn_color" value="#0367A6"></div>
-            <div class="input-group"><label>Couleur Fond Mail</label><input type="color" id="bg_page_color" value="#011F4B"></div>
-            <div class="input-group"><label>Accent (Néon)</label><input type="color" id="accent_color" value="#00F2FE"></div>
+            <div class="input-group"><label>Boutons</label><input type="color" id="btn_color" value="#0367A6"></div>
+            <div class="input-group"><label>Fond Mail</label><input type="color" id="bg_page_color" value="#011F4B"></div>
+            <div class="input-group"><label>Accent</label><input type="color" id="accent_color" value="#00F2FE"></div>
         </div>
 
-        <h3>📝 Contenu</h3>
+        <h3>📝 Contenu & Bannière</h3>
+        <div class="input-group"><label>URL de la Bannière</label><input type="text" id="banner_url" value="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png"></div>
         <div class="input-group"><label>Message</label><textarea id="mail_body">Bonjour,</textarea></div>
-        <div class="input-group"><label>Bannière (URL)</label><input type="text" id="banner_url" value="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png"></div>
 
         <h3>🔘 Boutons d'Action</h3>
-        <div id="actions_container">
-            <!-- Injecté par JS -->
-        </div>
+        <div id="actions_container"></div>
         <button class="add-btn" onclick="addAction()">+ Ajouter une action</button>
     </div>
 
@@ -120,8 +117,8 @@
             div.className = 'action-item';
             div.innerHTML = `
                 <button class="remove-btn" onclick="removeAction(${i})">X</button>
-                <div class="input-group"><label>Nom du bouton</label><input type="text" value="${a.label}" oninput="updateAction(${i}, 'label', this.value)"></div>
-                <div class="input-group"><label>Lien (URL)</label><input type="text" value="${a.url}" oninput="updateAction(${i}, 'url', this.value)"></div>
+                <div class="input-group"><label>Nom</label><input type="text" value="${a.label}" oninput="updateAction(${i}, 'label', this.value)"></div>
+                <div class="input-group"><label>URL</label><input type="text" value="${a.url}" oninput="updateAction(${i}, 'url', this.value)"></div>
             `;
             container.appendChild(div);
         });
@@ -136,7 +133,10 @@
         const name = "Julien";
         const job = "Directeur commercial";
         const phone = "06 61 74 75 73";
-        const banner = document.getElementById('banner_url').value;
+        let banner = document.getElementById('banner_url').value;
+        if (banner.includes('github.com') && banner.includes('/blob/')) {
+            banner = banner.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
+        }
         const body = document.getElementById('mail_body').value.replace(/\n/g, '<br>');
         const btnColor = document.getElementById('btn_color').value;
         const bgColor = document.getElementById('bg_page_color').value;
@@ -148,7 +148,7 @@
         actions.forEach(a => {
             actionsHtml += `
                 <td style="padding: 10px 5px;">
-                    <a href="${a.url}" target="_blank" style="display: inline-block; background-color: ${btnColor}; color: #ffffff; padding: 12px 20px; text-decoration: none; font-size: 10px; font-weight: bold; border-radius: 10px; border: 1px solid ${accent}; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif;">${a.label}</a>
+                    <a href="${a.url}" target="_blank" style="display: inline-block; background-color: ${btnColor}; color: #ffffff; padding: 12px 20px; text-decoration: none; font-size: 10px; font-weight: bold; border-radius: 5px; border: 1px solid ${accent}; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif;">${a.label}</a>
                 </td>
             `;
         });
@@ -159,7 +159,7 @@
         <td align="center">
             <table cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; background-color: #ffffff; border-radius: 0px; overflow: hidden;">
                 <tr><td style="padding: 0;"><img src="${banner}" width="600" style="display: block; width: 100%; height: auto;"></td></tr>
-                <tr><td height="4" style="background-color: ${accent}; line-height: 4px; font-size: 4px;">&nbsp;</td></tr>
+                <tr><td height="3" style="background-color: ${accent}; line-height: 3px; font-size: 3px;">&nbsp;</td></tr>
                 <tr><td style="padding: 40px; color: ${bgColor}; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6;">${body}</td></tr>
                 <tr>
                     <td style="background-color: ${bgColor}; padding: 40px 20px; text-align: center; font-family: Arial, sans-serif;">
