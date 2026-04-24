@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Master Studio | Prestige Edition</title>
+    <title>Email Master Studio | Responsive Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -33,7 +33,7 @@
             width: 100%;
             max-width: 1300px;
             display: grid;
-            grid-template-columns: 450px 1fr;
+            grid-template-columns: 400px 1fr;
             gap: 30px;
             align-items: start;
         }
@@ -68,7 +68,7 @@
             width: 100%; padding: 18px; background: var(--primary); color: #000; border: none; border-radius: 10px; font-family: 'Cinzel'; font-weight: 700; cursor: pointer; text-transform: uppercase; margin-top: 20px;
         }
 
-        @media (max-width: 1100px) { .app-container { grid-template-columns: 1fr; } }
+        @media (max-width: 1100px) { .app-container { grid-template-columns: 1fr; } .preview-panel { position: static; } }
     </style>
 </head>
 <body>
@@ -147,9 +147,9 @@
         let actionsHtml = '';
         actions.forEach(a => {
             actionsHtml += `
-                <td style="padding: 10px 5px;">
-                    <a href="${a.url}" target="_blank" style="display: inline-block; background-color: ${btnColor}; color: #ffffff; padding: 12px 20px; text-decoration: none; font-size: 10px; font-weight: bold; border-radius: 5px; border: 1px solid ${accent}; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif;">${a.label}</a>
-                </td>
+                <div style="display: inline-block; padding: 10px 5px;">
+                    <a href="${a.url}" target="_blank" style="display: inline-block; background-color: ${btnColor}; color: #ffffff; padding: 12px 25px; text-decoration: none; font-size: 11px; font-weight: bold; border-radius: 10px; border: 1px solid ${accent}; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif;">${a.label}</a>
+                </div>
             `;
         });
 
@@ -158,16 +158,48 @@
     <tr>
         <td align="center">
             <table cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; background-color: #ffffff; border-radius: 0px; overflow: hidden;">
+                <!-- BANNIERE -->
                 <tr><td style="padding: 0;"><img src="${banner}" width="600" style="display: block; width: 100%; height: auto;"></td></tr>
-                <tr><td height="3" style="background-color: ${accent}; line-height: 3px; font-size: 3px;">&nbsp;</td></tr>
-                <tr><td style="padding: 40px; color: ${bgColor}; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6;">${body}</td></tr>
+                
+                <!-- LIGNE ACCENT -->
+                <tr><td height="4" style="background-color: ${accent}; line-height: 4px; font-size: 4px;">&nbsp;</td></tr>
+                
+                <!-- CORPS DU MESSAGE -->
+                <tr>
+                    <td style="padding: 40px; color: #0a1128; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; background-color: #ffffff;">
+                        ${body}
+                    </td>
+                </tr>
+
+                <!-- SIGNATURE SECTION -->
                 <tr>
                     <td style="background-color: ${bgColor}; padding: 40px 20px; text-align: center; font-family: Arial, sans-serif;">
-                        <table cellpadding="0" cellspacing="0" border="0" align="center"><tr>${actionsHtml}</tr></table>
-                        <div style="height: 1px; background-color: ${btnColor}; margin: 30px auto; width: 80%;"></div>
-                        <div style="color: ${accent}; font-size: 18px; font-weight: bold; text-transform: uppercase;">${name}</div>
+                        <!-- BOUTONS RESPONSIVE (INLINE-BLOCK) -->
+                        <div style="text-align: center;">
+                            ${actionsHtml}
+                        </div>
+                        
+                        <div style="height: 1px; background-color: rgba(255,255,255,0.1); margin: 30px auto; width: 80%;"></div>
+                        
+                        <!-- IDENTITÉ -->
+                        <div style="color: ${accent}; font-size: 18px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">${name}</div>
                         <div style="color: #ffffff; font-size: 14px; margin-top:5px;">${job}</div>
                         <div style="color: ${accent}; font-size: 14px; font-weight: bold; margin-top:5px;">${phone}</div>
+                        
+                        <div style="height: 1px; background-color: rgba(255,255,255,0.1); margin: 30px auto; width: 80%;"></div>
+                        
+                        <!-- APP SECTION -->
+                        <div style="color: ${accent}; font-size: 13px; font-weight: bold; letter-spacing: 1px; margin-bottom: 15px; text-transform: uppercase;">TÉLÉCHARGEZ NOTRE APPLICATION</div>
+                        <table cellpadding="0" cellspacing="0" border="0" align="center">
+                            <tr>
+                                <td style="padding: 0 10px;">
+                                    <img src="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/doc%20HH/appli-2.jpg" alt="App Store" width="130" style="border-radius: 5px; border: 1px solid rgba(255,255,255,0.1);">
+                                </td>
+                                <td style="padding: 0 10px;">
+                                    <img src="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/doc%20HH/appli-2.jpg" alt="Google Play" width="130" style="border-radius: 5px; border: 1px solid rgba(255,255,255,0.1);">
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
             </table>
@@ -189,7 +221,7 @@
         const code = build();
         navigator.clipboard.writeText(code).then(() => {
             const s = document.getElementById('status');
-            s.innerText = "✓ TEMPLATE COPIÉ";
+            s.innerText = "✓ TEMPLATE RESPONSIVE COPIÉ";
             setTimeout(() => s.innerText = "", 3000);
         });
     }
