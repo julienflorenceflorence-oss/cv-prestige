@@ -57,6 +57,7 @@
         }
         input:focus { border-color: var(--primary); outline: none; }
         input[type="color"] { height: 40px; cursor: pointer; padding: 2px; }
+        input[type="range"] { padding: 0; cursor: pointer; height: 10px; }
 
         .color-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
 
@@ -95,6 +96,10 @@
         <div class="input-group"><label>Titre / Poste</label><input type="text" id="user_job" value="Directeur commercial"></div>
         <div class="input-group"><label>Téléphone</label><input type="text" id="user_phone" value="06 61 74 75 73"></div>
         <div class="input-group"><label>URL Photo de profil</label><input type="text" id="photo_url" value="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/CV%20lettre%20de%20motivation/photo%20moi%20pro.jpeg"></div>
+        <div class="input-group">
+            <label>Ajustement Taille Photo</label>
+            <input type="range" id="photo_zoom" min="50" max="200" value="100">
+        </div>
 
         <h3>📝 Contenu & Bannière</h3>
         <div class="input-group"><label>URL de la Bannière</label><input type="text" id="banner_url" value="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png"></div>
@@ -152,6 +157,7 @@
         const job = document.getElementById('user_job').value;
         const phone = document.getElementById('user_phone').value;
         const photo = fixGithubUrl(document.getElementById('photo_url').value);
+        const photoZoom = document.getElementById('photo_zoom').value;
         const banner = fixGithubUrl(document.getElementById('banner_url').value);
         const body = document.getElementById('mail_body').value.replace(/\n/g, '<br>');
         
@@ -177,7 +183,7 @@
         <td align="center">
             <table cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; background-color: #ffffff; border-radius: 0px; overflow: hidden; border: 1px solid #eeeeee;">
                 <tr>
-                    <td style="padding: 0; line-height: 0;">
+                    <td style="padding: 0; line-height: 0; background-color: #000;">
                         <img src="${banner}" width="600" style="display: block; width: 100%; max-width: 600px; height: auto; max-height: 10vh; object-fit: cover;">
                     </td>
                 </tr>
@@ -191,7 +197,7 @@
                             <tr>
                                 <td width="120" align="center" style="vertical-align: top; padding-right: 20px;">
                                     <div style="width: 100px; height: 100px; border: 3px solid ${accent}; border-radius: 50px; overflow: hidden; background-color: #000;">
-                                        <img src="${photo}" alt="Photo" width="100" height="100" style="display: block; border-radius: 50px; object-fit: cover;">
+                                        <img src="${photo}" alt="Photo" width="${photoZoom}" style="display: block; border-radius: 0; object-fit: cover; margin: auto;">
                                     </div>
                                 </td>
                                 <td align="left" style="vertical-align: middle;">
