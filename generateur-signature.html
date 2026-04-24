@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Master Studio | Restoration Edition</title>
+    <title>Email Master Studio v5 | Ultimate Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #00F2FE;
+            --primary: #00ff88; /* VERT NÉON POUR PREUVE DE v5 */
             --bg-page: #011F4B;
             --card-bg: rgba(22, 26, 35, 0.95);
             --text: #f4f4f4;
-            --restored-color: #a855f7;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,8 +27,8 @@
         }
 
         .header-app { text-align: center; margin-bottom: 40px; }
-        h1 { font-family: 'Cinzel', serif; color: var(--restored-color); font-size: 2.2rem; letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 0 15px var(--restored-color); }
-        .v-tag { background: var(--restored-color); color: #000; padding: 2px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; margin-left: 10px; }
+        h1 { font-family: 'Cinzel', serif; color: var(--primary); font-size: 2.2rem; letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 0 15px var(--primary); }
+        .v-tag { background: var(--primary); color: #000; padding: 2px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; margin-left: 10px; }
 
         .app-container {
             width: 100%;
@@ -42,15 +41,14 @@
 
         .form-panel {
             background: var(--card-bg);
-            border: 1px solid var(--restored-color);
+            border: 1px solid var(--primary);
             padding: 25px;
             border-radius: 10px;
             max-height: 90vh;
             overflow-y: auto;
-            box-shadow: 0 0 40px rgba(168, 85, 247, 0.15);
         }
 
-        h3 { font-family: 'Cinzel'; font-size: 0.8rem; color: var(--primary); margin: 20px 0 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
+        h3 { font-family: 'Cinzel'; font-size: 0.8rem; color: var(--primary); margin: 20px 0 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
 
         .input-group { margin-bottom: 12px; }
         label { display: block; font-size: 0.65rem; color: #aaa; margin-bottom: 4px; text-transform: uppercase; }
@@ -67,10 +65,10 @@
         .add-btn { width: 100%; padding: 10px; background: transparent; border: 1px dashed var(--primary); color: var(--primary); cursor: pointer; border-radius: 5px; font-family: 'Cinzel'; font-size: 0.7rem; }
 
         .preview-panel { position: sticky; top: 20px; display: flex; flex-direction: column; align-items: center; }
-        .signature-wrapper { width: 100%; max-width: 650px; border: 2px solid var(--restored-color); border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+        .signature-wrapper { width: 100%; max-width: 650px; border: 2px solid var(--primary); border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
 
         .btn-prestige {
-            width: 100%; padding: 18px; background: var(--restored-color); color: #fff; border: none; border-radius: 10px; font-family: 'Cinzel'; font-weight: 700; cursor: pointer; text-transform: uppercase; margin-top: 20px; transition: 0.3s;
+            width: 100%; padding: 18px; background: var(--primary); color: #000; border: none; border-radius: 10px; font-family: 'Cinzel'; font-weight: 700; cursor: pointer; text-transform: uppercase; margin-top: 20px; transition: 0.3s;
         }
         .btn-prestige:hover { background: #fff; color: #000; transform: translateY(-3px); }
 
@@ -80,7 +78,7 @@
 <body>
 
 <div class="header-app">
-    <h1>Email Master Studio <span class="v-tag">RESTORED</span></h1>
+    <h1>Email Master Studio <span class="v-tag">v5.0 FINAL</span></h1>
 </div>
 
 <div class="app-container">
@@ -89,7 +87,7 @@
         <div class="color-grid">
             <div class="input-group"><label>Boutons</label><input type="color" id="btn_color" value="#0367A6"></div>
             <div class="input-group"><label>Fond Mail</label><input type="color" id="bg_page_color" value="#011F4B"></div>
-            <div class="input-group"><label>Accent</label><input type="color" id="accent_color" value="#00F2FE"></div>
+            <div class="input-group"><label>Accent</label><input type="color" id="accent_color" value="#00ff88"></div>
         </div>
 
         <h3>👤 Identité & Photo</h3>
@@ -127,11 +125,15 @@
     function fixUrl(url) {
         if (!url) return "";
         let u = url.trim();
-        const parts = u.split('http');
-        if (parts.length > 2) u = 'http' + parts[parts.length - 1];
+        // Force le dernier lien si double URL
+        if (u.includes('http') && u.lastIndexOf('http') > 0) {
+            u = u.substring(u.lastIndexOf('http'));
+        }
+        // Correcteur GitHub
         if (u.includes('github.com') && u.includes('/blob/')) {
             u = u.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
         }
+        // Encodage propre pour les caractères spéciaux (accents)
         try {
             return encodeURI(decodeURI(u));
         } catch(e) {
@@ -182,7 +184,12 @@
     <tr>
         <td align="center">
             <table cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; background-color: #ffffff; border-radius: 0px; overflow: hidden; border: 1px solid #eeeeee;">
-                <tr><td style="padding: 0; line-height: 0; background-color: #000;"><img src="${banner}" width="600" style="display: block; width: 100%; max-width: 600px; height: auto;"></td></tr>
+                <!-- BANNIERE 10% VIEWPORT -->
+                <tr>
+                    <td style="padding: 0; line-height: 0; background-color: #000; height: 10vh; overflow: hidden;">
+                        <img src="${banner}" width="600" style="display: block; width: 100%; max-width: 600px; height: 10vh; object-fit: cover;">
+                    </td>
+                </tr>
                 <tr><td height="4" style="background-color: ${accent}; line-height: 4px; font-size: 4px;">&nbsp;</td></tr>
                 <tr><td style="padding: 40px; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; background-color: #ffffff;">${body}</td></tr>
                 <tr>
@@ -213,7 +220,7 @@
         const code = build();
         navigator.clipboard.writeText(code).then(() => {
             const s = document.getElementById('status');
-            s.innerText = "✓ TEMPLATE RESTAURÉ COPIÉ";
+            s.innerText = "✓ TEMPLATE v5.0 COPIÉ";
             setTimeout(() => s.innerText = "", 3000);
         });
     }
