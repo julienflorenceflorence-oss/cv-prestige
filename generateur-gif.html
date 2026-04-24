@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GIF Master Studio | Engine Fixed</title>
+    <title>GIF Master Studio | Engine Ultra-Fix</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -70,13 +70,13 @@
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0,0,0,0.8);
             position: relative;
-            min-height: 200px;
+            min-height: 300px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .gif-preview-box video, .gif-preview-box img { width: 100%; display: block; }
+        .gif-preview-box video, .gif-preview-box img { width: 100%; height: auto; display: block; }
 
         .fps-counter {
             position: absolute;
@@ -111,7 +111,7 @@
         <h3>🎬 Source Vidéo / Image</h3>
         <div class="input-group">
             <label>URL de la source (Hébergée)</label>
-            <input type="text" id="source_url" value="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png" placeholder="Collez l'URL de votre fichier">
+            <input type="text" id="source_url" value="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png" placeholder="Collez l'URL GitHub ou Cloud">
         </div>
         <div class="test-btns">
             <button class="btn-test" onclick="setTest('photo')">Tester Photo</button>
@@ -160,10 +160,11 @@
     function fixUrl(url) {
         if (!url) return "";
         let clean = url.trim();
+        // Correction GitHub : Blob -> Raw + Encodage des espaces
         if (clean.includes('github.com') && clean.includes('/blob/')) {
             clean = clean.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
         }
-        return clean;
+        return encodeURI(clean).replace(/%2520/g, '%20');
     }
 
     function build() {
@@ -173,12 +174,12 @@
         const container = document.getElementById('media_container');
         document.getElementById('fps_display').innerText = fps + " FPS";
 
-        if (!url) return;
+        if (!url || url.length < 5) return;
 
-        // Détection intelligente du type de média
+        container.innerHTML = '<p style="color:var(--gold); padding:20px; font-size:0.7rem;">Chargement...</p>';
+
+        // Détection par extension ou par mot-clé
         const isVideo = url.toLowerCase().match(/\.(mp4|webm|ogg|mov)$/) || url.toLowerCase().includes('video');
-        
-        container.innerHTML = ''; // Clear
         
         if (isVideo) {
             const video = document.createElement('video');
@@ -187,14 +188,21 @@
             video.loop = true;
             video.muted = true;
             video.setAttribute('playsinline', '');
-            video.onerror = () => { container.innerHTML = '<p style="color:red; padding:20px; font-size:0.7rem;">Erreur : Fichier vidéo non accessible ou lien invalide.</p>'; };
-            container.appendChild(video);
+            video.oncanplay = () => { container.innerHTML = ''; container.appendChild(video); };
+            video.onerror = () => { tryLoadingAsImage(url); };
         } else {
-            const img = document.createElement('img');
-            img.src = url;
-            img.onerror = () => { container.innerHTML = '<p style="color:red; padding:20px; font-size:0.7rem;">Erreur : Image non accessible. Vérifiez que le lien pointe sur un fichier .png ou .jpg.</p>'; };
-            container.appendChild(img);
+            tryLoadingAsImage(url);
         }
+    }
+
+    function tryLoadingAsImage(url) {
+        const container = document.getElementById('media_container');
+        const img = document.createElement('img');
+        img.src = url;
+        img.onload = () => { container.innerHTML = ''; container.appendChild(img); };
+        img.onerror = () => { 
+            container.innerHTML = '<div style="padding:40px; text-align:center;"><p style="color:#ff4444; font-size:0.8rem; margin-bottom:10px;">Impossible de charger ce média.</p><p style="color:#888; font-size:0.65rem;">Vérifiez que le lien pointe vers un fichier image (.png, .jpg) ou vidéo (.mp4).</p></div>'; 
+        };
     }
 
     function setTest(type) {
@@ -206,16 +214,15 @@
         build();
     }
 
-    document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', build));
+    document.addEventListener('input', build);
     build();
 
     function exportInstructions() {
         const status = document.getElementById('status');
-        status.innerText = "✓ WORKFLOW DISPONIBLE DANS LA CONSOLE (F12)";
+        status.innerText = "✓ WORKFLOW PRÊT (F12)";
         console.log("%c--- WORKFLOW GIF PRESTIGE ---", "color: #D4AF37; font-size: 20px; font-weight: bold;");
-        console.log("1. Ouvrez Photoshop > Import > Video Frames to Layers");
-        console.log("2. FPS cible : " + document.getElementById('fps_rate').value);
-        console.log("3. Dithering recommandé : " + document.getElementById('dither_type').value);
+        console.log("1. Photoshop > Import > Video Frames to Layers");
+        console.log("2. FPS: " + document.getElementById('fps_rate').value);
         setTimeout(() => status.innerText = "", 4000);
     }
 </script>
