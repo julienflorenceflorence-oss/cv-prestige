@@ -11,7 +11,7 @@
             --bg-page: #011F4B;
             --card-bg: rgba(22, 26, 35, 0.95);
             --text: #f4f4f4;
-            --v4-color: #a855f7; /* VIOLET POUR PREUVE DE MISE À JOUR */
+            --v4-color: #a855f7;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -80,7 +80,7 @@
 <body>
 
 <div class="header-app">
-    <h1>Email Master Studio <span class="v-tag">v4.0 PRESTIGE</span></h1>
+    <h1>Email Master Studio <span class="v-tag">v4.1 PRESTIGE</span></h1>
 </div>
 
 <div class="app-container">
@@ -127,14 +127,11 @@
     function fixUrl(url) {
         if (!url) return "";
         let u = url.trim();
-        // Nettoyage si double URL
         const parts = u.split('http');
         if (parts.length > 2) u = 'http' + parts[parts.length - 1];
-        // Correcteur GitHub & Accents
         if (u.includes('github.com') && u.includes('/blob/')) {
             u = u.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
         }
-        // Encodage propre pour les caractères spéciaux (accents/espaces)
         try {
             return encodeURI(decodeURI(u));
         } catch(e) {
@@ -149,8 +146,8 @@
             const div = document.createElement('div');
             div.className = 'action-item';
             div.innerHTML = `<button class="remove-btn" onclick="removeAction(${i})">X</button>
-                <div class="input-group"><label>Nom</label><input type="text" value="${a.label}" oninput="updateAction(${i}, 'label', this.value)"></div>
-                <div class="input-group"><label>URL</label><input type="text" value="${a.url}" oninput="updateAction(${i}, 'url', this.value)"></div>`;
+                <div class="input-group"><label>Nom du bouton</label><input type="text" value="${a.label}" oninput="updateAction(${i}, 'label', this.value)"></div>
+                <div class="input-group"><label>Lien (URL)</label><input type="text" value="${a.url}" oninput="updateAction(${i}, 'url', this.value)"></div>`;
             container.appendChild(div);
         });
         build();
@@ -185,7 +182,12 @@
     <tr>
         <td align="center">
             <table cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; background-color: #ffffff; border-radius: 0px; overflow: hidden; border: 1px solid #eeeeee;">
-                <tr><td style="padding: 0; line-height: 0; background-color: #000;"><img src="${banner}" width="600" style="display: block; width: 100%; max-width: 600px; height: auto;"></td></tr>
+                <!-- BANNIERE 10% DU VIEWPORT AVEC FALLBACK FIXED -->
+                <tr>
+                    <td style="padding: 0; line-height: 0; background-color: #000; height: 80px; height: 10vh; overflow: hidden;">
+                        <img src="${banner}" width="600" style="display: block; width: 100%; max-width: 600px; height: 80px; height: 10vh; object-fit: cover;">
+                    </td>
+                </tr>
                 <tr><td height="4" style="background-color: ${accent}; line-height: 4px; font-size: 4px;">&nbsp;</td></tr>
                 <tr><td style="padding: 40px; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; background-color: #ffffff;">${body}</td></tr>
                 <tr>
@@ -216,7 +218,7 @@
         const code = build();
         navigator.clipboard.writeText(code).then(() => {
             const s = document.getElementById('status');
-            s.innerText = "✓ CODE v4.0 COPIÉ";
+            s.innerText = "✓ CODE v4.1 COPIÉ";
             setTimeout(() => s.innerText = "", 3000);
         });
     }
