@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Email Template | Prestige Edition</title>
+    <title>Master Email Template | Edition Prestige</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #D4AF37;
             --neon: #00F2FE;
-            --bg: #0F1115;
-            --card-bg: rgba(22, 26, 35, 0.9);
+            --bg: #0a1128;
+            --card-bg: rgba(22, 26, 35, 0.95);
             --text: #f4f4f4;
         }
 
@@ -18,7 +18,7 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background: radial-gradient(circle at center, #1a1e26 0%, #000 100%);
+            background: var(--bg);
             color: var(--text);
             min-height: 100vh;
             padding: 40px 20px;
@@ -27,50 +27,50 @@
             align-items: center;
         }
 
-        .header-app { text-align: center; margin-bottom: 50px; }
-        h1 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.5rem; letter-spacing: 6px; text-transform: uppercase; }
+        .header-app { text-align: center; margin-bottom: 40px; }
+        h1 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 2rem; letter-spacing: 4px; text-transform: uppercase; }
 
         .app-container {
             width: 100%;
             max-width: 1300px;
             display: grid;
-            grid-template-columns: 450px 1fr;
-            gap: 40px;
+            grid-template-columns: 400px 1fr;
+            gap: 30px;
             align-items: start;
         }
 
         .form-panel {
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
             border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 30px;
+            padding: 25px;
             border-radius: 10px;
         }
 
         .input-group { margin-bottom: 15px; }
-        label { display: block; font-size: 0.7rem; color: var(--gold); margin-bottom: 5px; text-transform: uppercase; font-family: 'Cinzel'; }
+        label { display: block; font-size: 0.65rem; color: var(--gold); margin-bottom: 5px; text-transform: uppercase; font-family: 'Cinzel'; }
         input, textarea {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             background: rgba(0,0,0,0.5);
             border: 1px solid #333;
             color: #fff;
-            border-radius: 10px;
+            border-radius: 8px;
             font-family: 'Montserrat';
+            font-size: 0.85rem;
         }
-        textarea { height: 150px; resize: none; font-size: 0.85rem; }
-        input:focus, textarea:focus { border-color: var(--neon); outline: none; }
+        textarea { height: 120px; resize: none; }
+        input:focus, textarea:focus { border-color: var(--gold); outline: none; }
 
         .preview-panel { position: sticky; top: 20px; display: flex; flex-direction: column; align-items: center; }
+        
         .signature-wrapper {
-            background: #e0e0e0;
-            padding: 20px;
+            background: #0a1128; /* Fond extérieur sombre */
+            padding: 40px 20px;
             border-radius: 10px;
-            border: 3px solid var(--gold);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-            margin-bottom: 20px;
+            border: 2px solid var(--gold);
             width: 100%;
-            max-width: 640px;
+            max-width: 650px;
+            overflow: auto;
         }
 
         .btn-prestige {
@@ -85,10 +85,11 @@
             cursor: pointer;
             text-transform: uppercase;
             transition: 0.3s;
+            margin-top: 20px;
         }
         .btn-prestige:hover { background: #fff; transform: translateY(-3px); }
 
-        .status-msg { margin-top: 10px; color: var(--neon); font-weight: bold; }
+        .status-msg { margin-top: 10px; color: var(--neon); font-weight: bold; font-size: 0.8rem; }
 
         @media (max-width: 1100px) {
             .app-container { grid-template-columns: 1fr; }
@@ -98,32 +99,35 @@
 <body>
 
 <div class="header-app">
-    <h1>Email Master Engine</h1>
+    <h1>Template Master Mail</h1>
 </div>
 
 <div class="app-container">
     <div class="form-panel">
         <div class="input-group">
-            <label>Contenu du Message (Corps du mail)</label>
-            <textarea id="mail_body" placeholder="Tapez votre message ici...">Suite à notre entretien téléphonique de ce jour, veuillez trouver ci-dessous les informations demandées...</textarea>
+            <label>Corps du mail</label>
+            <textarea id="mail_body">Bonjour Khrystyna,
+
+Bien reçu, merci. Pour finaliser la mise en ligne de l'annonce, je vous prie de compléter ce formulaire.
+
+Excellente journée.</textarea>
         </div>
-        <div class="input-group"><label>Nom & Prénom</label><input type="text" id="name" value="Julien FLORENCE"></div>
-        <div class="input-group"><label>Fonction</label><input type="text" id="job" value="Directeur Commercial"></div>
+        <div class="input-group"><label>Prénom</label><input type="text" id="name" value="Julien"></div>
+        <div class="input-group"><label>Fonction</label><input type="text" id="job" value="Directeur commercial"></div>
         <div class="input-group"><label>Téléphone</label><input type="text" id="phone" value="06 61 74 75 73"></div>
         <div class="input-group"><label>Lien Calendly</label><input type="text" id="calendly" value="https://calendar.app.google/iCzfE1GQrjxM3ZQ56"></div>
-        <div class="input-group"><label>URL Photo</label><input type="text" id="photo_url" value="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/CV%20lettre%20de%20motivation/photo%20moi%20pro.jpeg"></div>
         <div class="input-group"><label>URL Bannière</label><input type="text" id="banner_url" value="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png"></div>
     </div>
 
     <div class="preview-panel">
         <div class="signature-wrapper" id="live_preview"></div>
-        <button class="btn-prestige" onclick="copyHTML()">Copier le Template Mail</button>
+        <button class="btn-prestige" onclick="copyHTML()">Copier le Template Final</button>
         <div class="status-msg" id="status"></div>
     </div>
 </div>
 
 <script>
-    const inputs = ['name', 'job', 'phone', 'calendly', 'photo_url', 'banner_url', 'mail_body'];
+    const inputs = ['name', 'job', 'phone', 'calendly', 'banner_url', 'mail_body'];
 
     function build() {
         const v = {};
@@ -138,52 +142,56 @@
         const formattedBody = v.mail_body.replace(/\n/g, '<br>');
 
         const html = `
-<table cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 600px; background-color: #ffffff; font-family: Arial, sans-serif; border-collapse: collapse; border-radius: 10px; overflow: hidden; border: 1px solid #dddddd;">
-    <!-- HEADER -->
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #0a1128; padding: 40px 10px;">
     <tr>
-        <td style="padding: 0;">
-            <img src="${v.banner_url}" alt="Header" width="600" style="display: block; width: 100%; max-width: 600px; height: auto;">
-        </td>
-    </tr>
-    <!-- CORPS DU MESSAGE -->
-    <tr>
-        <td style="padding: 40px; color: #333333; font-size: 15px; line-height: 1.6; background-color: #ffffff;">
-            ${formattedBody}
-        </td>
-    </tr>
-    <!-- SIGNATURE PRESTIGE -->
-    <tr>
-        <td style="padding: 30px 20px; background-color: #011F4B; color: #F4F4F4;">
-            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+        <td align="center">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; background-color: #ffffff; border-radius: 0px; overflow: hidden;">
+                <!-- BANNIÈRE -->
                 <tr>
-                    <td width="120" align="center" style="vertical-align: top; padding-right: 20px;">
-                        <div style="width: 100px; height: 100px; border: 3px solid #00F2FE; border-radius: 50px; overflow: hidden; background-color: #0F1115;">
-                            <img src="${v.photo_url}" alt="${v.name}" width="100" height="100" style="display: block; border-radius: 50px; object-fit: cover;">
-                        </div>
-                    </td>
-                    <td style="vertical-align: middle;">
-                        <div style="font-size: 18px; font-weight: bold; color: #00F2FE; text-transform: uppercase; letter-spacing: 1px;">${v.name}</div>
-                        <div style="font-size: 13px; font-style: italic; color: #0367A6; margin-top: 2px; font-weight: bold;">${v.job}</div>
-                        <div style="height: 2px; background-color: #00F2FE; margin: 12px 0; width: 50px;"></div>
-                        <div style="font-size: 11px; color: #F4F4F4; line-height: 1.5;">
-                            <span style="color: #0367A6; font-weight: bold;">T :</span> ${v.phone}<br>
-                            <span style="color: #0367A6; font-weight: bold;">E :</span> julien.florence@gmail.com
-                        </div>
+                    <td style="padding: 0;">
+                        <img src="${v.banner_url}" alt="Header" width="600" style="display: block; width: 100%; height: auto;">
                     </td>
                 </tr>
-            </table>
-        </td>
-    </tr>
-    <!-- BOUTONS -->
-    <tr>
-        <td style="padding: 0 20px 30px 20px; text-align: center; background-color: #011F4B;">
-            <table cellpadding="0" cellspacing="0" border="0" align="center">
+                <!-- LIGNE DORÉE -->
+                <tr><td height="4" style="background-color: #d4af37; line-height: 4px; font-size: 4px;">&nbsp;</td></tr>
+                
+                <!-- MESSAGE -->
                 <tr>
-                    <td style="padding: 0 8px;">
-                        <a href="${v.calendly}" target="_blank" style="display: inline-block; background-color: #0367A6; color: #ffffff; padding: 10px 18px; text-decoration: none; font-size: 10px; font-weight: bold; border-radius: 10px; border: 1px solid #00F2FE; text-transform: uppercase;">RÉSERVER UN RDV</a>
+                    <td style="padding: 40px; color: #0a1128; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6;">
+                        ${formattedBody}
                     </td>
-                    <td style="padding: 0 8px;">
-                        <a href="https://julienflorenceflorence-oss.github.io/cv-prestige/" target="_blank" style="display: inline-block; background-color: #0367A6; color: #ffffff; padding: 10px 18px; text-decoration: none; font-size: 10px; font-weight: bold; border-radius: 10px; border: 1px solid #00F2FE; text-transform: uppercase;">CONSULTER LE CV</a>
+                </tr>
+
+                <!-- SIGNATURE SECTION -->
+                <tr>
+                    <td style="background-color: #0a1128; padding: 40px 20px; text-align: center; font-family: Arial, sans-serif;">
+                        <!-- BOUTON RDV -->
+                        <a href="${v.calendly}" target="_blank" style="display: inline-block; background-color: #d4af37; color: #0a1128; padding: 15px 40px; text-decoration: none; font-size: 13px; font-weight: bold; border-radius: 4px; letter-spacing: 2px; text-transform: uppercase;">PRENDRE RENDEZ-VOUS</a>
+                        
+                        <div style="height: 1px; background-color: rgba(255,255,255,0.1); margin: 30px auto; width: 80%;"></div>
+                        
+                        <!-- INFO PERSO -->
+                        <div style="color: #ffffff; font-size: 16px; font-weight: bold; margin-bottom: 5px;">${v.name}</div>
+                        <div style="color: #ffffff; font-size: 14px; margin-bottom: 10px;">${v.job}</div>
+                        <div style="color: #d4af37; font-size: 14px; font-weight: bold;">${v.phone}</div>
+                        
+                        <div style="height: 1px; background-color: rgba(255,255,255,0.1); margin: 30px auto; width: 80%;"></div>
+                        
+                        <!-- APP PROMO -->
+                        <div style="color: #d4af37; font-size: 13px; font-weight: bold; letter-spacing: 1px; margin-bottom: 10px; text-transform: uppercase;">TÉLÉCHARGEZ NOTRE APPLICATION</div>
+                        <div style="color: #ffffff; font-size: 12px; margin-bottom: 20px;">Découvrez tous nos hébergements en quelques clics</div>
+                        
+                        <!-- APP BUTTONS -->
+                        <table cellpadding="0" cellspacing="0" border="0" align="center">
+                            <tr>
+                                <td style="padding: 0 5px;">
+                                    <img src="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/doc%20HH/appli-2.jpg" alt="App Store" width="120" style="border-radius: 5px;">
+                                </td>
+                                <td style="padding: 0 5px;">
+                                    <img src="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/doc%20HH/appli-2.jpg" alt="Google Play" width="120" style="border-radius: 5px;">
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
             </table>
@@ -202,7 +210,7 @@
         const code = build();
         navigator.clipboard.writeText(code).then(() => {
             const s = document.getElementById('status');
-            s.innerText = "✓ TEMPLATE PRÊT À ÊTRE COLLÉ";
+            s.innerText = "✓ TEMPLATE MASTER COPIÉ";
             setTimeout(() => s.innerText = "", 3000);
         });
     }
