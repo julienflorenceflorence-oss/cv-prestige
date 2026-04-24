@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIF Master Studio | Premium Production</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00F2FE;
+            --gold: #D4AF37;
+            --bg: #0F1115;
+            --card-bg: rgba(22, 26, 35, 0.95);
+            --text: #f4f4f4;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: radial-gradient(circle at center, #1a1e26 0%, #000 100%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header-app { text-align: center; margin-bottom: 40px; }
+        h1 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.5rem; letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+
+        .app-container {
+            width: 100%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 450px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .form-panel {
+            background: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        h3 { font-family: 'Cinzel'; font-size: 0.9rem; color: var(--gold); margin: 20px 0 15px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 5px; }
+
+        .input-group { margin-bottom: 15px; }
+        label { display: block; font-size: 0.7rem; color: #aaa; margin-bottom: 5px; text-transform: uppercase; }
+        input, select {
+            width: 100%; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid #333; color: #fff; border-radius: 8px; font-family: 'Montserrat'; font-size: 0.85rem;
+        }
+        input:focus { border-color: var(--primary); outline: none; }
+
+        .preview-panel { position: sticky; top: 20px; display: flex; flex-direction: column; align-items: center; }
+        .gif-preview-box {
+            width: 100%;
+            max-width: 600px;
+            background: #000;
+            border: 3px solid var(--gold);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        .gif-preview-box video, .gif-preview-box img { width: 100%; display: block; }
+
+        .fps-counter {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: var(--primary);
+            font-size: 0.7rem;
+            font-weight: bold;
+            border: 1px solid var(--primary);
+        }
+
+        .btn-prestige {
+            width: 100%; padding: 20px; background: var(--gold); color: #000; border: none; border-radius: 10px; font-family: 'Cinzel'; font-weight: 700; cursor: pointer; text-transform: uppercase; margin-top: 20px; transition: 0.3s; font-size: 0.9rem;
+        }
+        .btn-prestige:hover { background: #fff; transform: translateY(-3px); }
+
+        .workflow-card {
+            margin-top: 20px;
+            background: rgba(255,255,255,0.03);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            color: #ccc;
+        }
+        .workflow-card strong { color: var(--gold); }
+
+        @media (max-width: 1100px) { .app-container { grid-template-columns: 1fr; } .preview-panel { position: static; margin-top: 30px; } }
+    </style>
+</head>
+<body>
+
+<div class="header-app">
+    <h1>GIF Master Studio</h1>
+</div>
+
+<div class="app-container">
+    <div class="form-panel">
+        <h3>🎬 Source Vidéo / Image</h3>
+        <div class="input-group">
+            <label>URL de la vidéo source (Hébergée)</label>
+            <input type="text" id="source_url" value="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png" placeholder="Collez l'URL de votre .mp4 ou image">
+        </div>
+
+        <h3>⚙️ Paramètres Premium</h3>
+        <div class="input-group">
+            <label>Frame Rate (FPS)</label>
+            <select id="fps_rate">
+                <option value="30">30 FPS (Ultra-Fluide)</option>
+                <option value="24" selected>24 FPS (Cinématique)</option>
+                <option value="15">15 FPS (Standard)</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Qualité / Dithering</label>
+            <select id="dither_type">
+                <option value="floyd">Floyd-Steinberg (Premium)</option>
+                <option value="sierra">Sierra (Net)</option>
+                <option value="none">Aucun (Couleurs plates)</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Bouclage (Loop)</label>
+            <select id="loop_type">
+                <option value="seamless">Seamless Loop (Infini)</option>
+                <option value="pingpong">Ping-Pong (Aller-Retour)</option>
+            </select>
+        </div>
+
+        <div class="workflow-card">
+            <strong>Conseil Expert :</strong> Pour un rendu premium, utilisez <strong>After Effects</strong> pour stabiliser l'image avant l'exportation. Le poids idéal pour un mail est inférieur à <strong>5 Mo</strong>.
+        </div>
+    </div>
+
+    <div class="preview-panel">
+        <h2 style="font-family: 'Cinzel'; color: var(--gold); font-size: 0.9rem; margin-bottom: 15px;">Simulateur de Rendu Haute Fidélité</h2>
+        <div class="gif-preview-box">
+            <div class="fps-counter" id="fps_display">24 FPS</div>
+            <div id="media_container">
+                <!-- Chargement dynamique -->
+            </div>
+        </div>
+        <button class="btn-prestige" onclick="exportInstructions()">Générer Workflow d'Exportation</button>
+        <div id="status" style="margin-top:15px; color:var(--primary); font-size:0.85rem; font-weight:bold;"></div>
+    </div>
+</div>
+
+<script>
+    function build() {
+        const url = document.getElementById('source_url').value;
+        const fps = document.getElementById('fps_rate').value;
+        const container = document.getElementById('media_container');
+        document.getElementById('fps_display').innerText = fps + " FPS";
+
+        let mediaHtml = '';
+        if (url.toLowerCase().endsWith('.mp4') || url.toLowerCase().endsWith('.webm')) {
+            mediaHtml = `<video src="${url}" autoplay loop muted playsinline></video>`;
+        } else {
+            mediaHtml = `<img src="${url}" alt="Preview">`;
+        }
+        container.innerHTML = mediaHtml;
+    }
+
+    document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', build));
+    build();
+
+    function exportInstructions() {
+        const status = document.getElementById('status');
+        status.innerText = "✓ WORKFLOW PREMIUM GÉNÉRÉ DANS LA CONSOLE";
+        console.log("%c--- WORKFLOW GIF PRESTIGE ---", "color: #D4AF37; font-size: 20px; font-weight: bold;");
+        console.log("1. Ouvrez Photoshop > Import > Video Frames to Layers");
+        console.log("2. Set Frame Rate to: " + document.getElementById('fps_rate').value);
+        console.log("3. Save for Web (Legacy) > Select GIF");
+        console.log("4. Dithering: " + document.getElementById('dither_type').value);
+        console.log("5. Ensure Loop Options: Forever");
+        setTimeout(() => status.innerText = "", 4000);
+    }
+</script>
+
+</body>
+</html>
