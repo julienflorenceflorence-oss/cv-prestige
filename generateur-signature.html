@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Master Studio v5 | Ultimate Edition</title>
+    <title>Email Master Studio v5.1 | Auto-Fill Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #00ff88; /* VERT NÉON POUR PREUVE DE v5 */
+            --primary: #00ff88;
             --bg-page: #011F4B;
             --card-bg: rgba(22, 26, 35, 0.95);
             --text: #f4f4f4;
@@ -48,7 +48,23 @@
             overflow-y: auto;
         }
 
-        h3 { font-family: 'Cinzel'; font-size: 0.8rem; color: var(--primary); margin: 20px 0 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
+        h3 { font-family: 'Cinzel'; font-size: 0.8rem; color: var(--primary); margin: 20px 0 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
+
+        .btn-fill-auto {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            font-family: 'Cinzel';
+            font-size: 0.7rem;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .btn-fill-auto:hover { background: var(--primary); color: #000; }
 
         .input-group { margin-bottom: 12px; }
         label { display: block; font-size: 0.65rem; color: #aaa; margin-bottom: 4px; text-transform: uppercase; }
@@ -56,13 +72,7 @@
             width: 100%; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid #333; color: #fff; border-radius: 5px; font-family: 'Montserrat'; font-size: 0.85rem;
         }
         input:focus { border-color: var(--primary); outline: none; }
-        input[type="range"] { height: 10px; cursor: pointer; margin: 10px 0; }
-
-        .color-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-
-        .action-item { background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; margin-bottom: 10px; position: relative; border: 1px solid #333; }
-        .remove-btn { position: absolute; top: 5px; right: 5px; background: #ff4444; color: white; border: none; border-radius: 3px; font-size: 0.6rem; padding: 2px 5px; cursor: pointer; }
-        .add-btn { width: 100%; padding: 10px; background: transparent; border: 1px dashed var(--primary); color: var(--primary); cursor: pointer; border-radius: 5px; font-family: 'Cinzel'; font-size: 0.7rem; }
+        input[type="color"] { height: 40px; cursor: pointer; padding: 2px; }
 
         .preview-panel { position: sticky; top: 20px; display: flex; flex-direction: column; align-items: center; }
         .signature-wrapper { width: 100%; max-width: 650px; border: 2px solid var(--primary); border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
@@ -78,25 +88,29 @@
 <body>
 
 <div class="header-app">
-    <h1>Email Master Studio <span class="v-tag">v5.0 FINAL</span></h1>
+    <h1>Email Master Studio <span class="v-tag">v5.1 AUTO-FILL</span></h1>
 </div>
 
 <div class="app-container">
     <div class="form-panel">
         <h3>🎨 Thème & Couleurs</h3>
-        <div class="color-grid">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
             <div class="input-group"><label>Boutons</label><input type="color" id="btn_color" value="#0367A6"></div>
             <div class="input-group"><label>Fond Mail</label><input type="color" id="bg_page_color" value="#011F4B"></div>
             <div class="input-group"><label>Accent</label><input type="color" id="accent_color" value="#00ff88"></div>
         </div>
 
         <h3>👤 Identité & Photo</h3>
+        <button class="btn-fill-auto" onclick="autoFill()">⚡ Remplissage Automatique (Julien)</button>
         <div class="input-group"><label>Nom & Prénom</label><input type="text" id="user_name" value="Julien FLORENCE"></div>
         <div class="input-group"><label>Poste</label><input type="text" id="user_job" value="Directeur commercial"></div>
         <div class="input-group"><label>Téléphone</label><input type="text" id="user_phone" value="06 61 74 75 73"></div>
+        <div class="input-group"><label>Email de Contact</label><input type="text" id="user_email" value="julien.florence@gmail.com"></div>
         <div class="input-group"><label>URL Photo</label><input type="text" id="photo_url" value="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/CV%20lettre%20de%20motivation/photo%20moi%20pro.jpeg"></div>
-        <div class="input-group"><label>Zoom Photo</label><input type="range" id="photo_zoom" min="80" max="250" value="110"></div>
-        <div class="input-group"><label>Position Photo</label><input type="range" id="photo_pos" min="-50" max="50" value="0"></div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="input-group"><label>Zoom Photo</label><input type="range" id="photo_zoom" min="80" max="250" value="110"></div>
+            <div class="input-group"><label>Position Photo</label><input type="range" id="photo_pos" min="-50" max="50" value="0"></div>
+        </div>
 
         <h3>📝 Contenu & Bannière</h3>
         <div class="input-group"><label>URL de la Bannière</label><input type="text" id="banner_url" value="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png"></div>
@@ -104,7 +118,7 @@
 
         <h3>🔘 Boutons d'Action</h3>
         <div id="actions_container"></div>
-        <button class="add-btn" onclick="addAction()">+ Ajouter une action</button>
+        <button onclick="addAction()" style="width:100%; padding:10px; background:transparent; border:1px dashed var(--primary); color:var(--primary); cursor:pointer; border-radius:5px; font-family:'Cinzel'; font-size:0.7rem;">+ Ajouter une action</button>
     </div>
 
     <div class="preview-panel">
@@ -122,23 +136,25 @@
         { label: 'Voir mon CV', url: 'https://julienflorenceflorence-oss.github.io/cv-prestige/' }
     ];
 
+    function autoFill() {
+        document.getElementById('user_name').value = "Julien FLORENCE";
+        document.getElementById('user_job').value = "Directeur commercial";
+        document.getElementById('user_phone').value = "06 61 74 75 73";
+        document.getElementById('user_email').value = "julien.florence@gmail.com";
+        document.getElementById('photo_url').value = "https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/CV%20lettre%20de%20motivation/photo%20moi%20pro.jpeg";
+        document.getElementById('banner_url').value = "https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png";
+        build();
+    }
+
     function fixUrl(url) {
         if (!url) return "";
         let u = url.trim();
-        // Force le dernier lien si double URL
-        if (u.includes('http') && u.lastIndexOf('http') > 0) {
-            u = u.substring(u.lastIndexOf('http'));
-        }
-        // Correcteur GitHub
+        const parts = u.split('http');
+        if (parts.length > 2) u = 'http' + parts[parts.length - 1];
         if (u.includes('github.com') && u.includes('/blob/')) {
             u = u.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
         }
-        // Encodage propre pour les caractères spéciaux (accents)
-        try {
-            return encodeURI(decodeURI(u));
-        } catch(e) {
-            return u;
-        }
+        try { return encodeURI(decodeURI(u)); } catch(e) { return u; }
     }
 
     function renderActionsForm() {
@@ -146,10 +162,10 @@
         container.innerHTML = '';
         actions.forEach((a, i) => {
             const div = document.createElement('div');
-            div.className = 'action-item';
-            div.innerHTML = `<button class="remove-btn" onclick="removeAction(${i})">X</button>
+            div.style.cssText = "background:rgba(255,255,255,0.05); padding:10px; border-radius:8px; margin-bottom:10px; position:relative; border:1px solid #333;";
+            div.innerHTML = `<button onclick="removeAction(${i})" style="position:absolute; top:5px; right:5px; background:#ff4444; color:#fff; border:none; border-radius:3px; padding:2px 5px; font-size:0.6rem; cursor:pointer;">X</button>
                 <div class="input-group"><label>Nom du bouton</label><input type="text" value="${a.label}" oninput="updateAction(${i}, 'label', this.value)"></div>
-                <div class="input-group"><label>Lien (URL)</label><input type="text" value="${a.url}" oninput="updateAction(${i}, 'url', this.value)"></div>`;
+                <div class="input-group"><label>URL</label><input type="text" value="${a.url}" oninput="updateAction(${i}, 'url', this.value)"></div>`;
             container.appendChild(div);
         });
         build();
@@ -163,6 +179,7 @@
         const name = document.getElementById('user_name').value;
         const job = document.getElementById('user_job').value;
         const phone = document.getElementById('user_phone').value;
+        const email = document.getElementById('user_email').value;
         const photo = fixUrl(document.getElementById('photo_url').value);
         const photoZoom = document.getElementById('photo_zoom').value;
         const photoPos = document.getElementById('photo_pos').value;
@@ -184,12 +201,7 @@
     <tr>
         <td align="center">
             <table cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; background-color: #ffffff; border-radius: 0px; overflow: hidden; border: 1px solid #eeeeee;">
-                <!-- BANNIERE 10% VIEWPORT -->
-                <tr>
-                    <td style="padding: 0; line-height: 0; background-color: #000; height: 10vh; overflow: hidden;">
-                        <img src="${banner}" width="600" style="display: block; width: 100%; max-width: 600px; height: 10vh; object-fit: cover;">
-                    </td>
-                </tr>
+                <tr><td style="padding: 0; line-height: 0; background-color: #000; height: 10vh; overflow: hidden;"><img src="${banner}" width="600" style="display: block; width: 100%; max-width: 600px; height: 10vh; object-fit: cover;"></td></tr>
                 <tr><td height="4" style="background-color: ${accent}; line-height: 4px; font-size: 4px;">&nbsp;</td></tr>
                 <tr><td style="padding: 40px; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; background-color: #ffffff;">${body}</td></tr>
                 <tr>
@@ -199,7 +211,12 @@
                         <table cellpadding="0" cellspacing="0" border="0" width="100%">
                             <tr>
                                 <td width="140" align="center" style="vertical-align: top; padding-right: 20px;"><div style="width: 110px; height: 110px; border: 3px solid ${accent}; border-radius: 55px; overflow: hidden; background-color: #000; position: relative;"><img src="${photo}" alt="Photo" width="${photoZoom}" style="display: block; position: relative; top: ${photoPos}px; margin: auto;"></div></td>
-                                <td align="left" style="vertical-align: middle;"><div style="color: ${accent}; font-size: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">${name}</div><div style="color: #ffffff; font-size: 14px; margin-top:5px; font-weight: bold; text-transform: uppercase; opacity: 0.8;">${job}</div><div style="color: ${accent}; font-size: 14px; font-weight: bold; margin-top:8px;">${phone}</div><div style="color: #ffffff; font-size: 11px; margin-top:5px; opacity: 0.7;">julien.florence@gmail.com</div></td>
+                                <td align="left" style="vertical-align: middle;">
+                                    <div style="color: ${accent}; font-size: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">${name}</div>
+                                    <div style="color: #ffffff; font-size: 14px; margin-top:5px; font-weight: bold; text-transform: uppercase; opacity: 0.8;">${job}</div>
+                                    <div style="color: ${accent}; font-size: 14px; font-weight: bold; margin-top:8px;"><a href="tel:${phone.replace(/\s/g, '')}" style="color: ${accent}; text-decoration: none;">${phone}</a></div>
+                                    <div style="color: #ffffff; font-size: 11px; margin-top:5px; opacity: 0.7;"><a href="mailto:${email}" style="color: #ffffff; text-decoration: none;">${email}</a></div>
+                                </td>
                             </tr>
                         </table>
                     </td>
@@ -208,7 +225,6 @@
         </td>
     </tr>
 </table>`;
-        
         document.getElementById('live_preview').innerHTML = html;
         return html;
     }
@@ -220,7 +236,7 @@
         const code = build();
         navigator.clipboard.writeText(code).then(() => {
             const s = document.getElementById('status');
-            s.innerText = "✓ TEMPLATE v5.0 COPIÉ";
+            s.innerText = "✓ TEMPLATE v5.1 COPIÉ";
             setTimeout(() => s.innerText = "", 3000);
         });
     }
