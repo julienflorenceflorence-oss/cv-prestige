@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        /* BLOCAGE PAYSAGE MOBILE INTELLIGENT (Cible uniquement le tactile < 13") */
+        /* BLOCAGE PAYSAGE MOBILE INTELLIGENT */
         @media screen and (orientation: landscape) and (max-width: 1024px) and (pointer: coarse) {
             body::before {
                 content: "Lecture horizontale interdite. \A Veuillez pivoter votre appareil en mode Portrait pour consulter ce dossier de prestige.";
@@ -116,7 +116,7 @@
 
         .btn-mini-portfolio {
             display: none;
-            margin: 10px 0 30px 0;
+            margin: 15px 0 30px 0;
             padding: 12px 25px;
             border: 2px solid var(--primary-gold);
             color: var(--primary-gold);
@@ -129,7 +129,7 @@
             text-align: center;
         }
 
-        .desktop-phrase { display: block; margin: 10px 0 30px 0; font-style: italic; font-size: 0.85rem; color: var(--primary-gold); }
+        .desktop-phrase { display: block; margin: 15px 0 30px 0; font-style: italic; font-size: 0.85rem; color: var(--primary-gold); }
 
         @media (max-width: 1024px) {
             .cv-page { flex-direction: column; }
@@ -236,29 +236,8 @@
                     <div class="exp-comp">Ma Salle à Manger (Paris 1er)</div>
                     <ul class="exp-desc">
                         <li>Management complet d'une équipe de 15 salariés.</li>
-                        <li>Croissance de +140% du CA en 5 ans (de 250k€ à 600k€).</li>
+                        <li>Croissance de +140% du CA en 5 ans.</li>
                     </ul>
-                </div>
-
-                <h3 class="section-header">Excellence & Gastronomie</h3>
-                <div class="exp-item">
-                    <div class="exp-head"><span class="exp-role">Responsable de Salle & Sommelier</span><span class="exp-date">2004 – 2009</span></div>
-                    <div class="exp-comp">La Table du Sommelier (CA 750k€)</div>
-                    <ul class="exp-desc">
-                        <li>Management de 7 serveurs, gestion des caves et organisation de dégustations.</li>
-                    </ul>
-                </div>
-                <div class="exp-item">
-                    <div class="exp-head"><span class="exp-role">1er Sommelier (Palace 5*)</span><span class="exp-date">2003 – 2004</span></div>
-                    <div class="exp-comp">THE WESBURY (Leading Hotel, Dublin)</div>
-                    <ul class="exp-desc">
-                        <li>Restaurant 1 Étoile Michelin. Gestion de cave d'exception et service de prestige.</li>
-                    </ul>
-                </div>
-                <div class="exp-item">
-                    <div class="exp-head"><span class="exp-role">Chef Barman (Étoilé)</span><span class="exp-date">2001 – 2002</span></div>
-                    <div class="exp-comp">Le CLOS (Angleterre) - 1* Michelin</div>
-                    <ul class="exp-desc"><li>Management du bar et création de cartes cocktails pour établissement étoilé.</li></ul>
                 </div>
                 <div class="exp-item">
                     <div class="exp-head"><span class="exp-role">Assistant Superviseur (Palace 5*)</span><span class="exp-date">2000 – 2001</span></div>
@@ -276,10 +255,10 @@
                 <div class="exp-item">
                     <div class="exp-comp">Certification Conseiller Immobilier (2018)</div>
                 </div>
+                <!-- BOUTON PLACÉ PRÉCISÉMENT ICI SOUS LE CADRE IMMOBILIER -->
+                <a href="diplomes.html" class="btn-mini-portfolio">Portefolio</a>
+                <span class="desktop-phrase">Retrouvez l'intégralité de mes certifications détaillées dans mon portfolio de compétences.</span>
             </section>
-            <!-- BOUTON & PHRASE SORTIS DE LA SECTION POUR ÊTRE SOUS LE CADRE -->
-            <a href="diplomes.html" class="btn-mini-portfolio">Portefolio</a>
-            <span class="desktop-phrase">Retrouvez l'intégralité de mes certifications détaillées dans mon portfolio de compétences.</span>
         </main>
     </div>
 
