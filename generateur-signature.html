@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Master Studio | Final Fix</title>
+    <title>Email Master Studio | Final Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -48,7 +48,7 @@
             overflow-y: auto;
         }
 
-        h3 { font-family: 'Cinzel'; font-size: 0.8rem; color: var(--primary); margin: 20px 0 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
+        h3 { font-family: 'Cinzel'; font-size: 0.8rem; color: var(--primary); margin: 20px 0 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
 
         .input-group { margin-bottom: 12px; }
         label { display: block; font-size: 0.65rem; color: #888; margin-bottom: 4px; text-transform: uppercase; }
@@ -126,7 +126,11 @@
     function fixUrl(url) {
         if (!url) return "";
         let u = url.trim();
-        if (u.includes('http') && u.lastIndexOf('http') > 0) u = u.substring(u.lastIndexOf('http'));
+        // Gère les erreurs de copier-coller (double URL)
+        if (u.includes('http') && u.lastIndexOf('http') > 0) {
+            u = u.substring(u.lastIndexOf('http'));
+        }
+        // Correcteur GitHub
         if (u.includes('github.com') && u.includes('/blob/')) {
             u = u.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
         }
