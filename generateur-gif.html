@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GIF Master Studio | Premium Production</title>
+    <title>GIF Master Studio | Engine Fixed</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -52,9 +52,13 @@
         .input-group { margin-bottom: 15px; }
         label { display: block; font-size: 0.7rem; color: #aaa; margin-bottom: 5px; text-transform: uppercase; }
         input, select {
-            width: 100%; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid #333; color: #fff; border-radius: 8px; font-family: 'Montserrat'; font-size: 0.85rem;
+            width: 100%; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid #333; color: #fff; border-radius: 8px; font-family: 'Montserrat'; font-size: 0.85rem; transition: 0.3s;
         }
         input:focus { border-color: var(--primary); outline: none; }
+
+        .test-btns { display: flex; gap: 10px; margin-top: 10px; }
+        .btn-test { flex: 1; padding: 8px; background: rgba(255,255,255,0.05); border: 1px solid #444; color: #ccc; font-size: 0.65rem; border-radius: 5px; cursor: pointer; text-transform: uppercase; }
+        .btn-test:hover { background: var(--primary); color: #000; border-color: var(--primary); }
 
         .preview-panel { position: sticky; top: 20px; display: flex; flex-direction: column; align-items: center; }
         .gif-preview-box {
@@ -66,6 +70,10 @@
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0,0,0,0.8);
             position: relative;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .gif-preview-box video, .gif-preview-box img { width: 100%; display: block; }
@@ -81,23 +89,13 @@
             font-size: 0.7rem;
             font-weight: bold;
             border: 1px solid var(--primary);
+            z-index: 10;
         }
 
         .btn-prestige {
             width: 100%; padding: 20px; background: var(--gold); color: #000; border: none; border-radius: 10px; font-family: 'Cinzel'; font-weight: 700; cursor: pointer; text-transform: uppercase; margin-top: 20px; transition: 0.3s; font-size: 0.9rem;
         }
         .btn-prestige:hover { background: #fff; transform: translateY(-3px); }
-
-        .workflow-card {
-            margin-top: 20px;
-            background: rgba(255,255,255,0.03);
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            line-height: 1.5;
-            color: #ccc;
-        }
-        .workflow-card strong { color: var(--gold); }
 
         @media (max-width: 1100px) { .app-container { grid-template-columns: 1fr; } .preview-panel { position: static; margin-top: 30px; } }
     </style>
@@ -112,8 +110,12 @@
     <div class="form-panel">
         <h3>🎬 Source Vidéo / Image</h3>
         <div class="input-group">
-            <label>URL de la vidéo source (Hébergée)</label>
-            <input type="text" id="source_url" value="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png" placeholder="Collez l'URL de votre .mp4 ou image">
+            <label>URL de la source (Hébergée)</label>
+            <input type="text" id="source_url" value="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png" placeholder="Collez l'URL de votre fichier">
+        </div>
+        <div class="test-btns">
+            <button class="btn-test" onclick="setTest('photo')">Tester Photo</button>
+            <button class="btn-test" onclick="setTest('banner')">Tester Bannière</button>
         </div>
 
         <h3>⚙️ Paramètres Premium</h3>
@@ -130,7 +132,6 @@
             <select id="dither_type">
                 <option value="floyd">Floyd-Steinberg (Premium)</option>
                 <option value="sierra">Sierra (Net)</option>
-                <option value="none">Aucun (Couleurs plates)</option>
             </select>
         </div>
         <div class="input-group">
@@ -140,17 +141,13 @@
                 <option value="pingpong">Ping-Pong (Aller-Retour)</option>
             </select>
         </div>
-
-        <div class="workflow-card">
-            <strong>Conseil Expert :</strong> Pour un rendu premium, utilisez <strong>After Effects</strong> pour stabiliser l'image avant l'exportation. Le poids idéal pour un mail est inférieur à <strong>5 Mo</strong>.
-        </div>
     </div>
 
     <div class="preview-panel">
         <h2 style="font-family: 'Cinzel'; color: var(--gold); font-size: 0.9rem; margin-bottom: 15px;">Simulateur de Rendu Haute Fidélité</h2>
         <div class="gif-preview-box">
             <div class="fps-counter" id="fps_display">24 FPS</div>
-            <div id="media_container">
+            <div id="media_container" style="width: 100%;">
                 <!-- Chargement dynamique -->
             </div>
         </div>
@@ -162,26 +159,51 @@
 <script>
     function fixUrl(url) {
         if (!url) return "";
-        if (url.includes('github.com') && url.includes('/blob/')) {
-            return url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
+        let clean = url.trim();
+        if (clean.includes('github.com') && clean.includes('/blob/')) {
+            clean = clean.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
         }
-        return url;
+        return clean;
     }
 
     function build() {
-        const urlInput = document.getElementById('source_url').value;
-        const url = fixUrl(urlInput);
+        const rawUrl = document.getElementById('source_url').value;
+        const url = fixUrl(rawUrl);
         const fps = document.getElementById('fps_rate').value;
         const container = document.getElementById('media_container');
         document.getElementById('fps_display').innerText = fps + " FPS";
 
-        let mediaHtml = '';
-        if (url.toLowerCase().endsWith('.mp4') || url.toLowerCase().endsWith('.webm')) {
-            mediaHtml = `<video src="${url}" autoplay loop muted playsinline></video>`;
+        if (!url) return;
+
+        // Détection intelligente du type de média
+        const isVideo = url.toLowerCase().match(/\.(mp4|webm|ogg|mov)$/) || url.toLowerCase().includes('video');
+        
+        container.innerHTML = ''; // Clear
+        
+        if (isVideo) {
+            const video = document.createElement('video');
+            video.src = url;
+            video.autoplay = true;
+            video.loop = true;
+            video.muted = true;
+            video.setAttribute('playsinline', '');
+            video.onerror = () => { container.innerHTML = '<p style="color:red; padding:20px; font-size:0.7rem;">Erreur : Fichier vidéo non accessible ou lien invalide.</p>'; };
+            container.appendChild(video);
         } else {
-            mediaHtml = `<img src="${url}" alt="Preview">`;
+            const img = document.createElement('img');
+            img.src = url;
+            img.onerror = () => { container.innerHTML = '<p style="color:red; padding:20px; font-size:0.7rem;">Erreur : Image non accessible. Vérifiez que le lien pointe sur un fichier .png ou .jpg.</p>'; };
+            container.appendChild(img);
         }
-        container.innerHTML = mediaHtml;
+    }
+
+    function setTest(type) {
+        const urls = {
+            photo: 'https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/CV%20lettre%20de%20motivation/photo%20moi%20pro.jpeg',
+            banner: 'https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png'
+        };
+        document.getElementById('source_url').value = urls[type];
+        build();
     }
 
     document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', build));
@@ -189,13 +211,11 @@
 
     function exportInstructions() {
         const status = document.getElementById('status');
-        status.innerText = "✓ WORKFLOW PREMIUM GÉNÉRÉ DANS LA CONSOLE";
+        status.innerText = "✓ WORKFLOW DISPONIBLE DANS LA CONSOLE (F12)";
         console.log("%c--- WORKFLOW GIF PRESTIGE ---", "color: #D4AF37; font-size: 20px; font-weight: bold;");
         console.log("1. Ouvrez Photoshop > Import > Video Frames to Layers");
-        console.log("2. Set Frame Rate to: " + document.getElementById('fps_rate').value);
-        console.log("3. Save for Web (Legacy) > Select GIF");
-        console.log("4. Dithering: " + document.getElementById('dither_type').value);
-        console.log("5. Ensure Loop Options: Forever");
+        console.log("2. FPS cible : " + document.getElementById('fps_rate').value);
+        console.log("3. Dithering recommandé : " + document.getElementById('dither_type').value);
         setTimeout(() => status.innerText = "", 4000);
     }
 </script>
