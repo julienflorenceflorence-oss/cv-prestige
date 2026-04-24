@@ -28,7 +28,7 @@
         h1 { font-family: 'Cinzel'; color: var(--gold); font-size: clamp(1.5rem, 5vw, 2.2rem); letter-spacing: 4px; text-transform: uppercase; }
         .subtitle { text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; color: var(--gold); font-weight: 300; }
 
-        /* --- GRILLE & CARTES ARRONDIES --- */
+        /* --- GRILLE & CARTES ARRONDIES (Constraint: 10px) --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
         .card { 
             background: var(--card); 
@@ -38,14 +38,14 @@
             flex-direction: column; 
             justify-content: space-between; 
             transition: 0.4s; 
-            border-radius: 20px; /* ARRONDI HARMONISÉ */
+            border-radius: 10px; /* Constraint: 10px */
         }
         .card:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .card-cat { font-size: 0.65rem; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; font-weight: 700; }
         .card h3 { font-family: 'Cinzel'; color: var(--gold); margin-bottom: 15px; font-size: 1.1rem; }
         .card p { font-size: 0.85rem; color: #b0b0b0; margin-bottom: 25px; text-align: justify; }
 
-        .btn-v { display: block; padding: 12px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.7rem; text-transform: uppercase; text-align: center; transition: 0.3s; border-radius: 12px; }
+        .btn-v { display: block; padding: 12px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.7rem; text-transform: uppercase; text-align: center; transition: 0.3s; border-radius: 10px; }
         .btn-v:hover { background: var(--gold); color: var(--bg); }
 
         footer { margin-top: 100px; text-align: center; font-family: 'Cinzel'; font-size: 0.7rem; color: #666; padding: 40px 0 380px 0; border-top: 1px solid rgba(212, 175, 55, 0.1); }
@@ -55,12 +55,12 @@
             position: fixed; bottom: 25px; left: 20px; right: 20px; 
             max-width: 600px; margin: 0 auto; 
             background: rgba(15, 17, 21, 0.98); backdrop-filter: blur(15px); 
-            border: 1px solid var(--gold); border-radius: 20px; 
+            border: 1px solid var(--gold); border-radius: 10px; 
             z-index: 1000; padding: 15px; 
             display: flex; justify-content: center; gap: 15px; 
             box-shadow: 0 10px 40px rgba(0,0,0,0.8); 
         }
-        .btn-d { flex: 1; padding: 15px; border: 2px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; text-align: center; transition: 0.3s; border-radius: 12px; }
+        .btn-d { flex: 1; padding: 15px; border: 2px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; text-align: center; transition: 0.3s; border-radius: 10px; }
         .btn-g { background: var(--gold); color: var(--bg); }
 
         @media (max-width: 768px) {
@@ -74,16 +74,26 @@
 <div class="container">
     <header><h1>Dossier de Compétences</h1><div class="subtitle">Excellence & Expertise Tech</div></header>
     <div class="grid">
+        <!-- 1 -->
         <div class="card"><div class="card-cat">Développement Web</div><h3>HTML5 & CSS3</h3><p>Certification OpenClassrooms validant la maîtrise des standards du web moderne et du design adaptatif.</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat HTML5 CSS.pdf" target="_blank" class="btn-v">Consulter</a></div>
+        <!-- 2 -->
         <div class="card"><div class="card-cat">Marketing Digital</div><h3>Google Fundamentals</h3><p>Expertise certifiée Google : Analyse de données, SEO et stratégies d'acquisition haute performance.</p><a href="CV lettre de motivation/diplome julien/Fundamentals of digital marketing _ Google.html" target="_blank" class="btn-v">Consulter</a></div>
+        <!-- 3 -->
         <div class="card"><div class="card-cat">Stratégie Digital</div><h3>Inbound Marketing</h3><p>Méthodologie HubSpot axée sur l'optimisation du tunnel de conversion et le lead nurturing.</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat In Band.png" target="_blank" class="btn-v">Consulter</a></div>
+        <!-- 4 -->
         <div class="card"><div class="card-cat">Performance Sales</div><h3>B2B Sales Machine</h3><p>Techniques avancées de prospection multicanale et closing pour environnements Tech complexes.</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat B2B Sales Machine.pdf" target="_blank" class="btn-v">Consulter</a></div>
+        <!-- 5 -->
         <div class="card"><div class="card-cat">Immobilier</div><h3>Conseiller Expert</h3><p>Qualification Century 21 certifiant l'expertise en estimation et négociation immobilière (Bac+2).</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat Qualification et Certification de conseiller en immobilier.pdf" target="_blank" class="btn-v">Consulter</a></div>
+        <!-- 6 -->
         <div class="card"><div class="card-cat">International</div><h3>Néerlandais B2</h3><p>Maîtrise linguistique certifiée par le CBE Centre pour la gestion de relations d'affaires.</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat Néerlandais.pdf" target="_blank" class="btn-v">Consulter</a></div>
+        <!-- 7 -->
         <div class="card"><div class="card-cat">Art de Vivre</div><h3>Gastronomie Française</h3><p>Diplôme validant les codes de l'excellence et du service en milieu étoilé Michelin.</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat CAP Restauration.pdf" target="_blank" class="btn-v">Consulter</a></div>
+        <!-- 8 -->
         <div class="card"><div class="card-cat">Leadership</div><h3>Management Sportif</h3><p>Certification fédérale soulignant les capacités de coaching et de cohésion d'équipe (Handball).</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat Fédéral Sportif.pdf" target="_blank" class="btn-v">Consulter</a></div>
-        <div class="card"><div class="card-cat">Académie</div><h3>Bachelor Marketing</h3><p>Responsable Marketing et Commercial (2025). Spécialisation en acquisition Tech.</p><a href="#" class="btn-v">Détails</a></div>
-        <div class="card"><div class="card-cat">Acquisition B2B</div><h3>Lead Management</h3><p>Certification Datananas (2025) : Automatisation de la prospection commerciale.</p><a href="#" class="btn-v">Détails</a></div>
+        <!-- 9 -->
+        <div class="card"><div class="card-cat">Académie</div><h3>Bachelor Marketing</h3><p>Responsable Marketing et Commercial (2025). Spécialisation en acquisition Tech.</p><a href="index.html" class="btn-v">Détails</a></div>
+        <!-- 10 -->
+        <div class="card"><div class="card-cat">Acquisition B2B</div><h3>Lead Management</h3><p>Certification Datananas (2025) : Automatisation de la prospection commerciale.</p><a href="index.html" class="btn-v">Détails</a></div>
     </div>
     <footer>&copy; 2026 JULIEN FLORENCE &bull; DOSSIER DE COMPÉTENCES &bull; ÉDITION PRESTIGE</footer>
 </div>
