@@ -12,7 +12,7 @@
         body { font-family: 'Montserrat', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; min-height: 100vh; }
 
         /* --- BLOCAGE ORIENTATION : PORTRAIT OBLIGATOIRE --- */
-        @media screen and (orientation: landscape) and (max-device-width: 1024px) {
+        @media screen and (orientation: landscape) and (max-device-width: 1024px) and (pointer: coarse) {
             body::after {
                 content: "Lecture horizontale interdite. \A Veuillez pivoter votre appareil en mode Portrait pour une lecture optimale.";
                 white-space: pre-wrap; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -28,18 +28,8 @@
         h1 { font-family: 'Cinzel'; color: var(--gold); font-size: clamp(1.5rem, 5vw, 2.2rem); letter-spacing: 4px; text-transform: uppercase; }
         .subtitle { text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; color: var(--gold); font-weight: 300; }
 
-        /* --- GRILLE & CARTES ARRONDIES (Constraint: 10px) --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .card { 
-            background: var(--card); 
-            border: 1px solid rgba(212, 175, 55, 0.15); 
-            padding: 30px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between; 
-            transition: 0.4s; 
-            border-radius: 10px; 
-        }
+        .card { background: var(--card); border: 1px solid rgba(212, 175, 55, 0.15); padding: 30px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.4s; border-radius: 10px; }
         .card:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .card-cat { font-size: 0.65rem; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; font-weight: 700; }
         .card h3 { font-family: 'Cinzel'; color: var(--gold); margin-bottom: 15px; font-size: 1.1rem; }
@@ -50,16 +40,7 @@
 
         footer { margin-top: 100px; text-align: center; font-family: 'Cinzel'; font-size: 0.7rem; color: #666; padding: 40px 0 380px 0; border-top: 1px solid rgba(212, 175, 55, 0.1); }
 
-        /* --- DOCK MOBILE PREMIUM --- */
-        .fixed-dock { 
-            position: fixed; bottom: 25px; left: 20px; right: 20px; 
-            max-width: 600px; margin: 0 auto; 
-            background: rgba(15, 17, 21, 0.98); backdrop-filter: blur(15px); 
-            border: 1px solid var(--gold); border-radius: 10px; 
-            z-index: 1000; padding: 15px; 
-            display: flex; justify-content: center; gap: 15px; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8); 
-        }
+        .fixed-dock { position: fixed; bottom: 25px; left: 20px; right: 20px; max-width: 600px; margin: 0 auto; background: rgba(15, 17, 21, 0.98); backdrop-filter: blur(15px); border: 1px solid var(--gold); border-radius: 10px; z-index: 1000; padding: 15px; display: flex; justify-content: center; gap: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
         .btn-d { flex: 1; padding: 15px; border: 2px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; text-align: center; transition: 0.3s; border-radius: 10px; }
         .btn-g { background: var(--gold); color: var(--bg); }
 
@@ -82,14 +63,14 @@
         <div class="card"><div class="card-cat">International</div><h3>Néerlandais B2</h3><p>Maîtrise linguistique certifiée par le CBE Centre pour la gestion de relations d'affaires.</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat Néerlandais.pdf" target="_blank" class="btn-v">Consulter</a></div>
         <div class="card"><div class="card-cat">Art de Vivre</div><h3>Gastronomie Française</h3><p>Diplôme validant les codes de l'excellence et du service en milieu étoilé Michelin.</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat CAP Restauration.pdf" target="_blank" class="btn-v">Consulter</a></div>
         <div class="card"><div class="card-cat">Leadership</div><h3>Management Sportif</h3><p>Certification fédérale soulignant les capacités de coaching et de cohésion d'équipe (Handball).</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat Fédéral Sportif.pdf" target="_blank" class="btn-v">Consulter</a></div>
-        <div class="card"><div class="card-cat">Acquisition B2B</div><h3>Lead Management</h3><p>Certification Datananas (2025) : Automatisation de la prospection et Lead Relationship Management.</p><a href="https://app.academyocean.com/verify/RBJTszJisopDHanV" target="_blank" class="btn-v">Consulter</a></div>
+        <div class="card"><div class="card-cat">Acquisition B2B</div><h3>Lead Management</h3><p>Certification Datananas (2025) : Automatisation de la prospection et Lead Relationship Management.</p><a href="CV lettre de motivation/diplome julien/diplome tch/Certificat B2B Sales Machine.pdf" target="_blank" class="btn-v">Consulter</a></div>
         <div class="card"><div class="card-cat">Académie</div><h3>Bachelor Marketing</h3><p>Responsable Marketing et Commercial (2025). Spécialisation en acquisition Tech.</p><a href="index.html" class="btn-v">Détails</a></div>
     </div>
     <footer>&copy; 2026 JULIEN FLORENCE &bull; DOSSIER DE COMPÉTENCES &bull; ÉDITION PRESTIGE</footer>
 </div>
 <div class="fixed-dock">
     <a href="index.html" class="btn-d">Retour Profil</a>
-    <a href="https://calendar.app.google/iCzfE1GQrjxM3ZQ56" target="_blank" class="btn-d btn-g">Réserver RDV</a>
+    <a href="https://calendar.app.google/iCzfE1GQrjxM3ZQ56" target="_blank" class="btn-d btn-g">Réserver un RDV</a>
 </div>
 </body>
 </html>
