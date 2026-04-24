@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Master Studio | Responsive 10vh Edition</title>
+    <title>Email Master Studio | Fixed Images Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -33,7 +33,7 @@
             width: 100%;
             max-width: 1300px;
             display: grid;
-            grid-template-columns: 400px 1fr;
+            grid-template-columns: 450px 1fr;
             gap: 30px;
             align-items: start;
         }
@@ -43,7 +43,6 @@
             border: 1px solid rgba(255,255,255,0.1);
             padding: 25px;
             border-radius: 10px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
         }
 
         h3 { font-family: 'Cinzel'; font-size: 0.8rem; color: var(--primary); margin: 20px 0 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
@@ -133,10 +132,13 @@
         const name = "Julien";
         const job = "Directeur commercial";
         const phone = "06 61 74 75 73";
-        let banner = document.getElementById('banner_url').value;
-        if (banner.includes('github.com') && banner.includes('/blob/')) {
-            banner = banner.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
+        let bannerInput = document.getElementById('banner_url').value;
+        
+        // AUTO-FIX GITHUB LIENS
+        if (bannerInput.includes('github.com') && bannerInput.includes('/blob/')) {
+            bannerInput = bannerInput.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
         }
+
         const body = document.getElementById('mail_body').value.replace(/\n/g, '<br>');
         const btnColor = document.getElementById('btn_color').value;
         const bgColor = document.getElementById('bg_page_color').value;
@@ -158,47 +160,26 @@
     <tr>
         <td align="center">
             <table cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; background-color: #ffffff; border-radius: 0px; overflow: hidden;">
-                <!-- BANNIERE BRIDÉE À 10% DE LA HAUTEUR DE L'ÉCRAN -->
                 <tr>
                     <td style="padding: 0; line-height: 0;">
-                        <img src="${banner}" width="600" style="display: block; width: 100%; max-width: 600px; height: auto; max-height: 10vh; object-fit: cover;">
+                        <img src="${bannerInput}" width="600" style="display: block; width: 100%; max-width: 600px; height: auto; max-height: 10vh; object-fit: cover;">
                     </td>
                 </tr>
-                
-                <!-- LIGNE ACCENT -->
                 <tr><td height="4" style="background-color: ${accent}; line-height: 4px; font-size: 4px;">&nbsp;</td></tr>
-                
-                <!-- CORPS DU MESSAGE -->
-                <tr>
-                    <td style="padding: 40px; color: #0a1128; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; background-color: #ffffff;">
-                        ${body}
-                    </td>
-                </tr>
-
-                <!-- SIGNATURE SECTION -->
+                <tr><td style="padding: 40px; color: #0a1128; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; background-color: #ffffff;">${body}</td></tr>
                 <tr>
                     <td style="background-color: ${bgColor}; padding: 40px 20px; text-align: center; font-family: Arial, sans-serif;">
-                        <div style="text-align: center;">
-                            ${actionsHtml}
-                        </div>
-                        
+                        <div style="text-align: center;">${actionsHtml}</div>
                         <div style="height: 1px; background-color: rgba(255,255,255,0.1); margin: 30px auto; width: 80%;"></div>
-                        
                         <div style="color: ${accent}; font-size: 18px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">${name}</div>
                         <div style="color: #ffffff; font-size: 14px; margin-top:5px;">${job}</div>
                         <div style="color: ${accent}; font-size: 14px; font-weight: bold; margin-top:5px;">${phone}</div>
-                        
                         <div style="height: 1px; background-color: rgba(255,255,255,0.1); margin: 30px auto; width: 80%;"></div>
-                        
                         <div style="color: ${accent}; font-size: 13px; font-weight: bold; letter-spacing: 1px; margin-bottom: 15px; text-transform: uppercase;">TÉLÉCHARGEZ NOTRE APPLICATION</div>
                         <table cellpadding="0" cellspacing="0" border="0" align="center">
                             <tr>
-                                <td style="padding: 0 10px;">
-                                    <img src="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/doc%20HH/appli-2.jpg" alt="App Store" width="130" style="border-radius: 5px; border: 1px solid rgba(255,255,255,0.1);">
-                                </td>
-                                <td style="padding: 0 10px;">
-                                    <img src="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/doc%20HH/appli-2.jpg" alt="Google Play" width="130" style="border-radius: 5px; border: 1px solid rgba(255,255,255,0.1);">
-                                </td>
+                                <td style="padding: 0 10px;"><img src="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/doc%20HH/appli-2.jpg" alt="App Store" width="130" style="border-radius: 5px; border: 1px solid rgba(255,255,255,0.1);"></td>
+                                <td style="padding: 0 10px;"><img src="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/doc%20HH/appli-2.jpg" alt="Google Play" width="130" style="border-radius: 5px; border: 1px solid rgba(255,255,255,0.1);"></td>
                             </tr>
                         </table>
                     </td>
@@ -212,8 +193,11 @@
         return html;
     }
 
-    document.querySelectorAll('.form-panel input, .form-panel textarea').forEach(el => {
-        el.addEventListener('input', build);
+    // LISTENER GLOBAL
+    document.addEventListener('input', function(e) {
+        if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+            build();
+        }
     });
 
     renderActionsForm();
@@ -222,7 +206,7 @@
         const code = build();
         navigator.clipboard.writeText(code).then(() => {
             const s = document.getElementById('status');
-            s.innerText = "✓ TEMPLATE 10VH COPIÉ";
+            s.innerText = "✓ TEMPLATE PRÊT";
             setTimeout(() => s.innerText = "", 3000);
         });
     }
