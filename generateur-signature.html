@@ -216,7 +216,14 @@
 
     function build() {
         const v = {};
-        inputs.forEach(id => v[id] = document.getElementById(id).value);
+        inputs.forEach(id => {
+            let rawUrl = document.getElementById(id).value;
+            // CORRECTEUR AUTOMATIQUE DE LIEN GITHUB
+            if (rawUrl.includes('github.com') && rawUrl.includes('/blob/')) {
+                rawUrl = rawUrl.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
+            }
+            v[id] = rawUrl;
+        });
 
         const html = `
 <table cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 600px; background-color: #011F4B; font-family: Arial, sans-serif; color: #F4F4F4; border-collapse: collapse; border-radius: 10px; overflow: hidden;">
