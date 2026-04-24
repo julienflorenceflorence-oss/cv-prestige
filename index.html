@@ -73,6 +73,7 @@
             margin: 25px 0 15px 0; 
         }
 
+        .sidebar-section { margin-bottom: 20px; }
         .info-item { font-size: 0.85rem; margin-bottom: 8px; color: var(--text-dim); }
         .info-item strong { color: var(--text-light); display: block; margin-bottom: 2px; }
 
@@ -115,7 +116,7 @@
 
         .btn-mini-portfolio {
             display: none;
-            margin-top: 20px; /* Espace sous le cadre */
+            margin: 10px 0 30px 0; /* Espacement externe clair */
             padding: 12px 25px;
             border: 2px solid var(--primary-gold);
             color: var(--primary-gold);
@@ -128,7 +129,7 @@
             text-align: center;
         }
 
-        .desktop-phrase { display: block; margin-top: 20px; font-style: italic; font-size: 0.85rem; color: var(--primary-gold); }
+        .desktop-phrase { display: block; margin: 10px 0 30px 0; font-style: italic; font-size: 0.85rem; color: var(--primary-gold); }
 
         @media (max-width: 1024px) {
             .cv-page { flex-direction: column; }
@@ -154,6 +155,7 @@
 </head>
 <body>
     <div class="cv-page">
+        <!-- SIDEBAR -->
         <aside>
             <div class="profile-img-container"><img src="CV lettre de motivation/photo moi pro.jpeg" alt="Julien FLORENCE"></div>
             <section class="skills-mobile">
@@ -239,7 +241,7 @@
                 <div class="exp-item">
                     <div class="exp-comp">Certification Conseiller Immobilier (2018)</div>
                 </div>
-                <!-- CTA DÉPLACÉS ICI -->
+                <!-- BOUTON DÉPLACÉ À L'EXTÉRIEUR DU DERNIER CADRE -->
                 <a href="diplomes.html" class="btn-mini-portfolio">Portefolio</a>
                 <span class="desktop-phrase">Retrouvez l'intégralité de mes certifications détaillées dans mon portfolio de compétences.</span>
             </section>
