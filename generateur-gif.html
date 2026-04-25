@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GIF Master Studio | Premium Production</title>
+    <title>GIF Master Studio v2 | Premium Production</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
-    <!-- Intégration de gif.js pour la génération côté client -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
     <style>
         :root {
@@ -44,23 +43,25 @@
         .form-panel {
             background: var(--card-bg);
             border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 30px;
+            padding: 25px;
             border-radius: 10px;
             box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
-        h3 { font-family: 'Cinzel'; font-size: 0.9rem; color: var(--gold); margin: 20px 0 15px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 5px; }
+        h3 { font-family: 'Cinzel'; font-size: 0.8rem; color: var(--gold); margin: 20px 0 10px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.1); padding-bottom: 5px; }
 
         .input-group { margin-bottom: 15px; }
-        label { display: block; font-size: 0.7rem; color: #aaa; margin-bottom: 5px; text-transform: uppercase; }
-        input, select {
+        label { display: block; font-size: 0.65rem; color: #aaa; margin-bottom: 4px; text-transform: uppercase; }
+        input, select, textarea {
             width: 100%; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid #333; color: #fff; border-radius: 8px; font-family: 'Montserrat'; font-size: 0.85rem;
         }
-        input:focus { border-color: var(--primary); outline: none; }
+        input:focus, textarea:focus { border-color: var(--primary); outline: none; }
 
-        .test-btns { display: flex; gap: 10px; margin-top: 10px; }
-        .btn-test { flex: 1; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid #444; color: #ccc; font-size: 0.7rem; border-radius: 5px; cursor: pointer; text-transform: uppercase; font-family: 'Cinzel'; }
-        .btn-test:hover { background: var(--primary); color: #000; border-color: var(--primary); }
+        .test-btns { display: flex; gap: 10px; margin-bottom: 15px; }
+        .btn-test { flex: 1; padding: 8px; background: rgba(255,255,255,0.05); border: 1px solid #444; color: #ccc; font-size: 0.65rem; border-radius: 5px; cursor: pointer; text-transform: uppercase; }
+        .btn-test:hover { background: var(--primary); color: #000; }
 
         .preview-panel { position: sticky; top: 20px; display: flex; flex-direction: column; align-items: center; }
         .gif-preview-box {
@@ -72,128 +73,111 @@
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0,0,0,0.8);
             position: relative;
-            min-height: 200px;
+            min-height: 250px;
         }
 
-        .gif-preview-box video, .gif-preview-box img, .gif-preview-box canvas { width: 100%; display: block; }
+        .gif-preview-box video, .gif-preview-box img { width: 100%; height: auto; display: block; }
 
-        .fps-counter {
+        .caption-overlay {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.7);
-            padding: 5px 10px;
-            border-radius: 5px;
-            color: var(--primary);
-            font-size: 0.7rem;
-            font-weight: bold;
-            border: 1px solid var(--primary);
-            z-index: 10;
+            bottom: 15px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+            letter-spacing: 2px;
+            padding: 0 20px;
         }
 
         .btn-prestige {
-            width: 100%; padding: 18px; background: var(--gold); color: #000; border: none; border-radius: 10px; font-family: 'Cinzel'; font-weight: 700; cursor: pointer; text-transform: uppercase; margin-top: 15px; transition: 0.3s; font-size: 0.85rem;
+            width: 100%; padding: 18px; background: var(--gold); color: #000; border: none; border-radius: 10px; font-family: 'Cinzel'; font-weight: 700; cursor: pointer; text-transform: uppercase; margin-top: 15px; transition: 0.3s;
         }
-        .btn-prestige:hover { background: #fff; transform: translateY(-3px); }
-        .btn-prestige:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .btn-prestige:hover { background: #fff; transform: translateY(-2px); }
+        .btn-prestige:disabled { opacity: 0.4; cursor: not-allowed; }
 
-        .btn-download {
-            background: var(--primary);
-            display: none;
-            text-decoration: none;
-            color: #000;
-            text-align: center;
-        }
+        .btn-download { background: var(--primary); display: none; text-decoration: none; text-align: center; color: #000; font-size: 0.85rem; }
 
-        #progress-container {
-            width: 100%;
-            background: rgba(255,255,255,0.1);
-            height: 4px;
-            margin-top: 10px;
-            border-radius: 2px;
-            display: none;
-        }
-        #progress-bar {
-            width: 0%;
-            height: 100%;
-            background: var(--primary);
-            transition: width 0.1s;
-        }
+        #progress-container { width: 100%; background: rgba(255,255,255,0.1); height: 4px; margin-top: 15px; border-radius: 2px; display: none; }
+        #progress-bar { width: 0%; height: 100%; background: var(--primary); transition: 0.2s; }
 
-        @media (max-width: 1100px) { .app-container { grid-template-columns: 1fr; } .preview-panel { position: static; margin-top: 30px; } }
+        @media (max-width: 1100px) { .app-container { grid-template-columns: 1fr; } .preview-panel { position: static; } }
     </style>
 </head>
 <body>
 
 <div class="header-app">
-    <h1>GIF Master Studio</h1>
+    <h1>GIF Master Studio v2</h1>
 </div>
 
 <div class="app-container">
     <div class="form-panel">
-        <h3>🎬 Source Vidéo / Image</h3>
+        <h3>🎬 Source</h3>
         <div class="input-group">
-            <label>URL de la source (Hébergée)</label>
+            <label>URL du média (GitHub Raw recommandé)</label>
             <input type="text" id="source_url" value="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png">
         </div>
         <div class="test-btns">
-            <button class="btn-test" onclick="setTest('photo')">Tester Photo</button>
-            <button class="btn-test" onclick="setTest('banner')">Tester Bannière</button>
+            <button class="btn-test" onclick="setTest('photo')">Photo</button>
+            <button class="btn-test" onclick="setTest('banner')">Bannière</button>
         </div>
 
-        <h3>⚙️ Paramètres Premium</h3>
+        <h3>📝 Personnalisation</h3>
+        <div class="input-group">
+            <label>Description du rendu (Texte sur le GIF)</label>
+            <textarea id="gif_caption" placeholder="Ex: EDITION PRESTIGE 2026"></textarea>
+        </div>
+
+        <h3>⚙️ Paramètres</h3>
         <div class="input-group">
             <label>Frame Rate (FPS)</label>
             <select id="fps_rate">
-                <option value="30">30 FPS (Ultra-Fluide)</option>
-                <option value="24" selected>24 FPS (Cinématique)</option>
+                <option value="24" selected>24 FPS (Luxe)</option>
                 <option value="15">15 FPS (Standard)</option>
             </select>
         </div>
         <div class="input-group">
-            <label>Durée de capture (sec)</label>
-            <input type="number" id="capture_duration" value="2.5" min="0.5" max="5" step="0.5">
+            <label>Durée (sec)</label>
+            <input type="number" id="capture_duration" value="2" min="0.5" max="4" step="0.5">
         </div>
     </div>
 
     <div class="preview-panel">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold); font-size: 0.9rem; margin-bottom: 15px;">Simulateur de Rendu Haute Fidélité</h2>
         <div class="gif-preview-box">
-            <div class="fps-counter" id="fps_display">24 FPS</div>
             <div id="media_container"></div>
+            <div class="caption-overlay" id="caption_preview"></div>
             <canvas id="capture_canvas" style="display:none;"></canvas>
         </div>
         
         <div id="progress-container"><div id="progress-bar"></div></div>
         
-        <button id="generate_btn" class="btn-prestige" onclick="generateGIF()">Générer le fichier GIF</button>
-        <a id="download_btn" class="btn-prestige btn-download" download="prestige_animation.gif">Télécharger le format GIF</a>
+        <button id="generate_btn" class="btn-prestige" onclick="generateGIF()">Générer le GIF Final</button>
+        <a id="download_btn" class="btn-prestige btn-download" download="prestige_animation.gif">Télécharger le fichier .gif</a>
         
-        <div id="status" style="margin-top:15px; color:var(--primary); font-size:0.85rem; font-weight:bold;"></div>
+        <div id="status" style="margin-top:15px; color:var(--primary); font-size:0.8rem; font-weight:bold;"></div>
     </div>
 </div>
 
 <script>
-    let gifBlob = null;
-
     function fixUrl(url) {
         if (!url) return "";
-        let clean = url.trim();
-        if (clean.includes('github.com') && clean.includes('/blob/')) {
-            clean = clean.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
+        let u = url.trim();
+        if (u.includes('github.com') && u.includes('/blob/')) {
+            u = u.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
         }
-        return clean;
+        return u;
     }
 
     function build() {
         const url = fixUrl(document.getElementById('source_url').value);
-        const fps = document.getElementById('fps_rate').value;
+        const caption = document.getElementById('gif_caption').value;
         const container = document.getElementById('media_container');
-        document.getElementById('fps_display').innerText = fps + " FPS";
+        document.getElementById('caption_preview').innerText = caption;
         document.getElementById('download_btn').style.display = 'none';
 
         if (!url) return;
-
         const isVideo = url.toLowerCase().includes('.mp4') || url.toLowerCase().includes('.webm');
         
         container.innerHTML = '';
@@ -204,114 +188,75 @@
         }
     }
 
-    function setTest(type) {
-        const urls = {
-            photo: 'https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/CV%20lettre%20de%20motivation/photo%20moi%20pro.jpeg',
-            banner: 'https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png'
-        };
-        document.getElementById('source_url').value = urls[type];
-        build();
-    }
-
     async function generateGIF() {
         const video = document.getElementById('preview_video');
         const img = document.getElementById('preview_img');
         const btn = document.getElementById('generate_btn');
         const status = document.getElementById('status');
-        const progressContainer = document.getElementById('progress-container');
-        const progressBar = document.getElementById('progress-bar');
-
-        if (!video && !img) {
-            status.innerText = "Erreur : Média non chargé.";
-            return;
-        }
+        const progress = document.getElementById('progress-bar');
+        const progressCont = document.getElementById('progress-container');
 
         btn.disabled = true;
-        btn.innerText = "Traitement...";
-        status.innerText = "Capture des images en cours...";
-        progressContainer.style.display = 'block';
-        progressBar.style.width = "0%";
+        progressCont.style.display = 'block';
+        status.innerText = "Capture en cours...";
 
         const fps = parseInt(document.getElementById('fps_rate').value);
         const duration = parseFloat(document.getElementById('capture_duration').value);
         const frameCount = Math.floor(duration * fps);
-        const delay = Math.round(1000 / fps);
+        const delay = 1000 / fps;
 
         const gif = new GIF({
-            workers: 2,
-            quality: 5,
-            width: 600,
-            height: 337,
+            workers: 2, quality: 10, width: 600, height: 337,
             workerScript: 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
         });
 
         const canvas = document.getElementById('capture_canvas');
         const ctx = canvas.getContext('2d');
-        canvas.width = 600;
-        canvas.height = 337;
+        canvas.width = 600; canvas.height = 337;
 
-        try {
-            if (video) {
-                video.pause();
-                video.currentTime = 0;
-                
-                for (let i = 0; i < frameCount; i++) {
-                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                    gif.addFrame(ctx, {copy: true, delay: delay});
-                    video.currentTime += (1 / fps);
-                    progressBar.style.width = ((i / frameCount) * 50) + "%";
-                    // Petit délai pour laisser le navigateur souffler
-                    await new Promise(r => setTimeout(r, 40));
-                }
-                video.play();
-            } else {
-                // Pour une image fixe, on simule une animation de zoom
-                for (let i = 0; i < 20; i++) {
-                    const zoom = 1 + (i * 0.01);
-                    const w = canvas.width * zoom;
-                    const h = canvas.height * zoom;
-                    const x = (canvas.width - w) / 2;
-                    const y = (canvas.height - h) / 2;
-                    ctx.fillStyle = "#000";
-                    ctx.fillRect(0,0,canvas.width,canvas.height);
-                    ctx.drawImage(img, x, y, w, h);
-                    gif.addFrame(ctx, {copy: true, delay: 100});
-                    progressBar.style.width = ((i / 20) * 50) + "%";
-                    await new Promise(r => setTimeout(r, 20));
-                }
-            }
-
-            status.innerText = "Encodage du fichier GIF final...";
+        for (let i = 0; i < frameCount; i++) {
+            ctx.fillStyle = "#000";
+            ctx.fillRect(0,0,600,337);
+            if (video) ctx.drawImage(video, 0, 0, 600, 337);
+            else ctx.drawImage(img, 0, 0, 600, 337);
             
-            gif.on('progress', p => {
-                progressBar.style.width = (50 + (p * 50)) + "%";
-            });
-
-            gif.on('finished', blob => {
-                gifBlob = blob;
-                const url = URL.createObjectURL(blob);
-                const downloadBtn = document.getElementById('download_btn');
-                downloadBtn.href = url;
-                downloadBtn.style.display = 'block';
-                
-                btn.disabled = false;
-                btn.innerText = "Générer à nouveau";
-                status.innerText = "✓ GIF PRÊT AU TÉLÉCHARGEMENT";
-                progressContainer.style.display = 'none';
-            });
-
-            gif.render();
-        } catch (err) {
-            console.error(err);
-            status.innerText = "Erreur technique lors de la génération.";
-            btn.disabled = false;
-            btn.innerText = "Réessayer";
+            // Dessiner la description sur chaque frame
+            ctx.font = "bold 24px Cinzel";
+            ctx.fillStyle = "white";
+            ctx.textAlign = "center";
+            ctx.shadowColor = "black";
+            ctx.shadowBlur = 7;
+            ctx.fillText(document.getElementById('gif_caption').value, 300, 310);
+            
+            gif.addFrame(ctx, {copy: true, delay: delay});
+            if (video) video.currentTime += (1/fps);
+            progress.style.width = ((i / frameCount) * 50) + "%";
+            await new Promise(r => setTimeout(r, 50));
         }
+
+        status.innerText = "Encodage final...";
+        gif.on('progress', p => progress.style.width = (50 + (p * 50)) + "%");
+        gif.on('finished', blob => {
+            document.getElementById('download_btn').href = URL.createObjectURL(blob);
+            document.getElementById('download_btn').style.display = 'block';
+            btn.disabled = false;
+            status.innerText = "✓ GIF PRÊT";
+            progressCont.style.display = 'none';
+        });
+        gif.render();
     }
 
-    document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', build));
+    function setTest(type) {
+        const u = {
+            photo: 'https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/CV%20lettre%20de%20motivation/photo%20moi%20pro.jpeg',
+            banner: 'https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png'
+        };
+        document.getElementById('source_url').value = u[type];
+        build();
+    }
+
+    document.querySelectorAll('input, select, textarea').forEach(el => el.addEventListener('input', build));
     build();
 </script>
-
 </body>
 </html>
