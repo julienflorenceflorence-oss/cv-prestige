@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GIF Master Studio v7.1 | Auto-Wake Edition</title>
+    <title>GIF Master Studio v7.2 | Power Engine Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
     <style>
         :root {
-            --primary: #2ecc71; /* VERT ÉMERAUDE POUR PREUVE DE v7.1 */
+            --primary: #00d4ff; /* BLEU ÉLECTRIQUE POUR v7.2 */
             --gold: #D4AF37;
             --bg: #0F1115;
             --card-bg: rgba(22, 26, 35, 0.95);
@@ -100,24 +100,24 @@
 <body>
 
 <div class="header-app">
-    <h1>GIF Master Studio <span class="v-tag">v7.1 AUTO-WAKE</span></h1>
+    <h1>GIF Master Studio <span class="v-tag">v7.2 POWER ENGINE</span></h1>
 </div>
 
 <div class="app-container">
     <div class="form-panel">
         <h3>🎬 Média Source</h3>
         <div class="input-group">
-            <label>Option A : Charger Vidéo MP4 (Local)</label>
+            <label>Charger Vidéo MP4 (Local)</label>
             <input type="file" id="local_video" accept="video/mp4,video/webm">
         </div>
         <div class="input-group">
-            <label>Option B : URL (GitHub/Cloud)</label>
-            <input type="text" id="source_url" placeholder="https://..." value="">
+            <label>OU Coller une URL</label>
+            <input type="text" id="source_url" placeholder="https://...">
         </div>
 
         <h3>📝 Personnalisation</h3>
         <div class="input-group">
-            <label>Texte incrusté sur le GIF</label>
+            <label>Description du rendu (Texte sur le GIF)</label>
             <textarea id="gif_caption" placeholder="Ex: IA PRESTIGE 2026"></textarea>
         </div>
 
@@ -140,7 +140,7 @@
     <div class="preview-panel">
         <div class="gif-preview-box">
             <div id="media_container" style="width:100%;">
-                <p style="color:#555; font-size:0.8rem;">En attente de chargement...</p>
+                <p style="color:#555; font-size:0.8rem;">En attente de média...</p>
             </div>
             <div class="caption-overlay" id="caption_preview"></div>
             <canvas id="capture_canvas" style="display:none;"></canvas>
@@ -172,34 +172,17 @@
         if (!url) return;
         const isVideo = url.toLowerCase().includes('.mp4') || url.toLowerCase().includes('.webm') || url.includes('blob:');
         
-        container.innerHTML = '<p style="color:var(--gold); padding:20px; font-size:0.7rem;">Chargement du média...</p>';
-        
         if (isVideo) {
-            const video = document.createElement('video');
-            video.id = "preview_video";
-            video.src = url;
-            video.autoplay = true;
-            video.loop = true;
-            video.muted = true;
-            video.setAttribute('playsinline', '');
-            video.style.width = "100%";
-            video.onloadeddata = () => { container.innerHTML = ''; container.appendChild(video); };
-            video.onerror = () => { container.innerHTML = '<p style="color:red; padding:20px; font-size:0.7rem;">Erreur : Vidéo non lisible.</p>'; };
+            container.innerHTML = `<video id="preview_video" src="${url}" crossorigin="anonymous" autoplay loop muted playsinline style="width:100%;"></video>`;
         } else {
-            const img = document.createElement('img');
-            img.id = "preview_img";
-            img.src = url;
-            img.style.width = "100%";
-            img.onload = () => { container.innerHTML = ''; container.appendChild(img); };
-            img.onerror = () => { container.innerHTML = '<p style="color:red; padding:20px; font-size:0.7rem;">Erreur : Image non lisible.</p>'; };
+            container.innerHTML = `<img id="preview_img" src="${url}" crossorigin="anonymous" style="width:100%;">`;
         }
     }
 
     document.getElementById('local_video').addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file) {
-            const url = URL.createObjectURL(file);
-            document.getElementById('source_url').value = url;
+            document.getElementById('source_url').value = URL.createObjectURL(file);
             build();
         }
     });
@@ -212,14 +195,11 @@
         const progress = document.getElementById('progress-bar');
         const progCont = document.getElementById('progress-container');
 
-        if (!video && !img) {
-            status.innerText = "Média non prêt. Réessayez.";
-            return;
-        }
+        if (!video && !img) return;
 
         btn.disabled = true;
         progCont.style.display = 'block';
-        status.innerText = "Capture...";
+        status.innerText = "Capture des frames...";
 
         const fps = parseInt(document.getElementById('fps_rate').value);
         const duration = parseFloat(document.getElementById('capture_duration').value);
@@ -227,7 +207,7 @@
         const delay = 1000 / fps;
 
         const gif = new GIF({
-            workers: 0, quality: 10, width: 600, height: 337,
+            workers: 2, quality: 10, width: 600, height: 337,
             workerScript: 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
         });
 
@@ -260,16 +240,20 @@
         }
 
         if (video) video.play();
-        status.innerText = "Encodage...";
-        gif.on('progress', p => progress.style.width = (50 + (p * 50)) + "%");
+        status.innerText = "Encodage final...";
+        
+        gif.on('progress', p => {
+            progress.style.width = (50 + (p * 50)) + "%";
+        });
+
         gif.on('finished', blob => {
-            const downloadBtn = document.getElementById('download_btn');
-            downloadBtn.href = URL.createObjectURL(blob);
-            downloadBtn.style.display = 'block';
+            document.getElementById('download_btn').href = URL.createObjectURL(blob);
+            document.getElementById('download_btn').style.display = 'block';
             btn.disabled = false;
-            status.innerText = "✓ GIF PRÊT AU TÉLÉCHARGEMENT";
+            status.innerText = "✓ GIF GÉNÉRÉ AVEC SUCCÈS";
             progCont.style.display = 'none';
         });
+
         gif.render();
     }
 
