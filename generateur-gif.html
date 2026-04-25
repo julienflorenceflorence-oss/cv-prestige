@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GIF Master Studio v6 | Local Processing Edition</title>
+    <title>GIF Master Studio v6.1 | Robust Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
-    <!-- Moteur de capture GIF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
     <style>
         :root {
@@ -30,7 +29,7 @@
         }
 
         .header-app { text-align: center; margin-bottom: 40px; }
-        h1 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.5rem; letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+        h1 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.2rem; letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
 
         .app-container {
             width: 100%;
@@ -44,20 +43,21 @@
         .form-panel {
             background: var(--card-bg);
             border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 30px;
+            padding: 25px;
             border-radius: 10px;
             box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
-        h3 { font-family: 'Cinzel'; font-size: 0.9rem; color: var(--gold); margin: 20px 0 15px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 5px; }
+        h3 { font-family: 'Cinzel'; font-size: 0.8rem; color: var(--gold); margin: 20px 0 15px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.1); padding-bottom: 5px; }
 
-        .input-group { margin-bottom: 15px; }
-        label { display: block; font-size: 0.7rem; color: #aaa; margin-bottom: 5px; text-transform: uppercase; }
-        input, select {
-            width: 100%; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid #333; color: #fff; border-radius: 8px; font-family: 'Montserrat'; font-size: 0.85rem;
+        .input-group { margin-bottom: 12px; }
+        label { display: block; font-size: 0.65rem; color: #aaa; margin-bottom: 4px; text-transform: uppercase; }
+        input, select, textarea {
+            width: 100%; padding: 10px; background: rgba(0,0,0,0.5); border: 1px solid #333; color: #fff; border-radius: 8px; font-family: 'Montserrat'; font-size: 0.85rem;
         }
-        input[type="file"] { padding: 10px; background: rgba(0,255,136,0.1); border-color: var(--primary); cursor: pointer; }
-        input:focus { border-color: var(--primary); outline: none; }
+        input:focus, textarea:focus { border-color: var(--primary); outline: none; }
 
         .preview-panel { position: sticky; top: 20px; display: flex; flex-direction: column; align-items: center; }
         .gif-preview-box {
@@ -69,272 +69,174 @@
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0,0,0,0.8);
             position: relative;
-            min-height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            min-height: 200px;
         }
 
         .gif-preview-box video, .gif-preview-box img { width: 100%; display: block; }
-
-        .fps-counter {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.7);
-            padding: 5px 10px;
-            border-radius: 5px;
-            color: var(--primary);
-            font-size: 0.7rem;
-            font-weight: bold;
-            border: 1px solid var(--primary);
-            z-index: 10;
+        
+        .caption-overlay {
+            position: absolute; bottom: 15px; left: 0; width: 100%; text-align: center;
+            font-family: 'Cinzel', serif; font-size: 1.1rem; color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,1); letter-spacing: 2px; z-index: 5;
         }
 
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-            width: 100%;
-            margin-top: 20px;
-        }
+        .action-buttons { display: flex; gap: 10px; width: 100%; margin-top: 20px; }
 
         .btn-prestige {
-            flex: 1; padding: 18px; background: var(--gold); color: #000; border: none; border-radius: 10px; font-family: 'Cinzel'; font-weight: 700; cursor: pointer; text-transform: uppercase; transition: 0.3s; font-size: 0.8rem; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center;
+            flex: 1; padding: 18px; background: var(--gold); color: #000; border: none; border-radius: 10px; font-family: 'Cinzel'; font-weight: 700; cursor: pointer; text-transform: uppercase; transition: 0.3s; font-size: 0.8rem;
         }
-        .btn-prestige:hover { background: #fff; transform: translateY(-3px); }
-        .btn-prestige:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-        .btn-primary { background: var(--primary); }
-        .btn-github { background: #333; color: #fff; border: 1px solid #666; }
-        .btn-github:hover { background: #fff; color: #000; }
+        .btn-prestige:hover { background: #fff; transform: translateY(-2px); }
+        .btn-prestige:disabled { opacity: 0.4; cursor: not-allowed; }
 
         #progress-container { width: 100%; background: rgba(255,255,255,0.1); height: 6px; margin-top: 15px; border-radius: 3px; display: none; overflow: hidden; }
         #progress-bar { width: 0%; height: 100%; background: var(--primary); transition: width 0.1s; }
 
-        .hidden { display: none !important; }
-
-        @media (max-width: 1100px) { .app-container { grid-template-columns: 1fr; } .preview-panel { position: static; margin-top: 30px; } .action-buttons { flex-direction: column; } }
+        @media (max-width: 1100px) { .app-container { grid-template-columns: 1fr; } .preview-panel { position: static; } }
     </style>
 </head>
 <body>
 
 <div class="header-app">
-    <h1>GIF Master Studio <span style="font-size: 0.8rem; color: var(--primary); vertical-align: super;">v6.0</span></h1>
+    <h1>GIF Master Studio <span style="font-size:0.7rem; background:var(--primary); color:#000; padding:2px 8px; border-radius:10px; vertical-align:middle;">v6.1</span></h1>
 </div>
 
 <div class="app-container">
     <div class="form-panel">
-        <h3>🎬 Importation Média</h3>
+        <h3>🎬 Média Source</h3>
         <div class="input-group">
-            <label>1. Charger votre vidéo MP4 (Luma/PC)</label>
-            <input type="file" id="local_video" accept="video/mp4, video/webm">
+            <label>Option A : Charger Vidéo MP4 (Local)</label>
+            <input type="file" id="local_video" accept="video/mp4,video/webm">
+        </div>
+        <div class="input-group">
+            <label>Option B : URL (GitHub/Cloud)</label>
+            <input type="text" id="source_url" value="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png">
         </div>
 
-        <div style="text-align: center; color: #888; font-size: 0.8rem; margin: 15px 0;">OU</div>
-
+        <h3>📝 Personnalisation</h3>
         <div class="input-group">
-            <label>URL Directe (Cloud/GitHub)</label>
-            <input type="text" id="source_url" placeholder="https://..." value="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png">
+            <label>Description (Texte sur le GIF)</label>
+            <textarea id="gif_caption" placeholder="Ex: IA PRESTIGE 2026"></textarea>
         </div>
 
-        <h3>⚙️ Paramètres Premium</h3>
-        <div class="input-group">
-            <label>Frame Rate (FPS)</label>
-            <select id="fps_rate">
-                <option value="24" selected>24 FPS (Cinématique)</option>
-                <option value="15">15 FPS (Web Léger)</option>
-                <option value="10">10 FPS (Signature Email Opti)</option>
-            </select>
-        </div>
-        <div class="input-group">
-            <label>Durée Max (sec)</label>
-            <input type="number" id="capture_duration" value="3" min="1" max="10" step="1">
-        </div>
-        <div class="input-group">
-            <label>Largeur de sortie (px)</label>
-            <input type="number" id="output_width" value="600" min="300" max="800" step="50">
+        <h3>⚙️ Réglages</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="input-group">
+                <label>Vitesse (FPS)</label>
+                <select id="fps_rate">
+                    <option value="24" selected>24 FPS</option>
+                    <option value="15">15 FPS</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Durée (sec)</label>
+                <input type="number" id="capture_duration" value="2" min="1" max="5">
+            </div>
         </div>
     </div>
 
     <div class="preview-panel">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold); font-size: 0.9rem; margin-bottom: 15px;">Simulateur de Rendu Haute Fidélité</h2>
         <div class="gif-preview-box">
-            <div class="fps-counter" id="fps_display">24 FPS</div>
-            <div id="media_container"><p style="color:#555; font-size:0.8rem;">En attente de média...</p></div>
+            <div id="media_container"></div>
+            <div class="caption-overlay" id="caption_preview"></div>
             <canvas id="capture_canvas" style="display:none;"></canvas>
         </div>
         
         <div id="progress-container"><div id="progress-bar"></div></div>
         
         <div class="action-buttons">
-            <button id="generate_btn" class="btn-prestige" onclick="generateGIF()">2. Générer le fichier GIF</button>
-            <a id="download_btn" class="btn-prestige btn-primary hidden" download="prestige_animation.gif">3. Télécharger (PC)</a>
-            <button id="github_btn" class="btn-prestige btn-github hidden" onclick="pushToGitHub()">Héberger sur GitHub</button>
+            <button id="generate_btn" class="btn-prestige" onclick="generateGIF()">Générer le GIF</button>
+            <a id="download_btn" class="btn-prestige" style="background:var(--primary); display:none;" download="prestige_animation.gif">Télécharger</a>
         </div>
         
-        <div id="status" style="margin-top:15px; color:var(--primary); font-size:0.85rem; font-weight:bold; text-align: center;"></div>
+        <div id="status" style="margin-top:15px; color:var(--primary); font-size:0.8rem; font-weight:bold;"></div>
     </div>
 </div>
 
 <script>
-    let currentVideoFileUrl = null;
-    let finalGifBlob = null;
+    function fixUrl(url) {
+        if (!url) return "";
+        let u = url.trim();
+        if (u.includes('github.com') && u.includes('/blob/')) u = u.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
+        return u;
+    }
 
-    // Gestion du chargement de fichier local
+    function build() {
+        const url = fixUrl(document.getElementById('source_url').value);
+        const container = document.getElementById('media_container');
+        document.getElementById('caption_preview').innerText = document.getElementById('gif_caption').value;
+        document.getElementById('download_btn').style.display = 'none';
+
+        if (!url) return;
+        const isVideo = url.toLowerCase().includes('.mp4') || url.toLowerCase().includes('.webm');
+        container.innerHTML = isVideo ? `<video id="preview_video" src="${url}" crossorigin="anonymous" autoplay loop muted playsinline style="width:100%;"></video>` : `<img id="preview_img" src="${url}" crossorigin="anonymous" style="width:100%;">`;
+    }
+
     document.getElementById('local_video').addEventListener('change', function(e) {
         const file = e.target.files[0];
-        if (!file) return;
-        
-        if (currentVideoFileUrl) URL.revokeObjectURL(currentVideoFileUrl);
-        currentVideoFileUrl = URL.createObjectURL(file);
-        
-        // Vide le champ URL pour éviter les conflits
-        document.getElementById('source_url').value = '';
-        buildPreview(currentVideoFileUrl, true);
-    });
-
-    // Gestion de l'URL distante
-    document.getElementById('source_url').addEventListener('input', function(e) {
-        let url = e.target.value.trim();
-        if (!url) return;
-        
-        // Correcteur GitHub
-        if (url.includes('github.com') && url.includes('/blob/')) {
-            url = url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
+        if (file) {
+            document.getElementById('source_url').value = URL.createObjectURL(file);
+            build();
         }
-        
-        // Vide le champ fichier local
-        document.getElementById('local_video').value = '';
-        buildPreview(url, url.toLowerCase().includes('.mp4') || url.toLowerCase().includes('.webm'));
     });
-
-    function buildPreview(url, isVideo) {
-        const fps = document.getElementById('fps_rate').value;
-        const container = document.getElementById('media_container');
-        document.getElementById('fps_display').innerText = fps + " FPS";
-        
-        // Reset buttons state
-        document.getElementById('download_btn').classList.add('hidden');
-        document.getElementById('github_btn').classList.add('hidden');
-        document.getElementById('generate_btn').disabled = false;
-        document.getElementById('status').innerText = "";
-
-        container.innerHTML = '';
-        if (isVideo) {
-            container.innerHTML = `<video id="preview_video" src="${url}" crossorigin="anonymous" autoplay loop muted playsinline style="width:100%;"></video>`;
-        } else {
-            container.innerHTML = `<img id="preview_img" src="${url}" crossorigin="anonymous" alt="Preview" style="width:100%;">`;
-        }
-    }
 
     async function generateGIF() {
         const video = document.getElementById('preview_video');
+        const img = document.getElementById('preview_img');
         const btn = document.getElementById('generate_btn');
         const status = document.getElementById('status');
-        const progressContainer = document.getElementById('progress-container');
-        const progressBar = document.getElementById('progress-bar');
+        const progress = document.getElementById('progress-bar');
+        const progCont = document.getElementById('progress-container');
 
-        if (!video) {
-            status.innerText = "Erreur : Veuillez importer une vidéo (MP4) d'abord.";
-            status.style.color = "#ff4444";
-            return;
-        }
+        if (!video && !img) return;
 
-        status.style.color = "var(--primary)";
         btn.disabled = true;
-        btn.innerText = "Traitement en cours...";
-        progressContainer.style.display = 'block';
-        progressBar.style.width = "0%";
+        progCont.style.display = 'block';
+        status.innerText = "Capture...";
 
         const fps = parseInt(document.getElementById('fps_rate').value);
-        const maxDuration = parseFloat(document.getElementById('capture_duration').value);
-        const targetWidth = parseInt(document.getElementById('output_width').value);
-        
-        // S'assure que la vidéo est chargée pour avoir ses dimensions
-        if (video.readyState < 2) {
-            await new Promise(r => { video.onloadeddata = r; });
-        }
-
-        const duration = Math.min(video.duration || maxDuration, maxDuration);
+        const duration = parseFloat(document.getElementById('capture_duration').value);
         const frameCount = Math.floor(duration * fps);
-        const delay = Math.round(1000 / fps);
-        
-        const ratio = video.videoHeight / video.videoWidth;
-        const targetHeight = Math.round(targetWidth * ratio);
+        const delay = 1000 / fps;
 
         const gif = new GIF({
-            workers: 2,
-            quality: 10,
-            width: targetWidth,
-            height: targetHeight,
+            workers: 0, quality: 10, width: 600, height: 337,
             workerScript: 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
         });
 
         const canvas = document.getElementById('capture_canvas');
         const ctx = canvas.getContext('2d');
-        canvas.width = targetWidth;
-        canvas.height = targetHeight;
+        canvas.width = 600; canvas.height = 337;
 
-        try {
-            video.pause();
-            video.currentTime = 0;
-            status.innerText = "1/2 Capture des images de la vidéo...";
+        for (let i = 0; i < frameCount; i++) {
+            ctx.fillStyle = "#000"; ctx.fillRect(0,0,600,337);
+            if (video) ctx.drawImage(video, 0, 0, 600, 337);
+            else ctx.drawImage(img, 0, 0, 600, 337);
             
-            for (let i = 0; i < frameCount; i++) {
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                gif.addFrame(ctx, {copy: true, delay: delay});
-                video.currentTime += (1 / fps);
-                progressBar.style.width = ((i / frameCount) * 50) + "%";
-                await new Promise(r => setTimeout(r, 60)); // Évite le blocage
-            }
-            video.play();
-
-            status.innerText = "2/2 Encodage du fichier GIF en cours...";
+            ctx.font = "bold 26px Cinzel"; ctx.fillStyle = "white"; ctx.textAlign = "center";
+            ctx.shadowColor = "black"; ctx.shadowBlur = 8;
+            ctx.fillText(document.getElementById('gif_caption').value, 300, 310);
             
-            gif.on('progress', p => {
-                progressBar.style.width = (50 + (p * 50)) + "%";
-            });
-
-            gif.on('finished', blob => {
-                finalGifBlob = blob;
-                const url = URL.createObjectURL(blob);
-                
-                const downloadBtn = document.getElementById('download_btn');
-                downloadBtn.href = url;
-                downloadBtn.classList.remove('hidden');
-                
-                document.getElementById('github_btn').classList.remove('hidden');
-                
-                document.getElementById('media_container').innerHTML = `<img src="${url}" style="width:100%;">`;
-                
-                btn.disabled = false;
-                btn.innerText = "Re-Générer";
-                status.innerText = "✓ GIF PRÊT : " + (blob.size / 1024 / 1024).toFixed(2) + " MB";
-                progressContainer.style.display = 'none';
-            });
-
-            gif.render();
-        } catch (err) {
-            console.error(err);
-            status.innerText = "Erreur technique lors de la génération.";
-            status.style.color = "#ff4444";
-            btn.disabled = false;
-            btn.innerText = "Réessayer";
-            progressContainer.style.display = 'none';
+            gif.addFrame(ctx, {copy: true, delay: delay});
+            if (video) video.currentTime += (1/fps);
+            progress.style.width = ((i / frameCount) * 50) + "%";
+            await new Promise(r => setTimeout(r, 60));
         }
+
+        status.innerText = "Encodage...";
+        gif.on('progress', p => progress.style.width = (50 + (p * 50)) + "%");
+        gif.on('finished', blob => {
+            const downloadBtn = document.getElementById('download_btn');
+            downloadBtn.href = URL.createObjectURL(blob);
+            downloadBtn.style.display = 'block';
+            btn.disabled = false;
+            status.innerText = "✓ TERMINÉ";
+            progCont.style.display = 'none';
+        });
+        gif.render();
     }
 
-    function pushToGitHub() {
-        if (!finalGifBlob) return;
-        const status = document.getElementById('status');
-        status.innerText = "En cours d'intégration API GitHub... Utilisez le téléchargement PC pour le moment.";
-    }
-
-    // Init preview
-    if(document.getElementById('source_url').value) {
-        buildPreview(document.getElementById('source_url').value, false);
-    }
+    document.querySelectorAll('input, select, textarea').forEach(el => el.addEventListener('input', build));
+    build();
 </script>
-
 </body>
 </html>
