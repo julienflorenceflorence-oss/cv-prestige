@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GIF Master Studio | Prestige Edition</title>
+    <title>GIF Master Studio | Premium Production</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Intégration de gif.js pour la génération côté client -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
     <style>
         :root {
             --primary: #00F2FE;
@@ -72,7 +74,7 @@
             position: relative;
         }
 
-        .gif-preview-box video, .gif-preview-box img { width: 100%; display: block; }
+        .gif-preview-box video, .gif-preview-box img, .gif-preview-box canvas { width: 100%; display: block; }
 
         .fps-counter {
             position: absolute;
@@ -89,9 +91,30 @@
         }
 
         .btn-prestige {
-            width: 100%; padding: 20px; background: var(--gold); color: #000; border: none; border-radius: 10px; font-family: 'Cinzel'; font-weight: 700; cursor: pointer; text-transform: uppercase; margin-top: 20px; transition: 0.3s; font-size: 0.9rem;
+            width: 100%; padding: 18px; background: var(--gold); color: #000; border: none; border-radius: 10px; font-family: 'Cinzel'; font-weight: 700; cursor: pointer; text-transform: uppercase; margin-top: 15px; transition: 0.3s; font-size: 0.85rem;
         }
         .btn-prestige:hover { background: #fff; transform: translateY(-3px); }
+        .btn-prestige:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .btn-download {
+            background: var(--primary);
+            display: none;
+        }
+
+        #progress-container {
+            width: 100%;
+            background: rgba(255,255,255,0.1);
+            height: 4px;
+            margin-top: 10px;
+            border-radius: 2px;
+            display: none;
+        }
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.1s;
+        }
 
         @media (max-width: 1100px) { .app-container { grid-template-columns: 1fr; } .preview-panel { position: static; margin-top: 30px; } }
     </style>
@@ -124,18 +147,8 @@
             </select>
         </div>
         <div class="input-group">
-            <label>Qualité / Dithering</label>
-            <select id="dither_type">
-                <option value="floyd">Floyd-Steinberg (Premium)</option>
-                <option value="sierra">Sierra (Net)</option>
-            </select>
-        </div>
-        <div class="input-group">
-            <label>Bouclage (Loop)</label>
-            <select id="loop_type">
-                <option value="seamless">Seamless Loop (Infini)</option>
-                <option value="pingpong">Ping-Pong (Aller-Retour)</option>
-            </select>
+            <label>Durée de capture (sec)</label>
+            <input type="number" id="capture_duration" value="2" min="0.5" max="5" step="0.5">
         </div>
     </div>
 
@@ -144,20 +157,28 @@
         <div class="gif-preview-box">
             <div class="fps-counter" id="fps_display">24 FPS</div>
             <div id="media_container"></div>
+            <canvas id="capture_canvas" style="display:none;"></canvas>
         </div>
-        <button class="btn-prestige" onclick="exportInstructions()">Générer Workflow d'Exportation</button>
+        
+        <div id="progress-container"><div id="progress-bar"></div></div>
+        
+        <button id="generate_btn" class="btn-prestige" onclick="generateGIF()">Générer le fichier GIF</button>
+        <a id="download_btn" class="btn-prestige btn-download" download="prestige_animation.gif">Télécharger le format GIF</a>
+        
         <div id="status" style="margin-top:15px; color:var(--primary); font-size:0.85rem; font-weight:bold;"></div>
     </div>
 </div>
 
 <script>
+    let gifBlob = null;
+
     function fixUrl(url) {
         if (!url) return "";
         let clean = url.trim();
         if (clean.includes('github.com') && clean.includes('/blob/')) {
             clean = clean.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
         }
-        return clean; // Suppression de encodeURI qui causait des erreurs sur les liens déjà encodés
+        return clean;
     }
 
     function build() {
@@ -165,6 +186,7 @@
         const fps = document.getElementById('fps_rate').value;
         const container = document.getElementById('media_container');
         document.getElementById('fps_display').innerText = fps + " FPS";
+        document.getElementById('download_btn').style.display = 'none';
 
         if (!url) return;
 
@@ -172,9 +194,9 @@
         
         container.innerHTML = '';
         if (isVideo) {
-            container.innerHTML = `<video src="${url}" autoplay loop muted playsinline style="width:100%;"></video>`;
+            container.innerHTML = `<video id="preview_video" src="${url}" crossorigin="anonymous" autoplay loop muted playsinline style="width:100%;"></video>`;
         } else {
-            container.innerHTML = `<img src="${url}" alt="Preview" style="width:100%;">`;
+            container.innerHTML = `<img id="preview_img" src="${url}" crossorigin="anonymous" alt="Preview" style="width:100%;">`;
         }
     }
 
@@ -187,14 +209,85 @@
         build();
     }
 
+    async function generateGIF() {
+        const video = document.getElementById('preview_video');
+        const img = document.getElementById('preview_img');
+        const btn = document.getElementById('generate_btn');
+        const status = document.getElementById('status');
+        const progressContainer = document.getElementById('progress-container');
+        const progressBar = document.getElementById('progress-bar');
+
+        if (!video && !img) return;
+
+        btn.disabled = true;
+        btn.innerText = "Traitement en cours...";
+        status.innerText = "Capture des frames...";
+        progressContainer.style.display = 'block';
+
+        const fps = parseInt(document.getElementById('fps_rate').value);
+        const duration = parseFloat(document.getElementById('capture_duration').value);
+        const frameCount = Math.floor(duration * fps);
+        const delay = 1000 / fps;
+
+        const gif = new GIF({
+            workers: 2,
+            quality: 10,
+            width: 600,
+            height: 337,
+            workerScript: 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
+        });
+
+        const canvas = document.getElementById('capture_canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 600;
+        canvas.height = 337;
+
+        if (video) {
+            video.pause();
+            video.currentTime = 0;
+            
+            for (let i = 0; i < frameCount; i++) {
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                gif.addFrame(ctx, {copy: true, delay: delay});
+                video.currentTime += (1 / fps);
+                progressBar.style.width = ((i / frameCount) * 50) + "%";
+                await new Promise(r => setTimeout(r, 20));
+            }
+            video.play();
+        } else {
+            // Pour une image statique, on crée un petit effet de zoom/mouvement
+            for (let i = 0; i < 10; i++) {
+                ctx.drawImage(img, -i, -i, canvas.width + (i*2), canvas.height + (i*2));
+                gif.addFrame(ctx, {copy: true, delay: 100});
+            }
+        }
+
+        status.innerText = "Encodage du fichier GIF...";
+        
+        gif.on('progress', p => {
+            progressBar.style.width = (50 + (p * 50)) + "%";
+        });
+
+        gif.on('finished', blob => {
+            gifBlob = blob;
+            const url = URL.createObjectURL(blob);
+            const downloadBtn = document.getElementById('download_btn');
+            downloadBtn.href = url;
+            downloadBtn.style.display = 'block';
+            
+            btn.disabled = false;
+            btn.innerText = "Générer à nouveau";
+            status.innerText = "✓ GIF PRÊT AU TÉLÉCHARGEMENT";
+            progressContainer.style.display = 'none';
+        });
+
+        gif.render();
+    }
+
     document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', build));
     build();
 
-    function exportInstructions() {
-        const status = document.getElementById('status');
-        status.innerText = "✓ WORKFLOW DISPONIBLE (F12)";
-        setTimeout(() => status.innerText = "", 4000);
-    }
+    renderActionsForm();
 </script>
 
 </body>
