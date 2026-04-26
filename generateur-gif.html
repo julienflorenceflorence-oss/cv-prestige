@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GIF Master Studio v8.0 | Édition Prestige</title>
+    <title>GIF Master Studio v8.2 | Édition Prestige</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Script principal chargé depuis un CDN fiable -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
     <style>
         :root {
-            --primary: #D4AF37; /* OR PRESTIGE */
+            --primary: #D4AF37;
             --gold: #D4AF37;
             --bg: #0F1115;
             --card-bg: rgba(22, 26, 35, 0.98);
             --text: #f4f4f4;
-            --accent: #1a1d23;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,253 +35,210 @@
 
         .app-container {
             width: 100%;
-            max-width: 1300px;
+            max-width: 1200px;
             display: grid;
-            grid-template-columns: 420px 1fr;
+            grid-template-columns: 400px 1fr;
             gap: 40px;
-            align-items: start;
         }
 
         .form-panel {
             background: var(--card-bg);
             border: 1px solid rgba(212, 175, 55, 0.2);
             padding: 30px;
-            border-radius: 2px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 4px;
         }
 
         h3 { font-family: 'Cinzel'; font-size: 0.85rem; color: var(--gold); margin: 25px 0 15px 0; border-bottom: 1px solid rgba(212,175,55,0.1); padding-bottom: 8px; letter-spacing: 2px; }
 
         .input-group { margin-bottom: 20px; }
-        label { display: block; font-size: 0.7rem; color: #888; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+        label { display: block; font-size: 0.7rem; color: #888; margin-bottom: 6px; text-transform: uppercase; }
         input, select, textarea {
-            width: 100%; padding: 14px; background: #000; border: 1px solid #333; color: #fff; border-radius: 4px; font-family: 'Montserrat'; font-size: 0.9rem; transition: 0.3s;
+            width: 100%; padding: 12px; background: #000; border: 1px solid #333; color: #fff; border-radius: 4px; font-family: 'Montserrat'; font-size: 0.9rem;
         }
-        input:focus, select:focus { border-color: var(--gold); outline: none; }
 
-        .preview-panel { position: sticky; top: 20px; display: flex; flex-direction: column; align-items: center; }
+        .preview-panel { display: flex; flex-direction: column; align-items: center; }
         .gif-preview-box {
             width: 100%;
-            max-width: 640px;
+            max-width: 600px;
             background: #000;
             border: 1px solid var(--gold);
             padding: 5px;
             position: relative;
-            aspect-ratio: 16/9;
+            aspect-ratio: 1/1; /* Carré pour les signatures */
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            overflow: hidden;
         }
 
-        .gif-preview-box video, .gif-preview-box img { width: 100%; height: auto; display: block; }
-        
-        .caption-overlay {
-            position: absolute; bottom: 20px; left: 0; width: 100%; text-align: center;
-            font-family: 'Cinzel', serif; font-size: 1.1rem; color: #fff;
-            text-shadow: 0 2px 10px rgba(0,0,0,1); letter-spacing: 2px; z-index: 5;
-            pointer-events: none;
-        }
+        .gif-preview-box video, .gif-preview-box img { width: 100%; height: 100%; object-fit: cover; }
 
         .btn-prestige {
-            width: 100%; padding: 20px; background: var(--gold); color: #000; border: none; border-radius: 2px; font-family: 'Cinzel'; font-weight: 700; cursor: pointer; text-transform: uppercase; transition: 0.4s; font-size: 0.9rem; margin-top: 20px; letter-spacing: 2px;
+            width: 100%; padding: 20px; background: var(--gold); color: #000; border: none; border-radius: 4px; font-family: 'Cinzel'; font-weight: 700; cursor: pointer; text-transform: uppercase; transition: 0.4s; font-size: 0.9rem; margin-top: 20px;
         }
-        .btn-prestige:hover { background: #fff; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+        .btn-prestige:hover { background: #fff; }
         .btn-prestige:disabled { opacity: 0.3; cursor: not-allowed; }
 
-        .btn-download { background: #fff; display: none; text-decoration: none; text-align: center; color: #000; }
+        #progress-container { width: 100%; background: #000; height: 30px; margin-top: 20px; border: 1px solid #222; display: none; position: relative; }
+        #progress-bar { width: 0%; height: 100%; background: var(--gold); transition: width 0.1s; }
+        #progress-text { position: absolute; width: 100%; text-align: center; font-size: 0.7rem; line-height: 30px; color: #fff; z-index: 10; font-weight: bold; }
 
-        #progress-container { width: 100%; background: #000; height: 30px; margin-top: 25px; border: 1px solid #222; display: none; overflow: hidden; position: relative; }
-        #progress-bar { width: 0%; height: 100%; background: var(--gold); transition: width 0.2s; }
-        #progress-text { position: absolute; width: 100%; text-align: center; font-size: 0.7rem; font-weight: bold; line-height: 30px; color: #fff; z-index: 10; text-transform: uppercase; letter-spacing: 1px; }
-
-        @media (max-width: 1100px) { .app-container { grid-template-columns: 1fr; } .preview-panel { position: static; } }
+        #status { margin-top: 20px; color: var(--gold); font-size: 0.8rem; text-align: center; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="header-app">
-    <h1>GIF Master Studio <span class="v-tag">V8.0 PRESTIGE</span></h1>
+    <h1>GIF Studio <span class="v-tag">v8.2 PRESTIGE</span></h1>
 </div>
 
 <div class="app-container">
     <div class="form-panel">
-        <h3>🎬 Média Source</h3>
+        <h3>🎬 Source</h3>
         <div class="input-group">
-            <label>Vidéo Haute Définition (MP4)</label>
-            <input type="file" id="local_video" accept="video/mp4,video/webm">
+            <label>Vidéo (MP4)</label>
+            <input type="file" id="local_video" accept="video/mp4">
         </div>
 
-        <h3>📝 Typographie & Texte</h3>
+        <h3>⚙️ Paramètres</h3>
         <div class="input-group">
-            <label>Signature Cinématique</label>
-            <textarea id="gif_caption" placeholder="Ex: LUXE & STRATÉGIE 2026"></textarea>
-        </div>
-
-        <h3>⚙️ Paramètres Haute Fidélité</h3>
-        <div class="input-group">
-            <label>Résolution de sortie</label>
-            <select id="gif_res">
-                <option value="480">Standard (854x480)</option>
-                <option value="720" selected>Haute Définition (1280x720)</option>
+            <label>Format</label>
+            <select id="gif_format">
+                <option value="square">Carré (1:1) - Signature</option>
+                <option value="hd">HD (16:9)</option>
             </select>
         </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-            <div class="input-group">
-                <label>Fluidité (FPS)</label>
-                <select id="fps_rate">
-                    <option value="15">15 FPS (Éco)</option>
-                    <option value="24" selected>24 FPS (Cinéma)</option>
-                    <option value="30">30 FPS (Ultra)</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label>Durée (sec)</label>
-                <input type="number" id="capture_duration" value="2.5" min="0.5" max="5" step="0.5">
-            </div>
+        <div class="input-group">
+            <label>Durée (sec)</label>
+            <input type="number" id="capture_duration" value="2.0" min="0.5" max="5" step="0.5">
+        </div>
+        <div class="input-group">
+            <label>Qualité (1-20)</label>
+            <input type="number" id="gif_quality" value="10" min="1" max="20">
         </div>
     </div>
 
     <div class="preview-panel">
-        <div class="gif-preview-box">
-            <div id="media_container" style="width:100%;">
-                <p style="color:#444; font-size:0.75rem; font-family:'Cinzel';">En attente du média master...</p>
-            </div>
-            <div class="caption-overlay" id="caption_preview"></div>
-            <canvas id="capture_canvas" style="display:none;"></canvas>
+        <div class="gif-preview-box" id="media_container">
+            <p style="color:#444;">Sélectionnez une vidéo...</p>
         </div>
         
         <div id="progress-container">
-            <div id="progress-text">Initialisation du moteur...</div>
+            <div id="progress-text">Prêt</div>
             <div id="progress-bar"></div>
         </div>
         
-        <button id="generate_btn" class="btn-prestige" onclick="generateGIF()">Générer l'Animation Prestige</button>
-        <a id="download_btn" class="btn-prestige btn-download" download="prestige_animation.gif">Télécharger le Master GIF</a>
+        <button id="generate_btn" class="btn-prestige" onclick="generateGIF()">Générer le GIF</button>
+        <a id="download_btn" class="btn-prestige" style="display:none; background:#fff; text-decoration:none; text-align:center;" download="signature_prestige.gif">Télécharger le GIF</a>
         
-        <div id="status" style="margin-top:20px; color:var(--gold); font-size:0.75rem; letter-spacing:1px; text-transform:uppercase; text-align: center;"></div>
+        <div id="status"></div>
     </div>
 </div>
 
-<script>
-    function build() {
-        const url = document.getElementById('source_url_hidden')?.value || "";
-        const container = document.getElementById('media_container');
-        document.getElementById('caption_preview').innerText = document.getElementById('gif_caption').value;
-        document.getElementById('download_btn').style.display = 'none';
+<canvas id="capture_canvas" style="display:none;"></canvas>
 
-        if (!url) return;
-        container.innerHTML = `<video id="preview_video" src="${url}" autoplay loop muted playsinline style="width:100%;"></video>`;
-    }
+<script>
+    let videoUrl = "";
 
     document.getElementById('local_video').addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file) {
-            const url = URL.createObjectURL(file);
-            let hidden = document.getElementById('source_url_hidden');
-            if (!hidden) {
-                hidden = document.createElement('input');
-                hidden.type = "hidden"; hidden.id = "source_url_hidden";
-                document.body.appendChild(hidden);
-            }
-            hidden.value = url;
-            build();
+            videoUrl = URL.createObjectURL(file);
+            document.getElementById('media_container').innerHTML = `<video id="preview_video" src="${videoUrl}" autoplay loop muted playsinline></video>`;
+            document.getElementById('status').innerText = "Vidéo chargée : " + file.name;
         }
     });
 
     async function generateGIF() {
         const video = document.getElementById('preview_video');
+        if (!video) return alert("Veuillez d'abord charger une vidéo.");
+
         const btn = document.getElementById('generate_btn');
         const status = document.getElementById('status');
         const progress = document.getElementById('progress-bar');
         const progText = document.getElementById('progress-text');
         const progCont = document.getElementById('progress-container');
 
-        if (!video) { status.innerText = "ERREUR : AUCUN MÉDIA SOURCE"; return; }
-
         btn.disabled = true;
         progCont.style.display = 'block';
-        status.innerText = "CAPTURE DES TRAMES HD...";
+        status.innerText = "Initialisation...";
 
-        const fps = parseInt(document.getElementById('fps_rate').value);
         const duration = parseFloat(document.getElementById('capture_duration').value);
-        const resHeight = parseInt(document.getElementById('gif_res').value);
-        const resWidth = Math.round((resHeight * 16) / 9);
+        const quality = parseInt(document.getElementById('gif_quality').value);
+        const format = document.getElementById('gif_format').value;
         
+        const fps = 15;
         const frameCount = Math.floor(duration * fps);
-        const delay = 1000 / fps;
+        const size = (format === 'square') ? 400 : 640;
+        const width = size;
+        const height = (format === 'square') ? size : 360;
 
-        // QUALITÉ PRESTIGE (Lower value = higher quality)
         const gif = new GIF({
-            workers: 4, 
-            quality: 5, 
-            width: resWidth, 
-            height: resHeight,
+            workers: 2,
+            quality: quality,
+            width: width,
+            height: height,
             workerScript: 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
         });
 
         const canvas = document.getElementById('capture_canvas');
         const ctx = canvas.getContext('2d');
-        canvas.width = resWidth; canvas.height = resHeight;
+        canvas.width = width;
+        canvas.height = height;
 
         video.pause();
         video.currentTime = 0;
-        await new Promise(r => setTimeout(r, 1000));
+        
+        status.innerText = "Capture des trames...";
 
         for (let i = 0; i < frameCount; i++) {
-            ctx.fillStyle = "#000"; ctx.fillRect(0, 0, resWidth, resHeight);
-            ctx.drawImage(video, 0, 0, resWidth, resHeight);
-            
-            const caption = document.getElementById('gif_caption').value;
-            if (caption) {
-                const fontSize = Math.round(resHeight / 18);
-                ctx.font = `bold ${fontSize}px Cinzel`; 
-                ctx.fillStyle = "white"; ctx.textAlign = "center";
-                ctx.shadowColor = "rgba(0,0,0,0.8)"; ctx.shadowBlur = 10;
-                ctx.fillText(caption, resWidth/2, resHeight * 0.92);
+            // Dessin avec recadrage central pour le mode carré
+            if (format === 'square') {
+                const minDim = Math.min(video.videoWidth, video.videoHeight);
+                const sx = (video.videoWidth - minDim) / 2;
+                const sy = (video.videoHeight - minDim) / 2;
+                ctx.drawImage(video, sx, sy, minDim, minDim, 0, 0, width, height);
+            } else {
+                ctx.drawImage(video, 0, 0, width, height);
             }
+
+            gif.addFrame(ctx, {copy: true, delay: 1000 / fps});
+            video.currentTime += (1 / fps);
             
-            gif.addFrame(ctx, {copy: true, delay: delay});
-            video.currentTime += (1/fps);
-            
-            const p = Math.round((i / frameCount) * 40);
+            const p = Math.round((i / frameCount) * 100);
             progress.style.width = p + "%";
-            progText.innerText = "CAPTURE : " + p + "%";
-            await new Promise(r => setTimeout(r, 40));
+            progText.innerText = "Capture : " + p + "%";
+            
+            await new Promise(r => setTimeout(r, 50));
         }
 
-        video.play();
-        status.innerText = "ENCODAGE MULTI-CŒUR EN COURS...";
-        
+        status.innerText = "Encodage final...";
+        progText.innerText = "Encodage...";
+
         gif.on('progress', p => {
-            const totalP = 40 + Math.round(p * 60);
-            progress.style.width = totalP + "%";
-            progText.innerText = "OPTIMISATION PRESTIGE : " + totalP + "%";
+            const val = Math.round(p * 100);
+            progress.style.width = val + "%";
+            progText.innerText = "Encodage : " + val + "%";
         });
 
         gif.on('finished', blob => {
-            const finalUrl = URL.createObjectURL(blob);
-            document.getElementById('download_btn').href = finalUrl;
-            document.getElementById('download_btn').style.display = 'block';
+            const url = URL.createObjectURL(blob);
+            const downloadBtn = document.getElementById('download_btn');
+            downloadBtn.href = url;
+            downloadBtn.style.display = 'block';
             
-            // Preview actual GIF
-            const previewImg = document.createElement('img');
-            previewImg.src = finalUrl;
+            const img = document.createElement('img');
+            img.src = url;
             document.getElementById('media_container').innerHTML = '';
-            document.getElementById('media_container').appendChild(previewImg);
+            document.getElementById('media_container').appendChild(img);
             
             btn.disabled = false;
-            status.innerText = "✓ MASTER GIF GÉNÉRÉ AVEC SUCCÈS";
-            progText.innerText = "100% - TERMINÉ";
+            status.innerText = "✓ GIF généré avec succès !";
+            progText.innerText = "Terminé";
         });
 
         gif.render();
     }
-
-    document.getElementById('gif_caption').addEventListener('input', () => {
-        document.getElementById('caption_preview').innerText = document.getElementById('gif_caption').value;
-    });
 </script>
 </body>
 </html>
