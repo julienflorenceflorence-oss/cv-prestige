@@ -174,10 +174,12 @@
 
         /* --- MOBILE DOCK --- */
         .fixed-dock { 
-            position: relative; 
-            margin: 40px auto 20px auto; 
-            width: calc(100% - 40px);
+            position: fixed; 
+            bottom: 25px; 
+            left: 20px; 
+            right: 20px; 
             max-width: 600px; 
+            margin: 0 auto; 
             background: rgba(15, 17, 21, 0.95); 
             backdrop-filter: blur(15px); 
             border: 1px solid var(--gold); 
@@ -186,8 +188,8 @@
             padding: 15px; 
             display: flex; 
             justify-content: center; 
-            gap: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            gap: 15px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.9); 
         }
 
         .btn-d { 
