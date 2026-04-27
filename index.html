@@ -122,6 +122,30 @@
         
         .drive-btn:hover { background-color: var(--primary-gold); color: var(--bg-color); transform: translateY(-3px); box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3); }
         
+        /* CONTACT LINKS */
+        .tel-link, .mail-link {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .tel-link {
+            cursor: default;
+            pointer-events: none;
+        }
+
+        @media (max-width: 1024px) {
+            .tel-link {
+                cursor: pointer;
+                pointer-events: auto;
+                color: var(--primary-gold);
+            }
+        }
+        
+        .mail-link:hover {
+            color: var(--primary-gold);
+        }
+
         /* Bouton RDV en OR plein par défaut */
         .rdv-btn { 
             background-color: var(--primary-gold); 
@@ -206,8 +230,8 @@
 
             <section class="sidebar-section contact-block">
                 <h2>Contact</h2>
-                <div class="info-item"><strong>Téléphone</strong> 06 61 74 75 73</div>
-                <div class="info-item"><strong>Email</strong> julien.florence@gmail.com</div>
+                <div class="info-item"><strong>Téléphone</strong> <a href="tel:0661747573" class="tel-link">06 61 74 75 73</a></div>
+                <div class="info-item"><strong>Email</strong> <a href="mailto:julien.florence@gmail.com" class="mail-link">julien.florence@gmail.com</a></div>
                 <div class="info-item"><strong>Mobilité</strong> 31130 Quint-Fonsegrives</div>
             </section>
         </aside>
@@ -309,7 +333,7 @@
             <a href="diplomes.html" class="drive-btn portfolio-btn">Portfolio Diplômes</a>
             
             <div class="footer-contact-mobile">
-                06 61 74 75 73 &bull; julien.florence@gmail.com<br>
+                <a href="tel:0661747573" class="tel-link">06 61 74 75 73</a> &bull; <a href="mailto:julien.florence@gmail.com" class="mail-link">julien.florence@gmail.com</a><br>
                 31130 Quint-Fonsegrives
             </div>
 
