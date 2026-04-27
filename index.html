@@ -24,10 +24,10 @@
             overflow-x: hidden;
         }
 
-        /* BLOCAGE PAYSAGE MOBILE */
-        @media screen and (orientation: landscape) and (max-width: 1024px) and (pointer: coarse) {
+        /* BLOCAGE PAYSAGE MOBILE ET TABLETTE (< 13") */
+        @media screen and (orientation: landscape) and (max-width: 1366px) {
             body::before {
-                content: "Lecture horizontale interdite. \A Veuillez pivoter votre appareil en mode Portrait pour consulter ce dossier de prestige.";
+                content: "Lecture horizontale interdite sur cet appareil. \A Veuillez pivoter votre appareil en mode Portrait pour consulter ce dossier de prestige.";
                 white-space: pre-wrap; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
                 background: var(--bg-color); color: var(--primary-gold);
                 display: flex; align-items: center; justify-content: center;
@@ -120,7 +120,18 @@
         }
         
         .drive-btn:hover { background-color: var(--primary-gold); color: var(--bg-color); transform: translateY(-3px); box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3); }
-        .btn-rdv { background-color: var(--primary-gold); color: var(--bg-color); }
+        
+        /* Bouton RDV en OR plein par défaut */
+        .rdv-btn { 
+            background-color: var(--primary-gold); 
+            color: var(--bg-color); 
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+        .rdv-btn:hover {
+            background-color: #fff;
+            border-color: #fff;
+            color: var(--bg-color);
+        }
 
         /* FOOTER DOCK */
         .footer-dock {
@@ -236,6 +247,10 @@
                 <div class="exp-item">
                     <div class="exp-head"><span class="exp-role">Négociateur Immobilier Leader</span><span class="exp-date">2015 – 2021</span></div>
                     <div class="exp-comp">Century 21 & Cabinet Bedin - CA 7 M€</div>
+                    <ul class="exp-desc">
+                        <li>Management et responsabilité de 5 négociateurs.</li>
+                        <li>Animation de la force de vente et pilotage de la performance commerciale.</li>
+                    </ul>
                 </div>
             </section>
 
