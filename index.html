@@ -24,8 +24,9 @@
             overflow-x: hidden;
         }
 
-        /* BLOCAGE PAYSAGE MOBILE ET TABLETTE (< 13") */
-        @media screen and (orientation: landscape) and (max-width: 1366px) {
+        /* BLOCAGE PAYSAGE UNIQUEMENT POUR MOBILES/TABLETTES (< 13") */
+        /* On utilise pointer: coarse pour cibler les appareils tactiles et ne pas bloquer les laptops */
+        @media screen and (orientation: landscape) and (max-width: 1366px) and (pointer: coarse) {
             body::before {
                 content: "Lecture horizontale interdite sur cet appareil. \A Veuillez pivoter votre appareil en mode Portrait pour consulter ce dossier de prestige.";
                 white-space: pre-wrap; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
