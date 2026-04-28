@@ -117,10 +117,23 @@
 </head>
 <body>
     <div class="container">
-        <video autoplay loop muted playsinline class="tech-video">
-            <source src="video/cerveau_42.mp4" type="video/mp4">
-            Votre navigateur ne supporte pas la lecture de vidéos.
-        </video>
+        <div style="width: 250px; height: 250px; margin: 0 auto 30px auto; border-radius: 50%; border: 2px solid var(--gold); overflow: hidden; filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4)); background: #000;">
+            <video id="brainVideo" autoplay loop muted playsinline poster="cerveau 3.0.png" style="width: 100%; height: 100%; object-fit: cover;">
+                <source src="video/cerveau_4.2.mp4" type="video/mp4">
+                <source src="video/cerveau41.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo.
+            </video>
+        </div>
+        <script>
+            window.addEventListener('load', function() {
+                var v = document.getElementById('brainVideo');
+                v.play().catch(function(error) {
+                    document.body.addEventListener('click', function() {
+                        v.play();
+                    }, {once: true});
+                });
+            });
+        </script>
         <div class="status-badge">Validation en cours</div>
         <h1>Bachelor Marketing & Tech</h1>
         <p>Le dossier de certification finale est actuellement en phase de revue par le jury académique.<br><br>L'intégralité du mémoire "RDM Prestige" sera disponible dès validation officielle.</p>

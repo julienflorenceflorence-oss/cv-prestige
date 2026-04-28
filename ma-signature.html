@@ -119,17 +119,23 @@
 
 <script>
     const signatureHTML = `
-<div style="font-family: Arial, sans-serif; font-size: 14px; background-color: transparent; padding: 20px 0;">
-    <!-- ESPACE POUR VOTRE TEXTE D'E-MAIL -->
-    <br><br>
-</div>
 <table cellpadding="0" cellspacing="0" border="0" style="background-color: #0F1115; min-width: 600px; font-family: 'Montserrat', Arial, sans-serif; border: 1px solid #D4AF37; border-collapse: collapse;">
+    <!-- BLOC CORPS DU MAIL (BLANC) -->
+    <tr>
+        <td style="background-color: #ffffff; padding: 50px 40px; color: #000000; font-size: 16px; border-bottom: 2px solid #D4AF37;">
+            Bonjour,<br><br>
+            [Tapez votre message ici...]<br><br><br>
+        </td>
+    </tr>
+    <!-- BANNIÈRE CERVEAU -->
     <tr>
         <td style="padding: 0; line-height: 0; background-color: #000;">
             <img src="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/cerveau%203.0.png" width="600" style="display: block; width: 600px; height: auto;">
         </td>
     </tr>
+    <!-- LIGNE D'ACCENT -->
     <tr><td height="4" style="background-color: #D4AF37; line-height: 4px; font-size: 4px;">&nbsp;</td></tr>
+    <!-- PIED DE SIGNATURE -->
     <tr>
         <td style="padding: 35px 25px; background-color: #0F1115;">
             <table cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -145,9 +151,15 @@
                         
                         <table cellpadding="0" cellspacing="0" border="0" style="margin-top: 20px;">
                             <tr>
-                                <td style="color: #D4AF37; font-size: 13px; font-weight: bold; letter-spacing: 1px;">T : <a href="tel:0661747573" style="color: #D4AF37; text-decoration: none;">06 61 74 75 73</a></td>
+                                <td style="vertical-align: middle;">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/159/159832.png" width="14" style="display: block; width: 14px; filter: invert(72%) sepia(54%) saturate(464%) hue-rotate(11deg) brightness(91%) contrast(88%);">
+                                </td>
+                                <td style="padding-left: 8px; color: #D4AF37; font-size: 13px; font-weight: bold; letter-spacing: 1px;"><a href="tel:0661747573" style="color: #D4AF37; text-decoration: none;">06 61 74 75 73</a></td>
                                 <td style="padding: 0 15px; color: rgba(212,175,55,0.3);">|</td>
-                                <td style="color: #ffffff; font-size: 13px; opacity: 0.8; letter-spacing: 0.5px;">E : <a href="mailto:julien.florence@gmail.com" style="color: #ffffff; text-decoration: none;">julien.florence@gmail.com</a></td>
+                                <td style="vertical-align: middle;">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/542/542689.png" width="14" style="display: block; width: 14px; filter: invert(100%); opacity: 0.8;">
+                                </td>
+                                <td style="padding-left: 8px; color: #ffffff; font-size: 13px; opacity: 0.8; letter-spacing: 0.5px;"><a href="mailto:julien.florence@gmail.com" style="color: #ffffff; text-decoration: none;">julien.florence@gmail.com</a></td>
                             </tr>
                         </table>
 
