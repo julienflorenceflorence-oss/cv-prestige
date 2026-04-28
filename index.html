@@ -81,8 +81,15 @@
         }
 
         .sidebar-section { margin-bottom: 20px; }
-        .info-item { font-size: 0.85rem; margin-bottom: 8px; color: var(--text-dim); }
-        .info-item strong { color: var(--text-light); display: block; margin-bottom: 2px; }
+        .info-item { 
+            font-size: 0.85rem; 
+            margin-bottom: 8px; 
+            color: var(--text-dim); 
+            display: flex; 
+            align-items: center; 
+        }
+        .info-item strong { color: var(--text-light); margin-right: 5px; }
+        .info-item img { margin-right: 10px; flex-shrink: 0; }
 
         main { width: 65%; padding: 40px 50px; z-index: 2; position: relative; display: flex; flex-direction: column; }
         
@@ -130,32 +137,27 @@
         }
         
         .tel-link {
-            cursor: default;
-            pointer-events: none;
+            cursor: pointer;
+            pointer-events: auto;
+            color: var(--primary-gold);
         }
 
-        @media (max-width: 1024px) {
-            .tel-link {
-                cursor: pointer;
-                pointer-events: auto;
-                color: var(--primary-gold);
-            }
-        }
-        
         .mail-link:hover {
             color: var(--primary-gold);
         }
 
-        /* Bouton RDV en OR plein par défaut */
+        /* Bouton RDV en OR plein avec dégradé par défaut */
         .rdv-btn { 
-            background-color: var(--primary-gold); 
-            color: var(--bg-color); 
+            background: linear-gradient(135deg, #F7EF8A 0%, #D4AF37 50%, #8A6426 100%);
+            color: #000;
+            border: none;
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
         .rdv-btn:hover {
-            background-color: #fff;
-            border-color: #fff;
+            background: #fff;
             color: var(--bg-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
         }
 
         /* FOOTER DOCK */
@@ -163,7 +165,21 @@
             width: 100%; background: var(--bg-color); padding: 60px 0; border-top: 1px solid rgba(212, 175, 55, 0.3); display: flex; flex-direction: column; align-items: center; gap: 30px;
         }
 
-        .footer-contact-mobile { display: none; text-align: center; color: var(--primary-gold); font-family: 'Cinzel'; font-size: 0.85rem; letter-spacing: 1px; line-height: 1.8; padding: 20px; border-top: 1px solid rgba(212, 175, 55, 0.1); border-bottom: 1px solid rgba(212, 175, 55, 0.1); width: 100%; max-width: 400px; }
+        .footer-contact-mobile { 
+            display: none; 
+            text-align: center; 
+            color: var(--primary-gold); 
+            font-family: 'Cinzel'; 
+            font-size: 0.85rem; 
+            letter-spacing: 1px; 
+            line-height: 2.2; 
+            padding: 20px; 
+            border-top: 1px solid rgba(212, 175, 55, 0.1); 
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1); 
+            width: 100%; 
+            max-width: 400px; 
+        }
+        .footer-contact-mobile img { vertical-align: middle; margin-right: 8px; }
 
         .footer-btns-row { display: flex; justify-content: center; gap: 20px; width: 100%; }
 
@@ -230,9 +246,18 @@
 
             <section class="sidebar-section contact-block">
                 <h2>Contact</h2>
-                <div class="info-item"><strong>Téléphone</strong> <a href="tel:0661747573" class="tel-link">06 61 74 75 73</a></div>
-                <div class="info-item"><strong>Email</strong> <a href="mailto:julien.florence@gmail.com" class="mail-link">julien.florence@gmail.com</a></div>
-                <div class="info-item"><strong>Mobilité</strong> 31130 Quint-Fonsegrives</div>
+                <div class="info-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/455/455705.png" width="14" style="filter: invert(72%) sepia(54%) saturate(464%) hue-rotate(11deg) brightness(91%) contrast(88%); margin-right: 10px; flex-shrink: 0;">
+                    <strong>Téléphone</strong> <a href="tel:0661747573" class="tel-link" style="pointer-events: auto; cursor: pointer;">06 61 74 75 73</a>
+                </div>
+                <div class="info-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" width="14" style="filter: invert(72%) sepia(54%) saturate(464%) hue-rotate(11deg) brightness(91%) contrast(88%); margin-right: 10px; flex-shrink: 0;">
+                    <strong>Email</strong> <a href="mailto:julien.florence@gmail.com" class="mail-link">julien.florence@gmail.com</a>
+                </div>
+                <div class="info-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/447/447031.png" width="14" style="filter: invert(72%) sepia(54%) saturate(464%) hue-rotate(11deg) brightness(91%) contrast(88%); margin-right: 10px; flex-shrink: 0;">
+                    <strong>Mobilité</strong> 31130 Quint-Fonsegrives
+                </div>
             </section>
         </aside>
 
@@ -333,7 +358,16 @@
             <a href="diplomes.html" class="drive-btn portfolio-btn">Portfolio Diplômes</a>
             
             <div class="footer-contact-mobile">
-                <a href="tel:0661747573" class="tel-link">06 61 74 75 73</a> &bull; <a href="mailto:julien.florence@gmail.com" class="mail-link">julien.florence@gmail.com</a><br>
+                <span style="white-space: nowrap;">
+                    <img src="https://cdn-icons-png.flaticon.com/512/455/455705.png" width="14" style="filter: invert(72%) sepia(54%) saturate(464%) hue-rotate(11deg) brightness(91%) contrast(88%); vertical-align: middle; margin-right: 5px;">
+                    <a href="tel:0661747573" class="tel-link" style="pointer-events: auto; cursor: pointer;">06 61 74 75 73</a>
+                </span>
+                &nbsp;&bull;&nbsp; 
+                <span style="white-space: nowrap;">
+                    <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" width="14" style="filter: invert(72%) sepia(54%) saturate(464%) hue-rotate(11deg) brightness(91%) contrast(88%); vertical-align: middle; margin-right: 5px;">
+                    <a href="mailto:julien.florence@gmail.com" class="mail-link">julien.florence@gmail.com</a>
+                </span>
+                <br>
                 31130 Quint-Fonsegrives
             </div>
 

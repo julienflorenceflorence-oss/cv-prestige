@@ -85,8 +85,15 @@
         }
 
         .sidebar-section { margin-bottom: 20px; }
-        .info-item { font-size: 0.85rem; margin-bottom: 8px; color: var(--text-dim); }
-        .info-item strong { color: var(--text-light); display: block; margin-bottom: 2px; }
+        .info-item { 
+            font-size: 0.85rem; 
+            margin-bottom: 8px; 
+            color: var(--text-dim); 
+            display: flex; 
+            align-items: center; 
+        }
+        .info-item strong { color: var(--text-light); margin-right: 5px; }
+        .info-item img { margin-right: 10px; flex-shrink: 0; }
 
         /* --- COLONNE DROITE --- */
         main { width: 65%; padding: 40px 50px; }
@@ -140,18 +147,11 @@
         }
         
         .tel-link {
-            cursor: default;
-            pointer-events: none;
+            cursor: pointer;
+            pointer-events: auto;
+            color: var(--primary-gold);
         }
 
-        @media (max-width: 1024px) {
-            .tel-link {
-                cursor: pointer;
-                pointer-events: auto;
-                color: var(--primary-gold);
-            }
-        }
-        
         .mail-link:hover {
             color: var(--primary-gold);
         }
@@ -170,7 +170,12 @@
             background: transparent;
         }
         .drive-btn:hover { background-color: var(--primary-gold); color: var(--bg-color); }
-        .btn-rdv { background-color: var(--primary-gold); color: var(--bg-color); }
+        .btn-rdv { 
+            background: linear-gradient(135deg, #F7EF8A 0%, #D4AF37 50%, #8A6426 100%);
+            color: #000;
+            border: none;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
 
         /* --- RESPONSIVE MOBILE & TABLETTE --- */
         @media (max-width: 1024px) {
@@ -255,9 +260,18 @@
             <!-- 3. Contact -->
             <section class="contact-mobile">
                 <h2>Contact</h2>
-                <div class="info-item"><strong>Téléphone</strong> <a href="tel:0661747573" class="tel-link">06 61 74 75 73</a></div>
-                <div class="info-item"><strong>Email</strong> <a href="mailto:julien.florence@gmail.com" class="mail-link">julien.florence@gmail.com</a></div>
-                <div class="info-item"><strong>Adresse</strong> 31130 Quint-Fonsegrives</div>
+                <div class="info-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/455/455705.png" width="14" style="filter: invert(72%) sepia(54%) saturate(464%) hue-rotate(11deg) brightness(91%) contrast(88%); margin-right: 10px; flex-shrink: 0;">
+                    <strong>Téléphone</strong> <a href="tel:0661747573" class="tel-link" style="pointer-events: auto; cursor: pointer;">06 61 74 75 73</a>
+                </div>
+                <div class="info-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" width="14" style="filter: invert(72%) sepia(54%) saturate(464%) hue-rotate(11deg) brightness(91%) contrast(88%); margin-right: 10px; flex-shrink: 0;">
+                    <strong>Email</strong> <a href="mailto:julien.florence@gmail.com" class="mail-link">julien.florence@gmail.com</a>
+                </div>
+                <div class="info-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/447/447031.png" width="14" style="filter: invert(72%) sepia(54%) saturate(464%) hue-rotate(11deg) brightness(91%) contrast(88%); margin-right: 10px; flex-shrink: 0;">
+                    <strong>Adresse</strong> 31130 Quint-Fonsegrives
+                </div>
                 <div class="info-item"><strong>Mobilité</strong> Permis B véhiculé</div>
             </section>
 
