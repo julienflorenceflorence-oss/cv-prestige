@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ma Signature Prestige | Julien FLORENCE</title>
+    <title>Signature Prestige | Julien FLORENCE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -30,33 +30,6 @@
             max-width: 700px;
             width: 100%;
             text-align: center;
-            z-index: 2;
-        }
-
-        /* Video Banner */
-        .video-banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            z-index: 1;
-        }
-
-        .video-banner video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.5;
-            filter: grayscale(100%) brightness(0.7);
-            transition: 0.8s;
-        }
-
-        body:hover .video-banner video {
-            opacity: 0.8;
-            filter: grayscale(0%) brightness(0.9);
         }
 
         h1 {
@@ -101,10 +74,6 @@
             box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
         }
 
-        .btn-copy:active {
-            transform: translateY(-1px);
-        }
-
         #status {
             margin-top: 15px;
             font-size: 0.8rem;
@@ -129,14 +98,8 @@
 </head>
 <body>
 
-<div class="video-banner">
-    <video autoplay loop muted playsinline>
-        <source src="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/video/cerveau_42.mp4" type="video/mp4">
-    </video>
-</div>
-
 <div class="container">
-    <h1>Signature Prestige</h1>
+    <h1>Ma Signature Prestige</h1>
 
     <div class="preview-box" id="signature-container">
         <!-- La signature sera injectée ici -->
@@ -146,21 +109,24 @@
     <div id="status"></div>
 
     <div class="instructions">
-        <strong>Comment l'utiliser dans Gmail :</strong><br>
-        1. Cliquez sur le bouton "Copier pour Gmail" ci-dessus.<br>
-        2. Allez dans vos <strong>Paramètres Gmail</strong> (roue crantée) > "Voir tous les paramètres".<br>
-        3. Faites défiler jusqu'à la section <strong>"Signature"</strong>.<br>
-        4. Faites un clic-droit et <strong>"Coller"</strong> (ou Ctrl+V) dans la zone de texte.<br>
-        5. N'oubliez pas d'enregistrer les modifications en bas de la page Gmail.
+        <strong>Mode d'emploi :</strong><br>
+        1. Cliquez sur le bouton "Copier pour Gmail".<br>
+        2. Allez dans vos <strong>Paramètres Gmail</strong> > "Signature".<br>
+        3. <strong>Collez</strong> (Ctrl+V) dans la zone de texte.<br>
+        4. Enregistrez les modifications.
     </div>
 </div>
 
 <script>
     const signatureHTML = `
+<div style="font-family: Arial, sans-serif; font-size: 14px; background-color: transparent; padding: 20px 0;">
+    <!-- ESPACE POUR VOTRE TEXTE D'E-MAIL -->
+    <br><br>
+</div>
 <table cellpadding="0" cellspacing="0" border="0" style="background-color: #0F1115; min-width: 600px; font-family: 'Montserrat', Arial, sans-serif; border: 1px solid #D4AF37; border-collapse: collapse;">
     <tr>
-        <td style="padding: 0; line-height: 0;">
-            <img src="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/histoire%20Happy%20House/baniere/Bannie%CC%80reHH%20entete.png" width="600" style="display: block; width: 600px; height: auto;">
+        <td style="padding: 0; line-height: 0; background-color: #000;">
+            <img src="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/cerveau%203.0.png" width="600" style="display: block; width: 600px; height: auto;">
         </td>
     </tr>
     <tr><td height="4" style="background-color: #D4AF37; line-height: 4px; font-size: 4px;">&nbsp;</td></tr>
@@ -170,7 +136,7 @@
                 <tr>
                     <td width="120" align="center" style="vertical-align: top;">
                         <div style="width: 105px; height: 105px; border: 2px solid #D4AF37; border-radius: 50%; overflow: hidden; background-color: #000;">
-                            <img src="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/CV%20lettre%20de%20motivation/photo%20moi%20pro.jpeg" alt="Julien FLORENCE" width="105" style="display: block;">
+                            <img src="https://raw.githubusercontent.com/julienflorenceflorence-oss/cv-prestige/main/photo/photo%20moi%20pro.jpeg" alt="Julien FLORENCE" width="105" style="display: block;">
                         </div>
                     </td>
                     <td style="padding-left: 30px; vertical-align: middle;">
@@ -199,8 +165,6 @@
 
     function copySignature() {
         const container = document.getElementById('signature-container');
-        
-        // Pour Gmail, on copie le rendu visuel (Rich Text)
         const range = document.createRange();
         range.selectNode(container);
         window.getSelection().removeAllRanges();
@@ -212,9 +176,8 @@
             s.innerText = "✓ SIGNATURE COPIÉE DANS LE PRESSE-PAPIER";
             setTimeout(() => s.innerText = "", 4000);
         } catch (err) {
-            alert("Erreur lors de la copie. Veuillez sélectionner la signature et faire Ctrl+C.");
+            alert("Erreur lors de la copie.");
         }
-        
         window.getSelection().removeAllRanges();
     }
 </script>
