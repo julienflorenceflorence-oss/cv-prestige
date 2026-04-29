@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualisation Diplôme - Julien FLORENCE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --bg: #0F1115;
+            --text: #F4F4F4;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        header {
+            padding: 15px 20px;
+            background: rgba(22, 26, 35, 0.95);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Cinzel';
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        .btn-back:hover {
+            background: var(--gold);
+            color: var(--bg);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .diploma-title {
+            font-family: 'Cinzel';
+            color: var(--gold);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-align: right;
+        }
+
+        .viewer-container {
+            flex: 1;
+            width: 100%;
+            position: relative;
+            background: #fff; /* Fond blanc pour le PDF */
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 10px; }
+            .diploma-title { display: none; }
+            .btn-back { font-size: 0.65rem; padding: 8px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="diplomes.html" class="btn-back">← Retour au Portfolio</a>
+        <div class="diploma-title" id="cert-title">Certification Prestige</div>
+    </header>
+
+    <div class="viewer-container">
+        <iframe id="pdf-frame" src="" title="Visualisation du diplôme"></iframe>
+    </div>
+
+    <script>
+        // Récupération des paramètres de l'URL
+        const params = new URLSearchParams(window.location.search);
+        const file = params.get('file');
+        const title = params.get('title');
+
+        if (file) {
+            // Ajout des options de vue PDF (FitH pour ajuster à la largeur)
+            document.getElementById('pdf-frame').src = file + "#view=FitH&toolbar=0&navpanes=0";
+        }
+
+        if (title) {
+            document.getElementById('cert-title').textContent = decodeURIComponent(title);
+            document.title = decodeURIComponent(title) + " - Julien FLORENCE";
+        }
+    </script>
+</body>
+</html>
