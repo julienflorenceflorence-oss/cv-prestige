@@ -67,13 +67,18 @@
             flex: 1;
             width: 100%;
             position: relative;
-            background: #fff; /* Fond blanc pour le PDF */
+            background: #000; /* Fond noir pour les images cadrées */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
-        iframe {
-            width: 100%;
-            height: 100%;
+        iframe, img.diploma-img {
+            max-width: 100%;
+            max-height: 100%;
             border: none;
+            object-fit: contain; /* Assure que l'image tient entièrement dans l'écran */
         }
 
         @media (max-width: 768px) {
@@ -90,8 +95,8 @@
         <div class="diploma-title" id="cert-title">Certification Prestige</div>
     </header>
 
-    <div class="viewer-container">
-        <iframe id="pdf-frame" src="" title="Visualisation du diplôme"></iframe>
+    <div class="viewer-container" id="viewer-content">
+        <!-- Contenu dynamique (iframe ou img) -->
     </div>
 
     <script>
@@ -99,15 +104,31 @@
         const params = new URLSearchParams(window.location.search);
         const file = params.get('file');
         const title = params.get('title');
+        const container = document.getElementById('viewer-content');
 
         if (file) {
-            // Ajout des options de vue PDF (FitH pour ajuster à la largeur)
-            document.getElementById('pdf-frame').src = file + "#view=FitH&toolbar=0&navpanes=0";
+            const isImage = file.toLowerCase().match(/\.(png|jpg|jpeg|webp)$/);
+            
+            if (isImage) {
+                const img = document.createElement('img');
+                img.src = file;
+                img.className = 'diploma-img';
+                img.alt = title || "Diplôme";
+                container.appendChild(img);
+            } else {
+                const iframe = document.createElement('iframe');
+                // Ajout des options de vue PDF (Fit pour ajuster à la page)
+                iframe.src = file + (file.toLowerCase().endsWith('.pdf') ? "#view=Fit" : "");
+                iframe.id = 'pdf-frame';
+                iframe.title = title || "Visualisation du diplôme";
+                container.appendChild(iframe);
+            }
         }
 
         if (title) {
-            document.getElementById('cert-title').textContent = decodeURIComponent(title);
-            document.title = decodeURIComponent(title) + " - Julien FLORENCE";
+            const decodedTitle = decodeURIComponent(title);
+            document.getElementById('cert-title').textContent = decodedTitle;
+            document.title = decodedTitle + " - Julien FLORENCE";
         }
     </script>
 </body>
