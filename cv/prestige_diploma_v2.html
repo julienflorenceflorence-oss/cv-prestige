@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diplôme Prestige Original - Julien FLORENCE</title>
+    <style>
+        :root {
+            --cadre-img: url('Diplomes_PDF/cadre gemini 2.png');
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Dimensions : 60% de la largeur de la page, ratio du cadre */
+        .master-container {
+            position: relative;
+            width: 60vw;
+            aspect-ratio: 1983 / 1498;
+            background-color: #08090a;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.9);
+        }
+
+        /* LE CADRE (Couche supérieure avec trou) */
+        .frame-layer {
+            position: absolute;
+            inset: 0;
+            background: var(--cadre-img) no-repeat center/cover;
+            z-index: 100;
+            pointer-events: none;
+            /* Trou central pour laisser voir le PDF en dessous */
+            clip-path: polygon(
+                0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 
+                10.5% 13.5%, 10.5% 86.5%, 89.5% 86.5%, 89.5% 13.5%, 10.5% 13.5%
+            );
+        }
+
+        /* LE PDF ORIGINAL (Couche inférieure) */
+        /* On agrandit l'iframe pour qu'elle déborde sous le cadre doré.
+           Cela permet de cacher les marges noires générées par le lecteur PDF du navigateur. */
+        .pdf-viewer {
+            position: absolute;
+            top: 10%;      /* Déborde de 3.5% vers le haut sous le cadre */
+            left: 8%;      /* Déborde de 2.5% vers la gauche sous le cadre */
+            width: 84%;    /* Plus large que le trou (qui fait 79%) */
+            height: 80%;   /* Plus haut que le trou (qui fait 73%) */
+            border: none;
+            z-index: 10;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="master-container">
+        <!-- Le cadre doré par-dessus -->
+        <div class="frame-layer"></div>
+
+        <!-- Le PDF original, pur, forcé à s'ajuster à la taille de la fenêtre (Fit) -->
+        <iframe 
+            src="Diplomes_PDF/Certificat HTML5 CSS.pdf#view=Fit&toolbar=0&navpanes=0&scrollbar=0" 
+            class="pdf-viewer"
+            title="Certificat Original">
+        </iframe>
+    </div>
+
+</body>
+</html>

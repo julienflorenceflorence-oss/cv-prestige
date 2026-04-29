@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* CONFIGURATION DE PRÉCISION ABSOLUE */
+        :root {
+            --frame-ratio: 1.3237; /* Ratio 1983/1498 */
+            --content-scale: 1.05;  /* Zoom léger pour éliminer les bords du lecteur */
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff; /* Fond neutre */
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pdf-container {
+            position: relative;
+            /* On force une taille fixe virtuelle qui correspond au "trou" du cadre */
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff;
+        }
+
+        iframe {
+            /* Le secret de la taille unique : on force l'iframe à déborder 
+               puis on utilise l'échelle pour caler le contenu */
+            width: 100%;
+            height: 100%;
+            border: none;
+            transform: scale(var(--content-scale));
+            transform-origin: center;
+        }
+
+        /* BOUCLIERS DE PROTECTION (Masquent les barres d'outils et liserés) */
+        .shield {
+            position: absolute;
+            background: #fff;
+            z-index: 10;
+            pointer-events: none;
+        }
+        .top { top: 0; left: 0; right: 0; height: 8%; }
+        .bottom { bottom: 0; left: 0; right: 0; height: 8%; }
+        .left { top: 0; bottom: 0; left: 0; width: 6%; }
+        .right { top: 0; bottom: 0; right: 0; width: 6%; }
+
+    </style>
+</head>
+<body>
+    <div class="pdf-container">
+        <div class="shield top"></div>
+        <div class="shield bottom"></div>
+        <div class="shield left"></div>
+        <div class="shield right"></div>
+        
+        <!-- Le paramètre #view=FitH (Fit Horizontal) est crucial pour la taille unique -->
+        <iframe src="Diplomes_PDF/Certificat HTML5 CSS.pdf#view=FitH&toolbar=0&navpanes=0&scrollbar=0"></iframe>
+    </div>
+</body>
+</html>
