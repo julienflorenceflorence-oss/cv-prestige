@@ -114,6 +114,12 @@
                 img.src = file;
                 img.className = 'diploma-img';
                 img.alt = title || "Diplôme";
+                
+                // Dézoom spécifique pour Google Fundamentals
+                if (title && decodeURIComponent(title).includes("Google Fundamentals")) {
+                    img.style.transform = "scale(0.9)";
+                }
+                
                 container.appendChild(img);
             } else {
                 const iframe = document.createElement('iframe');
