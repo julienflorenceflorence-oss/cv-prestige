@@ -91,7 +91,7 @@
 <body>
 
     <header>
-        <a href="diplomes.html" class="btn-back">← Retour au Portfolio</a>
+        <a href="diplomes.html" class="btn-back" id="back-btn">← Retour au Portfolio</a>
         <div class="diploma-title" id="cert-title">Certification Prestige</div>
     </header>
 
@@ -104,7 +104,14 @@
         const params = new URLSearchParams(window.location.search);
         const file = params.get('file');
         const title = params.get('title');
+        const anchorId = params.get('id'); // Nouvel ID d'ancre
         const container = document.getElementById('viewer-content');
+        const backBtn = document.getElementById('back-btn');
+
+        // Mise à jour du bouton retour avec l'ancre
+        if (anchorId) {
+            backBtn.href = `diplomes.html#${anchorId}`;
+        }
 
         if (file) {
             const isImage = file.toLowerCase().match(/\.(png|jpg|jpeg|webp)$/);
