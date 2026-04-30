@@ -29,24 +29,12 @@
 
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 800px;
             padding: 40px 20px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 15px;
-            background: rgba(22, 26, 35, 0.8);
-            backdrop-filter: blur(10px);
             position: relative;
         }
 
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -2px; left: -2px; right: -2px; bottom: -2px;
-            background: linear-gradient(45deg, transparent, var(--gold), transparent);
-            z-index: -1;
-            border-radius: 17px;
-            opacity: 0.3;
-        }
+        /* Effet ::before supprimé pour enlever le cadre dégradé */
 
         .tech-video {
             max-width: 280px;
