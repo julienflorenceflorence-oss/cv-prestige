@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>CV Julien FLORENCE - Responsable Commercial & Événementiel - Édition Prestige</title>
+    <title>CV Julien FLORENCE - Manager Commercial & Opérationnel - Édition Prestige</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -25,6 +25,7 @@
         }
 
         /* BLOCAGE PAYSAGE UNIQUEMENT POUR APPAREILS MOBILES/TABLETTES (< 13") */
+        /* On cible les appareils sans capacité de survol (hover: none) pour épargner les laptops */
         @media screen and (orientation: landscape) and (max-width: 1366px) and (hover: none) {
             body::before {
                 content: "Lecture horizontale interdite sur cet appareil. \A Veuillez pivoter votre appareil en mode Portrait pour consulter ce dossier de prestige.";
@@ -133,21 +134,21 @@
         .drive-btn {
             display: flex; align-items: center; justify-content: center; min-width: 280px; padding: 18px 35px;
             border: none !important;
-            color: #000 !important;
+            color: #000 !important; /* Texte noir profond permanent */
             text-decoration: none;
             font-family: 'Cinzel', serif;
             font-size: 0.85rem;
             text-transform: uppercase;
             font-weight: 700;
             transition: all 0.3s ease;
-            background: linear-gradient(135deg, #F7EF8A 0%, #D4AF37 50%, #8A6426 100%) !important;
+            background: linear-gradient(135deg, #F7EF8A 0%, #D4AF37 50%, #8A6426 100%) !important; /* Dégradé or prestige en dur */
             border-radius: 10px;
             letter-spacing: 2px;
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
         
         .drive-btn:hover {
-            background: #FFFFFF !important;
+            background: #FFFFFF !important; /* Devient blanc brillant au survol */
             color: #000 !important;
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
@@ -170,6 +171,7 @@
             color: var(--primary-gold);
         }
 
+        /* Bouton RDV en OR plein avec dégradé par défaut */
         .rdv-btn { 
             background: linear-gradient(135deg, #F7EF8A 0%, #D4AF37 50%, #8A6426 100%);
             color: #000;
@@ -210,6 +212,7 @@
             .cv-page { flex-direction: column; width: 100%; max-width: 100%; display: flex; }
             aside, main { display: contents; } 
             
+            /* ORDRE MOBILE RIGOUREUX */
             .profile-img-container { order: 1; width: 180px; margin: 40px auto 30px auto; }
             .identity-header { order: 2; text-align: center; padding: 0 25px; }
             .summary-block { order: 3; padding: 0 25px; }
@@ -256,7 +259,7 @@
         
         .psych-progress {
             height: 100%;
-            background: linear-gradient(90deg, #92753F, #D4AF37) !important;
+            background: linear-gradient(90deg, #92753F, #D4AF37) !important; /* Dégradé or prestige soutenance en dur */
             border-radius: 10px;
             box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
             transition: width 1s ease-in-out;
@@ -266,18 +269,41 @@
         .ambient {
             position: fixed; inset: -18%; z-index: 0; pointer-events: none;
             background:
-              radial-gradient(48vw 38vw at 15% 17%, rgba(212, 175, 55, 0.12), transparent 70%),
-              radial-gradient(46vw 42vw at 85% 7%, rgba(197, 160, 89, 0.2), transparent 64%),
-              radial-gradient(58vw 42vw at 70% 90%, rgba(212, 175, 55, 0.1), transparent 68%),
-              linear-gradient(145deg, #07090E 0%, #080B11 47%, #05070A 100%);
-            filter: saturate(1.1);
+              radial-gradient(48vw 38vw at calc(8% + var(--slide)*2.4%) 17%, rgba(212, 175, 55, 0.15), transparent 70%),
+              radial-gradient(46vw 42vw at calc(92% - var(--slide)*1.6%) 7%, rgba(197, 160, 89, 0.25), transparent 64%),
+              radial-gradient(58vw 42vw at 70% calc(96% - var(--slide)*1.2%), rgba(212, 175, 55, 0.12), transparent 68%),
+              linear-gradient(145deg, #07090E 0%, #07090E 47%, #07090E 100%);
+            filter: saturate(1.12);
+            transition: background 820ms cubic-bezier(.2,.8,.2,1), filter 820ms ease;
+        }
+        .ambient::before, .ambient::after {
+            content: ""; position: absolute; pointer-events: none; opacity: 0.62; mix-blend-mode: screen;
+            transform: translateZ(0); will-change: transform, opacity;
+        }
+        .ambient::before {
+            width: 58vw; height: 22vh; left: 9%; top: 15%;
+            background: linear-gradient(100deg, transparent 0%, rgba(243, 208, 130, 0.18) 43%, rgba(255, 255, 255, 0.24) 50%, rgba(197, 160, 89, 0.13) 58%, transparent 100%);
+            filter: blur(14px);
+            transform: translateX(calc(var(--slide)*1.4vw)) rotate(-10deg);
+            animation: glide 12s ease-in-out infinite alternate;
+        }
+        .ambient::after {
+            width: 50vw; height: 50vw; right: -10vw; bottom: -15vw; border-radius: 50%;
+            background: radial-gradient(circle at 36% 33%, rgba(255, 255, 255, 0.16), rgba(243, 208, 130, 0.10) 31%, rgba(146, 117, 63, 0.13) 48%, transparent 70%);
+            filter: blur(34px);
+            transform: translate(calc(var(--slide)*-0.8vw), calc(var(--slide)*-.35vw));
+            animation: orb 15s ease-in-out infinite alternate;
         }
         .rays {
-            position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.25; mix-blend-mode: screen;
+            position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.36; mix-blend-mode: screen;
             background:
-              linear-gradient(118deg, transparent 23%, rgba(255, 255, 255, 0.04) 34%, transparent 47%),
-              linear-gradient(65deg, transparent 54%, rgba(197, 160, 89, 0.05) 61%, transparent 72%);
+              linear-gradient(118deg, transparent 23%, rgba(255, 255, 255, 0.045) 34%, transparent 47%),
+              linear-gradient(65deg, transparent 54%, rgba(197, 160, 89, 0.06) 61%, transparent 72%);
+            transform: translateX(calc(var(--slide)*-.55vw));
+            transition: transform 850ms cubic-bezier(.2,.8,.2,1), opacity 850ms ease;
         }
+        @keyframes glide { from { translate: -4vw 0; } to { translate: 5vw 1.8vh; } }
+        @keyframes orb { from { scale: 1; opacity: 0.48; } to { scale: 1.08; opacity: 0.7; } }
     </style>
 </head>
 <body>
@@ -286,17 +312,17 @@
     <div class="cv-page">
         <!-- 1. PHOTO (SIDEBAR) -->
         <aside>
-            <div class="profile-img-container"><img src="photo/photo_moi_pro.jpeg" alt="Julien FLORENCE"></div>
+            <div class="profile-img-container"><img src="photo/photo moi pro.jpeg" alt="Julien FLORENCE"></div>
             
             <!-- 3. EXPERTISES CLES -->
             <section class="sidebar-section expertises-block">
                 <h2>Expertises Clés</h2>
                 <ul style="list-style: none;">
-                    <li style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 12px;">✓ Événementiel de Prestige & MICE</li>
-                    <li style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 12px;">✓ Standards de l'Hôtellerie (LHW)</li>
-                    <li style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 12px;">✓ Business Development & B2B</li>
-                    <li style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 12px;">✓ Management d'équipes (3-20 ETP)</li>
-                    <li style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 12px;">✓ Sommellerie d'Excellence</li>
+                    <li style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 12px;">✓ Business Plan & Pilotage P&L</li>
+                    <li style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 12px;">✓ Management d'équipes (3-15 pers)</li>
+                    <li style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 12px;">✓ Stratégie d'Acquisition Tech</li>
+                    <li style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 12px;">✓ Négociation de contrats prestige</li>
+                    <li style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 12px;">✓ Sommelerie & Gastronomie étoilée</li>
                 </ul>
             </section>
 
@@ -318,11 +344,11 @@
                 </div>
             </section>
 
-            <!-- 5. LANGUES -->
+            <!-- 5. LANGUES (Usage International) -->
             <section class="sidebar-section languages-block">
                 <h2>Langues</h2>
                 <div class="info-item" style="margin-bottom: 8px;">
-                    <strong>Anglais</strong>&nbsp; Usage Pro (C1 - 2 ans UK/IRL)
+                    <strong>Anglais</strong>&nbsp; Usage Professionnel (Exp. internationale)
                 </div>
                 <div class="info-item">
                     <strong>Néerlandais</strong>&nbsp; Intermédiaire (B2)
@@ -341,7 +367,7 @@
                 </div>
                 <div class="info-item">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="var(--primary-gold)" style="margin-right: 10px; flex-shrink: 0; vertical-align: middle;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                    <strong>Mobilité</strong> Toulouse (Quartier Capitole) & Mobilité régionale.
+                    <strong>Mobilité</strong> Quint-Fonsegrives (Toulouse) & Bordeaux (Déménagement validé)
                 </div>
             </section>
         </aside>
@@ -350,13 +376,13 @@
         <main>
             <header class="identity-header">
                 <h1>Julien FLORENCE</h1>
-                <div class="job-title">Responsable Commercial & Événementiel</div>
+                <div class="job-title">Manager Commercial & Opérationnel</div>
             </header>
             
             <div class="summary-block">
                 <div class="who-title">Vision Strategique</div>
                 <div class="summary">
-                    Alliant 15 ans d'exigence opérationnelle dans l'hôtellerie de luxe (Palaces 5*, Yachting d'ultra-luxe) à une expertise robuste en business development B2B et techniques d'acquisition digitales, je me spécialise dans la commercialisation d'offres hôtelières et d'espaces événementiels haut de gamme. Expert de la conquête de portefeuilles corporate et MICE, et animateur de partenariats exclusifs (clubs d'affaires, vernissages d'art), je pilote la rentabilité et encadre les équipes avec une posture orientée ROI et satisfaction client d'exception.
+                    Plus de 15 ans d'expérience dans la création de valeur et le pilotage de centres de profit. Alliant la rigueur du luxe (Palaces 5* & Étoilés) à la performance commerciale, je déploie des stratégies de développement axées sur l'expérience client et les solutions technologiques (Domotique / IoT / Smart Home). Profil ENTJ-A orienté action.
                     <span class="quote">"Ce n'est pas ce que vous êtes qui vous retient, mais ce que vous pensez ne pas être." – Denis Waitley</span>
                 </div>
             </div>
@@ -365,38 +391,27 @@
             <section class="path-block">
                 <h3 class="section-header">Parcours Professionnel</h3>
                 <div class="exp-item">
-                    <div class="exp-head"><span class="exp-role">Responsable Commercial & Acquisition Tech</span><span class="exp-date">2025 – Présent</span></div>
+                    <div class="exp-head"><span class="exp-role">Responsable Développement</span><span class="exp-date">2025 – Présent</span></div>
                     <div class="exp-comp">Happy House</div>
                     <ul class="exp-desc">
-                        <li>Pilotage, coaching et montée en compétences d'une équipe de 3 collaborateurs.</li>
-                        <li>Déploiement de la stratégie commerciale Go-To-Market et intégration d'outils d'acquisition / CRM.</li>
+                        <li>Pilotage et coaching d'une équipe de 3 collaborateurs.</li>
+                        <li>Élaboration, déploiement de la stratégie Go-To-Market et intégration d'outils d'acquisition Tech (Domotique & Smart Home).</li>
                     </ul>
                 </div>
                 <div class="exp-item">
-                    <div class="exp-head"><span class="exp-role">Responsable de Division HRE (Hôtellerie, Restauration & Événementiel)</span><span class="exp-date">2022 – 2024</span></div>
-                    <div class="exp-comp">RAS Intérim - CA Division <span class="badge-perf">2.6 M€</span></div>
+                    <div class="exp-head"><span class="exp-role">Gestionnaire Centre de Profit</span><span class="exp-date">2022 – 2024</span></div>
+                    <div class="exp-comp">RAS Intérim - CA <span class="badge-perf">2.6 M€</span></div>
                     <ul class="exp-desc">
-                        <li>Développement B2B & Comptes Clés : Négociation et gestion d'un portefeuille de 20 clients corporate (hôtels 4/5*, traiteurs, événementiel).</li>
-                        <li>Management opérationnel quotidien de 20 ETP par semaine (recrutement, formation, plannings de brigades de service et de cuisine).</li>
+                        <li>Management de 20 ETP par semaine et gestion de 25 comptes B2B stratégiques.</li>
                     </ul>
                 </div>
                 <div class="exp-item">
-                    <div class="exp-head"><span class="exp-role">Négociateur Immobilier & Manager Leader</span><span class="exp-date">2015 – 2021</span></div>
+                    <div class="exp-head"><span class="exp-role">Négociateur Immobilier Leader</span><span class="exp-date">2015 – 2021</span></div>
                     <div class="exp-comp">Century 21 (Paris) & Cabinet Bedin (Toulouse)</div>
                     <ul class="exp-desc">
                         <li>Performance individuelle : Volume d'affaires moyen de <span class="badge-perf">110 k€</span>.</li>
-                        <li>Management et coaching de 5 négociateurs sur le terrain et en agence.</li>
-                        <li>Animation de la force de vente et de partenariats locaux.</li>
-                    </ul>
-                </div>
-                <div class="exp-item">
-                    <div class="exp-head"><span class="exp-role">Directeur de Restaurant & Partenaire Événementiel</span><span class="exp-date">2010 – 2015</span></div>
-                    <div class="exp-comp">Ma Salle à Manger (Paris 1er - Place Dauphine)</div>
-                    <ul class="exp-desc">
-                        <li>Management complet d'une équipe de 15 salariés et gestion de la rentabilité (P&L).</li>
-                        <li><strong>Croissance de +140% du CA en 5 ans</strong> (CA : 250 k€ à <span class="badge-perf">600 k€</span>) en dupliquant les standards du luxe.</li>
-                        <li>Partenaire gastronomique de la prestigieuse <em>Galerie Nabokof</em> (Place Dauphine) pour ses vernissages d'art.</li>
-                        <li>Organisation d'événements privés haut de gamme (EVG de prestige, accueil de clubs d'affaires parisiens).</li>
+                        <li>Management et responsabilité de 5 négociateurs.</li>
+                        <li>Animation de la force de vente et pilotage de la performance commerciale.</li>
                     </ul>
                 </div>
             </section>
@@ -405,29 +420,34 @@
             <section class="prestige-block">
                 <h3 class="section-header">Restauration & Hôtellerie de Prestige</h3>
                 <div class="exp-item">
-                    <div class="exp-head"><span class="exp-role">1er Sommelier</span><span class="exp-date">2003 – 2004</span></div>
-                    <div class="exp-comp">THE WESTBURY (Palace 5*, Leading Hotels of the World, Dublin)</div>
+                    <div class="exp-head"><span class="exp-role">Directeur de Restaurant</span><span class="exp-date">2010 – 2015</span></div>
+                    <div class="exp-comp">Ma Salle à Manger (Paris 1er)</div>
                     <ul class="exp-desc">
-                        <li>Restaurant 1 Étoile Michelin. Management de 20 personnes et gestion de cave d'exception.</li>
-                        <li><strong>Sommelier privilégié de M. Bono (U2)</strong> lors de réceptions privées à l'hôtel.</li>
+                        <li>Management complet d'une équipe de 15 salariés.</li>
+                        <li>Orchestration d'une croissance de <span class="badge-perf">+140%</span> (CA : 250 k€ à <span class="badge-perf">600 k€</span>).</li>
                     </ul>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-head"><span class="exp-role">Maître d'Hôtel & Sommelier</span><span class="exp-date">2004 – 2009</span></div>
+                    <div class="exp-comp">La Table du Sommelier (Gaillac) - CA <span class="badge-perf">500 k€ à 700 k€</span></div>
+                    <ul class="exp-desc">
+                        <li>Management de 7 serveurs, gestion des caves et dégustations prestige.</li>
+                    </ul>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-head"><span class="exp-role">1er Sommelier (Palace 5*)</span><span class="exp-date">2003 – 2004</span></div>
+                    <div class="exp-comp">THE WESBURY (Leading Hotel, Dublin) - CA <span class="badge-perf">100 M€ à 110 M€</span></div>
+                    <ul class="exp-desc"><li>Restaurant 1 Étoile Michelin. Management de 20 personnes et gestion de cave d'exception.</li></ul>
                 </div>
                 <div class="exp-item">
                     <div class="exp-head"><span class="exp-role">Chef Barman</span><span class="exp-date">2001 – 2002</span></div>
-                    <div class="exp-comp">LE CLOS (1* Michelin, Bath, Angleterre) - CA 6 M€</div>
-                    <ul class="exp-desc">
-                        <li>Mise en place de la carte des cocktails, gestion des barmans et du stock d'alcools.</li>
-                        <li>Gestion de la clientèle exigeante du bar de prestige et coordination globale du service.</li>
-                    </ul>
+                    <div class="exp-comp">Le CLOS (1 Étoile Michelin, Bath, Angleterre) - CA <span class="badge-perf">6 M€</span></div>
+                    <ul class="exp-desc"><li>Management de 10 personnes et création de cartes prestige.</li></ul>
                 </div>
                 <div class="exp-item">
-                    <div class="exp-head"><span class="exp-role">Adjoint du Responsable Room Service</span><span class="exp-date">2000 – 2001</span></div>
-                    <div class="exp-comp">THE GUANAHANI (Palace 5*, St-Barth)</div>
-                    <ul class="exp-desc">
-                        <li>Supervision opérationnelle et management de 20 personnes au Room Service.</li>
-                        <li>Service d'excellence lors d'événements prestigieux (<strong>Nouvel An sur les yachts de luxe</strong> à St-Barth).</li>
-                        <li>Prise en charge de personnalités VIP internationales (Mariah Carey, Jennifer Lopez, P. Diddy).</li>
-                    </ul>
+                    <div class="exp-head"><span class="exp-role">Assistant Superviseur Room Service (Palace 5*)</span><span class="exp-date">2000 – 2001</span></div>
+                    <div class="exp-comp">The GUANAHANI (Leading Hotel, St-Barth) - CA <span class="badge-perf">10 M€ à 20 M€</span></div>
+                    <ul class="exp-desc"><li>Restaurant 2 Étoiles Michelin. Supervision du management sur 20 personnes.</li></ul>
                 </div>
             </section>
 
@@ -436,12 +456,9 @@
                 <h3 class="section-header">Formations & Excellence</h3>
                 <div class="exp-item" style="padding: 15px 25px;"><div class="exp-comp" style="margin-bottom: 0;">Bachelor Marketing et Commercial (2025)</div></div>
                 <div class="exp-item" style="padding: 15px 25px;"><div class="exp-comp" style="margin-bottom: 0;">HTML5 & CSS3 &bull; Google Digital Academy</div></div>
-                
-                <div style="text-align: center; margin-top: 30px; margin-bottom: 40px;">
-                    <a href="diplomes.html" class="drive-btn portfolio-btn" style="display: inline-flex; width: auto; min-width: 320px; font-weight: bold;">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="vertical-align: middle; margin-right: 8px; display: inline-block;"><path d="M12 3L1 9l11 6 9-4.91v6.27h2V9L12 3z"/></svg>Accéder au Portfolio des Diplômes
-                    </a>
-                </div>
+                <p style="font-size: 0.9rem; color: var(--primary-gold); text-align: center; margin-top: 10px; margin-bottom: 40px; font-style: italic;">
+                    Découvrez l'intégralité de mes travaux et certifications dans mon portfolio numérique en fin de page.
+                </p>
             </section>
         </main>
     </div>
@@ -453,7 +470,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="vertical-align: middle; margin-right: 8px; display: inline-block;"><path d="M12 3L1 9l11 6 9-4.91v6.27h2V9L12 3z"/></svg>Portfolio Diplômes
             </a>
             
-            <a href="PDF/CV_Julien_Florence_Capitole.pdf" target="_blank" class="drive-btn pdf-btn" >
+            <a href="PDF/CV_Julien_Florence_Nextgen.pdf" target="_blank" class="drive-btn pdf-btn" >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="vertical-align: middle; margin-right: 8px; display: inline-block;"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 16H5V4h14v14zm-3-5H8v-2h8v2zm0-4H8V7h8v2zm0 8H8v-2h8v2z"/></svg>Version PDF
             </a>
             
@@ -468,7 +485,7 @@
                     <a href="mailto:julienflorence.florence@gmail.com" class="mail-link">julienflorence.florence@gmail.com</a>
                 </span>
                 <br>
-                Toulouse (Capitole)
+                Quint-Fonsegrives (Toulouse) & Bordeaux (Déménagement validé)
             </div>
 
             <a href="https://calendar.app.google/iCzfE1GQrjxM3ZQ56" target="_blank" class="drive-btn rdv-btn">
